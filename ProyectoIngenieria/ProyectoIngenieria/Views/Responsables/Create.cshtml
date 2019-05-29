@@ -22,7 +22,7 @@
                 <div class="col-md-8">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
-                        @Html.LabelFor(model => model.identification, htmlAttributes: new { @class = "control-label col-md-2" })
+                        Identificación
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.identification, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.identification, "", new { @class = "text-danger" })
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                       Nombre
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.last_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                       Apellidos
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.last_name, "", new { @class = "text-danger" })
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label col-md-2" })
+                        Dirección
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.phone_number, htmlAttributes: new { @class = "control-label col-md-2" })
+                       Número de Teléfono
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.phone_number, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger" })
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                       Descripción
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
@@ -70,14 +70,14 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        Correo
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Student, htmlAttributes: new { @class = "control-label col-md-2" })
+                       Asignar Estudiante
                         <div class="col-md-10">
                             <select multiple="multiple" style="width:100%;" id="students" name="students">
                                 @foreach (var item in ViewBag.students)
