@@ -1,5 +1,5 @@
 ﻿@model PagedList.IPagedList<ProyectoIngenieria.DB.Activity>
-
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -60,7 +60,7 @@
         <div class="row">
             <div class="col-sm-5"></div>
             <div class="col-sm-6 ">
-              
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
             </div>
         </div>
 

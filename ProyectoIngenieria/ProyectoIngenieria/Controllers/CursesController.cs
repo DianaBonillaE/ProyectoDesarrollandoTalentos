@@ -18,8 +18,8 @@ namespace ProyectoIngenieria.Controllers
         // GET: Curses
         public ActionResult Index(int page = 1, int pageSize = 4)
         {
-            List<News> newsList = db.News.ToList();
-            PagedList<News> model = new PagedList<News>(newsList, page, pageSize);
+            List<Curse> curseList = db.Curse.ToList();
+            PagedList<Curse> model = new PagedList<Curse>(curseList, page, pageSize);
             return View(model);
         }
 
