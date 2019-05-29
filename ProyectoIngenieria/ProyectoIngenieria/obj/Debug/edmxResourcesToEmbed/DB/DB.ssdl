@@ -1,0 +1,556 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProyectoIngenieriaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Activity">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="start_date" Type="date" Nullable="false" />
+    <Property Name="end_date" Type="date" Nullable="false" />
+    <Property Name="photo_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Activity_Sponsor">
+    <Key>
+      <PropertyRef Name="activity_id" />
+      <PropertyRef Name="sponsor_identificacion" />
+    </Key>
+    <Property Name="activity_id" Type="int" Nullable="false" />
+    <Property Name="sponsor_identificacion" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Activity_User">
+    <Key>
+      <PropertyRef Name="activity_id" />
+      <PropertyRef Name="user_identification" />
+    </Key>
+    <Property Name="activity_id" Type="int" Nullable="false" />
+    <Property Name="user_identification" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Album">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="creation_date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Album_Photo">
+    <Key>
+      <PropertyRef Name="album_id" />
+      <PropertyRef Name="photo_id" />
+    </Key>
+    <Property Name="album_id" Type="int" Nullable="false" />
+    <Property Name="photo_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="state" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Curse">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="200" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="start_date" Type="date" Nullable="false" />
+    <Property Name="end_date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Curse_Student">
+    <Key>
+      <PropertyRef Name="curse_id" />
+      <PropertyRef Name="student_identification" />
+    </Key>
+    <Property Name="curse_id" Type="int" Nullable="false" />
+    <Property Name="student_identification" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Curse_Teacher">
+    <Key>
+      <PropertyRef Name="curse_id" />
+      <PropertyRef Name="teacher_identification" />
+    </Key>
+    <Property Name="curse_id" Type="int" Nullable="false" />
+    <Property Name="teacher_identification" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="album_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="image" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Responsable">
+    <Key>
+      <PropertyRef Name="identification" />
+    </Key>
+    <Property Name="identification" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="phone_number" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="200" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="room_number" Type="int" Nullable="false" />
+    <Property Name="location" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="capacity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Room_Curse">
+    <Key>
+      <PropertyRef Name="room_id" />
+      <PropertyRef Name="curse_id" />
+    </Key>
+    <Property Name="room_id" Type="int" Nullable="false" />
+    <Property Name="curse_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sponsor">
+    <Key>
+      <PropertyRef Name="identificacion" />
+    </Key>
+    <Property Name="identificacion" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" />
+    <Property Name="last_name" Type="varchar" MaxLength="50" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="phone_number" Type="varchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="300" />
+    <Property Name="photo_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="identification" />
+    </Key>
+    <Property Name="identification" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone_number" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="responsable_identification" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="identification" />
+    </Key>
+    <Property Name="identification" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="state" Type="bit" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="800" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="phone_number" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="photo_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="identification" />
+    </Key>
+    <Property Name="identification" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone_number" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="user_name" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="description" Type="varchar" MaxLength="300" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Voluntary">
+    <Key>
+      <PropertyRef Name="identification" />
+    </Key>
+    <Property Name="identification" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="state" Type="bit" Nullable="false" />
+    <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="descripcion" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="photo_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Voluntary_Activity">
+    <Key>
+      <PropertyRef Name="voluntary_identification" />
+      <PropertyRef Name="activity_id" />
+    </Key>
+    <Property Name="voluntary_identification" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="activity_id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Activity___activ__07C12930">
+    <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+    <End Role="Activity_Sponsor" Type="Self.Activity_Sponsor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Activity_Sponsor">
+        <PropertyRef Name="activity_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Activity___activ__778AC167">
+    <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+    <End Role="Activity_User" Type="Self.Activity_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Activity_User">
+        <PropertyRef Name="activity_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Activity___spons__08B54D69">
+    <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="1" />
+    <End Role="Activity_Sponsor" Type="Self.Activity_Sponsor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sponsor">
+        <PropertyRef Name="identificacion" />
+      </Principal>
+      <Dependent Role="Activity_Sponsor">
+        <PropertyRef Name="sponsor_identificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Activity___user___787EE5A0">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Activity_User" Type="Self.Activity_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="identification" />
+      </Principal>
+      <Dependent Role="Activity_User">
+        <PropertyRef Name="user_identification" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Album_Pho__album__6FE99F9F">
+    <End Role="Album" Type="Self.Album" Multiplicity="1" />
+    <End Role="Album_Photo" Type="Self.Album_Photo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Album_Photo">
+        <PropertyRef Name="album_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Album_Pho__photo__70DDC3D8">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+    <End Role="Album_Photo" Type="Self.Album_Photo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Album_Photo">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curse_Stu__curse__1AD3FDA4">
+    <End Role="Curse" Type="Self.Curse" Multiplicity="1" />
+    <End Role="Curse_Student" Type="Self.Curse_Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curse">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Curse_Student">
+        <PropertyRef Name="curse_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curse_Stu__stude__1BC821DD">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Curse_Student" Type="Self.Curse_Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="identification" />
+      </Principal>
+      <Dependent Role="Curse_Student">
+        <PropertyRef Name="student_identification" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curse_Tea__curse__7E37BEF6">
+    <End Role="Curse" Type="Self.Curse" Multiplicity="1" />
+    <End Role="Curse_Teacher" Type="Self.Curse_Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curse">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Curse_Teacher">
+        <PropertyRef Name="curse_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curse_Tea__teach__7F2BE32F">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="Curse_Teacher" Type="Self.Curse_Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="identification" />
+      </Principal>
+      <Dependent Role="Curse_Teacher">
+        <PropertyRef Name="teacher_identification" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__News__album_id__412EB0B6">
+    <End Role="Album" Type="Self.Album" Multiplicity="1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Album">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="album_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Room_Curs__curse__4F7CD00D">
+    <End Role="Curse" Type="Self.Curse" Multiplicity="1" />
+    <End Role="Room_Curse" Type="Self.Room_Curse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Curse">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Room_Curse">
+        <PropertyRef Name="curse_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Room_Curs__room___4E88ABD4">
+    <End Role="Room" Type="Self.Room" Multiplicity="1" />
+    <End Role="Room_Curse" Type="Self.Room_Curse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Room">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Room_Curse">
+        <PropertyRef Name="room_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sponsor__photo_i__04E4BC85">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+    <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Sponsor">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Student__respons__17F790F9">
+    <End Role="Responsable" Type="Self.Responsable" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Responsable">
+        <PropertyRef Name="identification" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="responsable_identification" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teacher__photo_i__7B5B524B">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Voluntary__activ__74AE54BC">
+    <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+    <End Role="Voluntary_Activity" Type="Self.Voluntary_Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Voluntary_Activity">
+        <PropertyRef Name="activity_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Voluntary__photo__5441852A">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+    <End Role="Voluntary" Type="Self.Voluntary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Voluntary">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Voluntary__volun__73BA3083">
+    <End Role="Voluntary" Type="Self.Voluntary" Multiplicity="1" />
+    <End Role="Voluntary_Activity" Type="Self.Voluntary_Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Voluntary">
+        <PropertyRef Name="identification" />
+      </Principal>
+      <Dependent Role="Voluntary_Activity">
+        <PropertyRef Name="voluntary_identification" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Activity_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
+    <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Activity">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Curse_Curse">
+    <End Role="Curse" Type="Self.Curse" Multiplicity="1" />
+    <End Role="Curse1" Type="Self.Curse" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Curse">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Curse1">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProyectoIngenieriaModelStoreContainer">
+    <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Activity_Sponsor" EntityType="Self.Activity_Sponsor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Activity_User" EntityType="Self.Activity_User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Album_Photo" EntityType="Self.Album_Photo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Curse" EntityType="Self.Curse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Curse_Student" EntityType="Self.Curse_Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Curse_Teacher" EntityType="Self.Curse_Teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Responsable" EntityType="Self.Responsable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Room_Curse" EntityType="Self.Room_Curse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sponsor" EntityType="Self.Sponsor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Voluntary" EntityType="Self.Voluntary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Voluntary_Activity" EntityType="Self.Voluntary_Activity" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Activity___activ__07C12930" Association="Self.FK__Activity___activ__07C12930">
+      <End Role="Activity" EntitySet="Activity" />
+      <End Role="Activity_Sponsor" EntitySet="Activity_Sponsor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Activity___activ__778AC167" Association="Self.FK__Activity___activ__778AC167">
+      <End Role="Activity" EntitySet="Activity" />
+      <End Role="Activity_User" EntitySet="Activity_User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Activity___spons__08B54D69" Association="Self.FK__Activity___spons__08B54D69">
+      <End Role="Sponsor" EntitySet="Sponsor" />
+      <End Role="Activity_Sponsor" EntitySet="Activity_Sponsor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Activity___user___787EE5A0" Association="Self.FK__Activity___user___787EE5A0">
+      <End Role="User" EntitySet="User" />
+      <End Role="Activity_User" EntitySet="Activity_User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Album_Pho__album__6FE99F9F" Association="Self.FK__Album_Pho__album__6FE99F9F">
+      <End Role="Album" EntitySet="Album" />
+      <End Role="Album_Photo" EntitySet="Album_Photo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Album_Pho__photo__70DDC3D8" Association="Self.FK__Album_Pho__photo__70DDC3D8">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Album_Photo" EntitySet="Album_Photo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curse_Stu__curse__1AD3FDA4" Association="Self.FK__Curse_Stu__curse__1AD3FDA4">
+      <End Role="Curse" EntitySet="Curse" />
+      <End Role="Curse_Student" EntitySet="Curse_Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curse_Stu__stude__1BC821DD" Association="Self.FK__Curse_Stu__stude__1BC821DD">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Curse_Student" EntitySet="Curse_Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curse_Tea__curse__7E37BEF6" Association="Self.FK__Curse_Tea__curse__7E37BEF6">
+      <End Role="Curse" EntitySet="Curse" />
+      <End Role="Curse_Teacher" EntitySet="Curse_Teacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curse_Tea__teach__7F2BE32F" Association="Self.FK__Curse_Tea__teach__7F2BE32F">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Curse_Teacher" EntitySet="Curse_Teacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK__News__album_id__412EB0B6" Association="Self.FK__News__album_id__412EB0B6">
+      <End Role="Album" EntitySet="Album" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Room_Curs__curse__4F7CD00D" Association="Self.FK__Room_Curs__curse__4F7CD00D">
+      <End Role="Curse" EntitySet="Curse" />
+      <End Role="Room_Curse" EntitySet="Room_Curse" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Room_Curs__room___4E88ABD4" Association="Self.FK__Room_Curs__room___4E88ABD4">
+      <End Role="Room" EntitySet="Room" />
+      <End Role="Room_Curse" EntitySet="Room_Curse" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sponsor__photo_i__04E4BC85" Association="Self.FK__Sponsor__photo_i__04E4BC85">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Sponsor" EntitySet="Sponsor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Student__respons__17F790F9" Association="Self.FK__Student__respons__17F790F9">
+      <End Role="Responsable" EntitySet="Responsable" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teacher__photo_i__7B5B524B" Association="Self.FK__Teacher__photo_i__7B5B524B">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Teacher" EntitySet="Teacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Voluntary__activ__74AE54BC" Association="Self.FK__Voluntary__activ__74AE54BC">
+      <End Role="Activity" EntitySet="Activity" />
+      <End Role="Voluntary_Activity" EntitySet="Voluntary_Activity" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Voluntary__photo__5441852A" Association="Self.FK__Voluntary__photo__5441852A">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Voluntary" EntitySet="Voluntary" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Voluntary__volun__73BA3083" Association="Self.FK__Voluntary__volun__73BA3083">
+      <End Role="Voluntary" EntitySet="Voluntary" />
+      <End Role="Voluntary_Activity" EntitySet="Voluntary_Activity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Activity_Photo" Association="Self.FK_Activity_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Activity" EntitySet="Activity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Curse_Curse" Association="Self.FK_Curse_Curse">
+      <End Role="Curse" EntitySet="Curse" />
+      <End Role="Curse1" EntitySet="Curse" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

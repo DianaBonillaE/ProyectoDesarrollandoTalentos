@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2ff33f5a84f04364830cb2e590058025" Name="Diagram1">
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Activity" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Album" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Comments" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Curse" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Curse_Student" Width="1.5" PointX="10.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.News" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Photo" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Responsable" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Room" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Sponsor" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Student" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Teacher" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.User" Width="1.5" PointX="7.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Voluntary" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK_Activity_Photo" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK__News__album_id__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK__Curse_Stu__curse__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK_Curse_Curse" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK__Curse_Stu__stude__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK__Sponsor__photo_i__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK__Teacher__photo_i__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK__Voluntary__photo__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK__Student__respons__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Activity_Sponsor" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Activity_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Album_Photo" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Curse_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Room_Curse" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Voluntary_Activity" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
