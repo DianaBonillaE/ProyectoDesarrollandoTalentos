@@ -96,18 +96,22 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,date,description,album_id")] News news, string albumName, string albumID)
+        public ActionResult Edit([Bind(Include = "id,date,description")] News news, string albumName, int albumId)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(news).State = EntityState.Modified;
-
-                Album album = db.Album.Find(albumID);
+                Album album = db.Album.Find(albumId);
                 album.name = albumName;
                 album.descripcion = news.description;
                 album.creation_date = news.date;
 
+                News new1 = db.News.Find(news.id);
+                new1.date = news.date;
+                new1.description = news.description;
+                new1.album_id = albumId;
+
                 db.Entry(album).State = EntityState.Modified;
+                db.Entry(news).State = EntityState.Modified;
 
                 db.SaveChanges();
                 return RedirectToAction("Index");

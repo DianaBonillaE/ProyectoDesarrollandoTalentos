@@ -36,9 +36,16 @@
                     </div>
 
                     <div class="form-group">
+                        @Html.LabelFor(model => model.album_id, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-10">
+                            <input id="albumId" name="albumId" value="@(ViewBag.albumId)" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.album_id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         @Html.LabelFor(model => model.Album.name, htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-10">
-                            <a id="albumID" name="albumID" value="@(ViewBag.albumID)"></a>
                             <input id="albumName" name="albumName" value="@(ViewBag.albumName)" class="form-control" />
                             @Html.ValidationMessageFor(model => model.Album.name, "", new { @class = "text-danger" })
                         </div>
