@@ -4,63 +4,108 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<div class="container md-3">
+    <br />
+    <h1 class="text-center">Detalles del Responsable</h1>
+    <br />
+    <br />
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-8">
+                <div class="row" style="text-align: center;">
+                    <div class="col-sm-2">
 
-<div>
-    <h4>Responsable</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+                        @Html.DisplayNameFor(model => model.identification)
+                        <br />
+                        •  @Html.DisplayFor(model => model.identification)
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+                    <div class="col-sm-2">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.last_name)
-        </dt>
+                        @Html.DisplayNameFor(model => model.name)
+                        <br />
+                        •  @Html.DisplayFor(model => model.name)
+                    </div>
+                    <div class="col-sm-2">
 
-        <dd>
-            @Html.DisplayFor(model => model.last_name)
-        </dd>
+                        @Html.DisplayNameFor(model => model.last_name)
+                        <br />
+                        •  @Html.DisplayFor(model => model.last_name)
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.address)
-        </dt>
+                    <div class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.phone_number)
+                        <br />
+                        •  @Html.DisplayFor(model => model.phone_number)
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.address)
-        </dd>
+                    <div class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.address)
+                        <br />
+                        •  @Html.DisplayFor(model => model.address)
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.phone_number)
-        </dt>
+                    <div class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.description)
+                        <br />
+                        •  @Html.DisplayFor(model => model.description)
+                    </div>
+                    <div class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.email)
+                        <br />
+                         @Html.DisplayFor(model => model.email)
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5%; text-align: center;">
+                    <div class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Student)
 
-        <dd>
-            @Html.DisplayFor(model => model.phone_number)
-        </dd>
+                        <br />
+                        @foreach (var item in ViewBag.students)
+                        {
 
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
+                            var sel = (Model.Student.Where(ca => ca.responsable_identification == item.identification).Count() > 0) ? "selected" : "ninguno";
 
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
+                            <option value="@item.identification" @sel>•  @item.name @item.last_name</option>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
-
-    </dl>
+                        }
+                    </div>
+                    
+                                  </div>
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <a href="~/Responsables/Index" class="btn btn-primary btn-md text-uppercase">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.identification }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<style>
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 97%;
+        margin-top: 10%;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+
+    .form-group {
+        align-content: center;
+    }
+</style>
+
