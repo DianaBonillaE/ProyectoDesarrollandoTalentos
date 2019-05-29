@@ -4,55 +4,101 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Activity</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+<div class="container md-3">
+    <br />
+    <h1 class="text-center">Detalles de la Actividad</h1>
+    <br />
+    <br />
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-8">
+                <div class="row" style="text-align: center;">
+                    <div class="col-sm-2">
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+                        @Html.DisplayNameFor(model => model.name)
+                        <br />
+                        •  @Html.DisplayFor(model => model.name)
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.descripcion)
-        </dd>
+                    <div class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.descripcion)
+                        <br />
+                        •  @Html.DisplayFor(model => model.descripcion)
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5%; text-align: center;">
+                    <div class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Sponsor)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.start_date)
-        </dt>
+                        <br />
+                        @foreach (var item in ViewBag.sponsors)
+                        {
 
-        <dd>
-            @Html.DisplayFor(model => model.start_date)
-        </dd>
+                            var sel = (Model.Sponsor.Where(ca => ca.identificacion == item.identificacion).Count() > 0) ? "selected" : "ninguno";
 
-        <dt>
-            @Html.DisplayNameFor(model => model.end_date)
-        </dt>
+                            <option value="@item.identificacion" @sel>•  @item.name</option>
 
-        <dd>
-            @Html.DisplayFor(model => model.end_date)
-        </dd>
+                        }
+                    </div>
+                    <div class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.User)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Photo.name)
-        </dt>
+                        <br />
+                        @foreach (var item in ViewBag.users)
+                        {
+                            var sel = (Model.User.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "Ninguno";
 
-        <dd>
-            @Html.DisplayFor(model => model.Photo.name)
-        </dd>
+                            <option value="@item.identification" @sel>•  @item.name @item.last_name</option>
+                        }
+                    </div>
+                    <div class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Voluntary)
 
-    </dl>
+                        <br />
+                        @foreach (var item in ViewBag.voluntaries)
+                        {
+                            var sel = (Model.Voluntary.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "Ninguno";
+
+                            <option value="@item.identification" @sel>•  @item.name @item.last_name</option>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2">
+                            <a href="~/Activities/Index" class="btn btn-primary btn-md text-uppercase">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<style>
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 97%;
+        margin-top: 10%;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+
+    .form-group {
+        align-content: center;
+    }
+</style>
+

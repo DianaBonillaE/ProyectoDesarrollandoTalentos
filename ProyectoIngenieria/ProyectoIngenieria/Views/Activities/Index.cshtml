@@ -1,57 +1,92 @@
-﻿@model IEnumerable<ProyectoIngenieria.DB.Activity>
+﻿@model PagedList.IPagedList<ProyectoIngenieria.DB.Activity>
+
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container md-3">
+    <br />
+    <h1 class="text-center">Actividades</h1>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-9"></div>
+        <div class="col-sm-3 ">
+            <a href="~/Activities/Create" class="btn btn-primary btn-md text-uppercase">Añadir Nuevo</a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <br />
+        <table class="table ">
+            <tr class="text-center">
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Fecha inicio
+                </th>
+                <th>
+                    Fecha Final
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.start_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.end_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Photo.name)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.start_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.end_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Photo.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.start_date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.end_date)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
 
-</table>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.id })|
+                        @Html.ActionLink("Details", "Details", new { id = item.id })
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <br />
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-6 ">
+              
+            </div>
+        </div>
+
+
+    </div>
+    <br />
+    <br />
+</div>
+<hr />
+
+<style>
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 97%;
+        margin-top: 10%;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+</style>
+

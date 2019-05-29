@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using ProyectoIngenieria.DB;
 
 namespace ProyectoIngenieria.Controllers
@@ -15,10 +16,11 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Curses
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 4)
         {
-            var curse = db.Curse.Include(c => c.Curse1).Include(c => c.Curse2);
-            return View(curse.ToList());
+            List<News> newsList = db.News.ToList();
+            PagedList<News> model = new PagedList<News>(newsList, page, pageSize);
+            return View(model);
         }
 
         // GET: Curses/Details/5
@@ -39,8 +41,7 @@ namespace ProyectoIngenieria.Controllers
         // GET: Curses/Create
         public ActionResult Create()
         {
-            ViewBag.id = new SelectList(db.Curse, "id", "description");
-            ViewBag.id = new SelectList(db.Curse, "id", "description");
+            
             return View();
         }
 
@@ -58,8 +59,7 @@ namespace ProyectoIngenieria.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id = new SelectList(db.Curse, "id", "description", curse.id);
-            ViewBag.id = new SelectList(db.Curse, "id", "description", curse.id);
+            
             return View(curse);
         }
 
@@ -75,8 +75,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.id = new SelectList(db.Curse, "id", "description", curse.id);
-            ViewBag.id = new SelectList(db.Curse, "id", "description", curse.id);
+          
             return View(curse);
         }
 
@@ -93,8 +92,7 @@ namespace ProyectoIngenieria.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id = new SelectList(db.Curse, "id", "description", curse.id);
-            ViewBag.id = new SelectList(db.Curse, "id", "description", curse.id);
+            
             return View(curse);
         }
 

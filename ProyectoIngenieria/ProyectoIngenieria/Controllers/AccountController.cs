@@ -68,7 +68,7 @@ namespace ProyectoIngenieria.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
+           /*/ if (!ModelState.IsValid)
             {
                 return View(model);
             }
@@ -87,9 +87,9 @@ namespace ProyectoIngenieria.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Intento de inicio de sesión no válido.");
-                    return View(model);
+                 /*/   return View(model);
             }
-        }
+        
 
         //
         // GET: /Account/VerifyCode

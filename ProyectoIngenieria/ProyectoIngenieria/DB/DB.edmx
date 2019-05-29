@@ -608,8 +608,6 @@
           <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Curse_Student" Relationship="Self.FK__Curse_Stu__curse__1AD3FDA4" FromRole="Curse" ToRole="Curse_Student" />
-          <NavigationProperty Name="Curse1" Relationship="Self.FK_Curse_Curse" FromRole="Curse" ToRole="Curse1" />
-          <NavigationProperty Name="Curse2" Relationship="Self.FK_Curse_Curse" FromRole="Curse1" ToRole="Curse" />
           <NavigationProperty Name="Teacher" Relationship="Self.Curse_Teacher" FromRole="Curse" ToRole="Teacher" />
           <NavigationProperty Name="Room" Relationship="Self.Room_Curse" FromRole="Curse" ToRole="Room" />
         </EntityType>
@@ -776,18 +774,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Curse_Curse">
-          <End Role="Curse" Type="Self.Curse" Multiplicity="1" />
-          <End Role="Curse1" Type="Self.Curse" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Curse">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Curse1">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Curse_Stu__stude__1BC821DD">
           <End Role="Student" Type="Self.Student" Multiplicity="1" />
           <End Role="Curse_Student" Type="Self.Curse_Student" Multiplicity="*" />
@@ -898,10 +884,6 @@
           <AssociationSet Name="FK__Curse_Stu__curse__1AD3FDA4" Association="Self.FK__Curse_Stu__curse__1AD3FDA4">
             <End Role="Curse" EntitySet="Curse" />
             <End Role="Curse_Student" EntitySet="Curse_Student" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Curse_Curse" Association="Self.FK_Curse_Curse">
-            <End Role="Curse" EntitySet="Curse" />
-            <End Role="Curse1" EntitySet="Curse" />
           </AssociationSet>
           <AssociationSet Name="FK__Curse_Stu__stude__1BC821DD" Association="Self.FK__Curse_Stu__stude__1BC821DD">
             <End Role="Student" EntitySet="Student" />
