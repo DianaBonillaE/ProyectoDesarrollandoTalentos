@@ -4,48 +4,89 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container md-3">
+    <br />
+    <h1 class="text-center">Estudiante</h1>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-9"></div>
+        <div class="col-sm-3 ">
+            <a href="~/Students/Create" class="btn btn-primary btn-md text-uppercase">Añadir Nuevo</a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <br />
+        <table class="table ">
+            <tr class="text-center">
+                <th>
+                    Identificación
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Apellidos
+                </th>
+                 <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.last_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.phone_number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Responsable.name)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.last_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phone_number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Responsable.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.identification }) |
-            @Html.ActionLink("Details", "Details", new { id=item.identification }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.identification })
-        </td>
-    </tr>
-}
+                    <td>
+                        @Html.DisplayFor(modelItem => item.identification)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.last_name)
+                    </td>
+                     <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.identification }) |
 
-</table>
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.identification })|
+                        @Html.ActionLink("Detalles", "Details", new { id = item.identification })
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <br />
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-6 ">
+
+            </div>
+        </div>
+        <div class="col-sm-3 ">
+            <a href="~/Home/About" class="btn btn-primary btn-md text-uppercase">Regresar</a>
+        </div>
+
+    </div>
+    <br />
+    <br />
+</div>
+<hr />
+
+<style>
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 97%;
+        margin-top: 10%;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+</style>
