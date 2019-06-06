@@ -6,137 +6,116 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using PagedList;
 using ProyectoIngenieria.DB;
 
 namespace ProyectoIngenieria.Controllers
 {
-    public class NewsController : Controller
+    public class TeachersController : Controller
     {
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
-        // GET: News
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        // GET: Teachers
+        public ActionResult Index()
         {
-            List<News> newsList = db.News.ToList();
-            PagedList<News> model = new PagedList<News>(newsList, page, pageSize);
-            return View(model);
+            var teacher = db.Teacher.Include(t => t.Photo);
+            return View(teacher.ToList());
         }
 
-        // GET: News/Details/5
-        public ActionResult Details(int? id)
+        // GET: Teachers/Details/5
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news = db.News.Find(id);
-            if (news == null)
+            Teacher teacher = db.Teacher.Find(id);
+            if (teacher == null)
             {
                 return HttpNotFound();
             }
-            return View(news);
+            return View(teacher);
         }
 
-        // GET: News/Create
+        // GET: Teachers/Create
         public ActionResult Create()
         {
-            ViewBag.album_id = new SelectList(db.Album, "id", "name");
+            ViewBag.photo_id = new SelectList(db.Photo, "id", "name");
             return View();
         }
 
-        // POST: News/Create
+        // POST: Teachers/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,date,description")] News news, string albumName)
+        public ActionResult Create([Bind(Include = "identification,name,last_name,address,state,description,email,phone_number,photo_id")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
-
-                var Album = new DB.Album();
-                Album.name = albumName;
-                Album.descripcion = news.description;
-                Album.creation_date = news.date;
-
-                db.Album.Add(Album);
-
-                db.News.Add(news);
-
+                db.Teacher.Add(teacher);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(news);
+            ViewBag.photo_id = new SelectList(db.Photo, "id", "name", teacher.photo_id);
+            return View(teacher);
         }
 
-        // GET: News/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Teachers/Edit/5
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            News news = db.News.Find(id);
-            Album album = db.Album.Find(news.album_id);
-            ViewBag.albumName = album.name;
-            ViewBag.albumId = news.album_id;
-            if (news == null)
+            Teacher teacher = db.Teacher.Find(id);
+            if (teacher == null)
             {
                 return HttpNotFound();
             }
-
-            return View(news);
+            ViewBag.photo_id = new SelectList(db.Photo, "id", "name", teacher.photo_id);
+            return View(teacher);
         }
 
-        // POST: News/Edit/5
+        // POST: Teachers/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,date,description,album_id")] News news, string albumName)
+        public ActionResult Edit([Bind(Include = "identification,name,last_name,address,state,description,email,phone_number,photo_id")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
-                Album album = db.Album.Find(news.album_id);
-                album.name = albumName;
-                album.descripcion = news.description;
-                album.creation_date = news.date;
-
-                db.Entry(album).State = EntityState.Modified;
-                db.Entry(news).State = EntityState.Modified;
-
+                db.Entry(teacher).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(news);
+            ViewBag.photo_id = new SelectList(db.Photo, "id", "name", teacher.photo_id);
+            return View(teacher);
         }
 
-        // GET: News/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Teachers/Delete/5
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            News news = db.News.Find(id);
-            if (news == null)
+            Teacher teacher = db.Teacher.Find(id);
+            if (teacher == null)
             {
                 return HttpNotFound();
             }
-            return View(news);
+            return View(teacher);
         }
 
-        // POST: News/Delete/5
+        // POST: Teachers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            News news = db.News.Find(id);
-            db.News.Remove(news);
+            Teacher teacher = db.Teacher.Find(id);
+            db.Teacher.Remove(teacher);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -151,4 +130,3 @@ namespace ProyectoIngenieria.Controllers
         }
     }
 }
-

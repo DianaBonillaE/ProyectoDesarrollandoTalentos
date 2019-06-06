@@ -38,7 +38,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.album_id, htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-10">
-                            <input id="albumId" name="albumId" value="@(ViewBag.albumId)" class="form-control" />
+                            @Html.EditorFor(model => model.album_id, new { htmlAttributes = new { @class = "form-control" ,@readonly="readonly"} })
                             @Html.ValidationMessageFor(model => model.album_id, "", new { @class = "text-danger" })
                         </div>
                     </div>

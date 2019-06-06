@@ -250,13 +250,13 @@ namespace ProyectoIngenieria.Controllers
             act.Voluntary.Clear();
             act.User.Clear();
 
-            var photo = db.Photo.Find(act.photo_id);
-            db.Photo.Remove(photo);
+            //Photo photo = db.Photo.Find(act.photo_id);
+            ///db.Photo.Remove(photo);
             db.Activity.Remove(act);
-
+            db.SaveChanges();
             try
             {
-                db.SaveChanges();
+                
             }
             catch (Exception e)
             {

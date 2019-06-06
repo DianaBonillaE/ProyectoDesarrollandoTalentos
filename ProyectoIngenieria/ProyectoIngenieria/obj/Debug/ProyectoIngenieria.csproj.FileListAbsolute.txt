@@ -394,8 +394,8 @@ C:\Users\koran\Documents\ProyectoDesarrollandoTalentos\ProyectoIngenieria\Proyec
 C:\Users\koran\Documents\ProyectoDesarrollandoTalentos\ProyectoIngenieria\ProyectoIngenieria\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
 C:\Users\koran\Documents\ProyectoDesarrollandoTalentos\ProyectoIngenieria\ProyectoIngenieria\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
 C:\Users\koran\Documents\ProyectoDesarrollandoTalentos\ProyectoIngenieria\ProyectoIngenieria\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
-C:\Users\koran\Documents\ProyectoDesarrollandoTalentos\ProyectoIngenieria\ProyectoIngenieria\obj\Debug\ProyectoIngenieria.csprojAssemblyReference.cache
 C:\Users\koran\Documents\ProyectoDesarrollandoTalentos\ProyectoIngenieria\ProyectoIngenieria\obj\Debug\ProyectoIngenieria.csproj.CoreCompileInputs.cache
 C:\Users\koran\Documents\ProyectoDesarrollandoTalentos\ProyectoIngenieria\ProyectoIngenieria\obj\Debug\ProyectoIngenieria.csproj.CopyComplete
 C:\Users\koran\Documents\ProyectoDesarrollandoTalentos\ProyectoIngenieria\ProyectoIngenieria\obj\Debug\ProyectoIngenieria.dll
 C:\Users\koran\Documents\ProyectoDesarrollandoTalentos\ProyectoIngenieria\ProyectoIngenieria\obj\Debug\ProyectoIngenieria.pdb
+C:\Users\koran\Documents\ProyectoDesarrollandoTalentos\ProyectoIngenieria\ProyectoIngenieria\obj\Debug\ProyectoIngenieria.csprojAssemblyReference.cache

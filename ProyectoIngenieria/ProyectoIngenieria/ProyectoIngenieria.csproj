@@ -213,6 +213,7 @@
     <Compile Include="Controllers\ResponsablesController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="DB\Activity.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -2061,6 +2062,11 @@
     <Content Include="Views\Curses\Details.cshtml" />
     <Content Include="Views\Curses\Edit.cshtml" />
     <Content Include="Views\Curses\Index.cshtml" />
+    <Content Include="Views\Teachers\Create.cshtml" />
+    <Content Include="Views\Teachers\Delete.cshtml" />
+    <Content Include="Views\Teachers\Details.cshtml" />
+    <Content Include="Views\Teachers\Edit.cshtml" />
+    <Content Include="Views\Teachers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
