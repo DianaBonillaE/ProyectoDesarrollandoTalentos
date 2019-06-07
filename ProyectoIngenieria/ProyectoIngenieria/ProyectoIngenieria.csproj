@@ -217,6 +217,7 @@
     <Compile Include="Controllers\SponsorsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VoluntariesController.cs" />
     <Compile Include="DB\Activity.cs">
       <DependentUpon>DB.tt</DependentUpon>
@@ -2086,6 +2087,11 @@
     <Content Include="Views\Sponsors\Details.cshtml" />
     <Content Include="Views\Sponsors\Edit.cshtml" />
     <Content Include="Views\Sponsors\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
