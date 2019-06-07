@@ -207,13 +207,17 @@
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\CursesController.cs" />
+    <Compile Include="Controllers\EnrollmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\PhotosController.cs" />
     <Compile Include="Controllers\ResponsablesController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
+    <Compile Include="Controllers\SponsorsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
+    <Compile Include="Controllers\VoluntariesController.cs" />
     <Compile Include="DB\Activity.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
@@ -2067,10 +2071,26 @@
     <Content Include="Views\Teachers\Details.cshtml" />
     <Content Include="Views\Teachers\Edit.cshtml" />
     <Content Include="Views\Teachers\Index.cshtml" />
+    <Content Include="Views\Voluntaries\Create.cshtml" />
+    <Content Include="Views\Voluntaries\Delete.cshtml" />
+    <Content Include="Views\Voluntaries\Details.cshtml" />
+    <Content Include="Views\Voluntaries\Edit.cshtml" />
+    <Content Include="Views\Voluntaries\Index.cshtml" />
+    <Content Include="Views\Photos\Create.cshtml" />
+    <Content Include="Views\Photos\Delete.cshtml" />
+    <Content Include="Views\Photos\Details.cshtml" />
+    <Content Include="Views\Photos\Edit.cshtml" />
+    <Content Include="Views\Photos\Index.cshtml" />
+    <Content Include="Views\Sponsors\Create.cshtml" />
+    <Content Include="Views\Sponsors\Delete.cshtml" />
+    <Content Include="Views\Sponsors\Details.cshtml" />
+    <Content Include="Views\Sponsors\Edit.cshtml" />
+    <Content Include="Views\Sponsors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Static\" />
+    <Folder Include="Views\Enrollment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
