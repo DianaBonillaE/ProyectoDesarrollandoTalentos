@@ -11,16 +11,16 @@
         <h2 class="section-heading text-uppercase text-center" style="margin-top:-6%;">Iniciar Sesión</h2>
         <br />
         <br />
-        @using (Html.BeginForm("About", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal ", role = "form" }))
+        @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label text-muted mov " })
+                @Html.LabelFor(m => m.Identification, new { @class = "col-md-4 control-label text-muted mov " })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control mov" })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger mov" })
+                    @Html.TextBoxFor(m => m.Identification, new { @class = "form-control mov" })
+                    @Html.ValidationMessageFor(m => m.Identification, "", new { @class = "text-danger mov" })
                 </div>
             </div>
             <div class="form-group">
