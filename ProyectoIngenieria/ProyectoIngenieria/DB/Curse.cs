@@ -35,10 +35,12 @@ namespace ProyectoIngenieria.DB
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Hora de Entrada")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime start_date { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Hora de Salida")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime end_date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

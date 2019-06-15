@@ -34,11 +34,13 @@ namespace ProyectoIngenieria.DB
         public string descripcion { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Hora de Entrada")]
+        [Display(Name = "Fecha inicio")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime start_date { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Hora de Salida")]
+        [Display(Name = "Fecha Finalización")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode =true)]
         public System.DateTime end_date { get; set; }
         public int photo_id { get; set; }
     
