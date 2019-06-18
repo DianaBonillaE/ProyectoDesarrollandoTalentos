@@ -1,0 +1,282 @@
+﻿
+@{
+    ViewBag.Title = "ViewAdmin";
+}
+
+@Html.Partial("AdminMenu")
+
+<div class="container bg-3">
+    <br />
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Matrícula</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAABcVBMVEX///+E2/8ySl7m6e7O1eD/0Fv/cFgrO05+2v+H4P9/2/+I4v/S1d562f+F3f+E3P8uQlY8S1wkNkotQFNha3nu8PX/1Fvj9v/I7v/1/P+l5P//1luz6P/c9P/s+f+/6/9dl7OX4P/5s0uo2PH/bFid4v/G1uRyvNxDaYA3VGn/z00mMUR9zvFaYl246f9oqsjX4er/aE3L1eag2fTK5fMfPVRQgZoUN0+FkqC51+pJc4v/sFpViaNJXG0AHznn5ek7W3EcSF780mz7vVDnwFujrbq7wcay189pTVfOm5jOZlr/rKD/4d3/8/G9o1ywYFue2eNvfYqOWVyzs6OQhF3w0G7QsFz29+dKVloTPF7s0n/zbVi418fO1av/jXzc05T/gW2UnqfX1J3/ubD/zsenk1xtbl2Ee10DMEv/57D/4Jvv3rfb1MH/8dD9hWP/nI3+jFz9o2T/m1ntycfh07Xp2tz5qH77hXSeUk7p6938lm7TKyQUAAAQEElEQVR4nN2d+X8TxxmHtTqs9VoXxpIl4SNrY4MEMTZYsSGAwMZOT4pbmgTIgZujBBoakqYt/es7e2h3rl3N+85Isvz9IZ/gXXnm8fvO+74zO9rJZMap45N72ezCaWmsjY5RR71eLUtU27t3LhnrC71spL2TSXfHvOqdWpZSr1OfdI8Mq5VlAD3G/qT7ZFL94wUe8HwhnrzqCXyecpPumCmdyPmyC61J98yQ6q/kgNm982LDowQTZnvHk+6aIZ2GhAJo73TSXTMk34a9p4Wn2WfPer3eOSQ89qCePWpcajx6/N3Tv3//oafve+eIMLdHCD+8VCgUGo3GpYGe9rK9o0l3zZQ6xFzfNQqcnp2fSOO56bNPecJLH2b3zk9R08n2HvEmJG66N+l+GVPrL72s4KSNx88+/2xl0l3TVmt5tW2V57oXspcEwk8vFP5aLlvt1eVpLd4WmwSubNuW9aT7+JlI+Ohxo+BYlm17mM3FSXcXqJVm2/bhfFULjc8FLy08KjS+dsI7CKbdbk6Nzy5uWTGdJ+eL7mMh0hQK3e4t6iaP0tqaAlMublXLNF2A+MlzEbDwtycOf6Ndrp5tyFbTFfFCKwqAB44AGEC6zbMaehbbcjzfiCLhcylgANk+i4ZcTjBfQPhEIIzDjNyQy5MG4tSslJP7S+QKhN0vUwiJypXmpKEoLVvpfEQi4RfphITROit2JP45jM9yDgTCT4YREkb3LIzHlY3hfITwa4HQVfiYVd6YeBmwlBJfaEIhmCaHUkZ2eWmifMuWEp+H+JxF7D5R/CBpYXLDsaXkoKEqzEhUGYWRyu0JlQBNW9WAnhwmYSj6aCjbnkjmaAMM6Kl6GAMeroEIPTOOnW9ReQSGcp6srR1GgIfKwzCUbY05cawCDUis8GX3cI1AHvr/HVbRyH7B6jgBISEmkN088I235lOSgbgB9AEvN46ND+yhHmHmNRNLf1wG/5HG56mIvln2RuYzJiFmMvBfQsw4ltQIH4Jh137oUibMZHbhjjCewbiEAbS3vJ0XUVnT/YH8K7eEQhx5EdfGdMte6vt7Sw4CxO5r7x+5Pu53jTgzwiOg16nVfi7YPfPaQ+y+8f8/l+ujrGiPNKS6iC7Z1m4/lwsf2f940H39WSYkzPV3bXBaJL/QPVOAjr2e8xX+ino/3AtVD36M8dTRIcIBHbu93Q9QfLB63pP/y4KfEjNuwO04KkToGHRsa33AFxixnvMJfdro5/3ttgP9041mLML8icys2rs5Wj5UQEgQ69SVfm53wwFNxUYSUbcAedCxNrZ2c30GMOczhYS5OnvNg1xyLcis2Hjqb0IAb/c5ukj5/L5PKFM/dxuCaHhSvAiqZJIYCOHJ3knKVUgjZaNleAu0XrGewnCUPUq5ug4Jq7bJ1RtQnnA2Uxjy24leSq5ugggN5gxYGHVL+e1kwnwy4Xa+BGmHlLumACFRxnfSNMLjVEKQmxqLNiuw+RJx0mSI/P6r/eSLeZibEkQza/4uqFHLKpGOYgnzVVhbRobiFqykctYJYaKbpnop+Vzp1vAWaNlb+oCwTOil+3wqYbILb3vXIEnfk4GsCGuQEJbSCNPkE+bBEw1dQKCPWtatUmpGSJH/uZILbE/XT4FxNMgVWoSwfGFpx1MX2FyQKzQIwQNRM54iFn+DfiIG4nb4SXCLWsvE4NYGwxBPCB6Ilk6wWYUvzITDEOGmA0LwQLRs9GwYNGcKCW+jCQcfhA9E/DwKsWDrDPqZWLcNJQSWpj4hcpLRQjyhcEvaNoTNoAKVcUbErLnfigjBoSYiBJamnnBGRIxCahiCCbcjQnioQY5EcL1mxflehxATanC1G+a5kJWPBSSMP4gINd5TdLCaKMJS3E80Ibyq8QjhCxoVTDtxoNGwIaaqsawKFBCzHSGc32sTIoIpojpFPYGmQik01GxTn8QEU/CzGky2Z0KpDiEmmIKzPi7OOHkjhKhgCo01qDjDJAsNQvhajS9QrAEvXgRyS3Q/QYS0f6PSBXA5Az4x9EUni/w6iHCd+iQuXcCmibgmmGSRryQ9JZWpTzs4Ll2AFmyQTsoki9sOhDBXpj6Lqr0tkJviIilDWFovg7y0TNsfly4g0XQD1QCTDktVGxJMt+2qPqGlvgcF56RMOtx0QIS7Nv3nwSVE4qaqgKia1FNsBjKU7N3hYDQh5aZoQtXaFDP35QldC0jIJFNk+8rzYBfZgMtYAURIEjDlppjFqKAHaoCYBRpfVMIn8d5eBRASt4kXk7EpX3m5BvpMVELoddHeghA6tAugCRWflyJLNsuhbOg6MMIlx3Lc2IbIokY1I6ImvxZbtJFY6iwBCMnt7KeRhGrTYOB2iJiQLrxLm1YbQNh2N+kP30ISWlUlQuwwZKcWhBFAuMt+FOulajkfHWisKtPNPGSGyEyAScmHJlQpvpFlt8Ut0/hSLtxYQmxNoxhqsKGUnx+CzMgQogON4iwYG0o9CYCqZmRtiAZUC6YuHtC5JRpRzYw0IT7OWGp1G3KZLUCU+KmSGSlCDR+11BbcNJzUm+bjEGPCEnb6G0jhGRRutTsdUcGIhgBVVr6Rq1AxosRR38QkK+mEei5qKSVEfMIfIArh5h/d5yFH/+XO7+VLcIMgowmoMrtY1hqHPqLLAt70vuP83uf4z87Mzsw3yYSuLqDKQga+pIkRrU3GjP7XKn8gGL/szBDtvPhFSkiKdX0pFDUGCNl4c/Nf/ndjuwfvczOhdr76lScs6Q9BX+MipD315uBdbd1/X56JGPnhuL2p76GexkZIleEl34TPC91CDDgjDMdtQ82OkdAKo8fNNz7hm9z7/9GE/nCkU4dOKUVpjIRuP6hUbgZv3nme+3VnhhMzHNtGnHSMhM564HyhkxYOFr/iAdnhiJ+0MRofYbRauh0Emu63ggl9xJ2BGVEvkZC0Oz7CaMU7SBaNny7LCGdetsyGGgVC/ZomaCmutn0bNt5dJhJt+IfoW9261WLY7vCaBv3giRX1fDR4Mc3hT0Rv3759+fIFlRb/mYnePWCkWZWqTbvyDhUTvg9iTSN6I3vh7YBx54+ZyIaukWYVKm/d2dNAVM3CvzOxsXZ5EEpjE/aRD545KcyeNGfAA9lUMn/DvF2IWPLdwIaZ2IR9I80q7f0ylfFz9UiNwEcbl8j/HH788c8DE37rmTAQ6hUgEqnspDVUPlVuLER6Vzhc+/jdzz+9nZm5TIXUl6S1UnjLDVPNKhC6Zpqa/eDafKC9/14eSMgUmQvBPdc+mDXTrMp2DEPuQgiLgealqX5m5ivS2NGr4B5ThEpfSzBUIM7eDQn3/iQH9DPF/fCvcO2uIUKVVX1DZdvs3WLN18MXckAvU+z3gntqRVOEKvtNDCXEuY/Cc8ge/i7RhP75LL5qH80ZaVVta5sZwtk70ZlAMsSdb0hLJ/FhbHfM2FBtV5SZuD13Ner9w99IHJU0VIpMmM1eNWNDtX3CZoLp7APq7KqHf+ZN6CX7e9QdD4wQKu5UMBNqKh36eK6HWTaivsyE50AN1DHiOYq7TYzMLqoWdwTZwwvUcPSTPXsiooV+dk9J9Q0LJtaEqpZwpCM1HL1p4SlzDlvNCKGjBphxDbQl2DAYji+iTFHfY68ZIVTd6W2iqpEShsPRT/YnNfOEyrv1TQxEOWE4HDNspjBGqP6iExPBtNqREnrD8bcZNlN46phwUvWvWZrIiJUkwmy2d69/zB/3aCJbAL6+ZiIjziYTSo6zzD4wULUBvo1gYq2GqWmGy0RNA/l+nqvf3Nz4CSGvcTHgplTlrSIDlTfoC4gG3HT8hLAvkbpTSAh715C+m1IzYBXpz4Ch38jXJpwDEdbuaNsQ+lYF7aQfrdOoEWqv04Bfb6Jdm46bEP7yPVezxdm7ckJ5AKpprybC32mmG2sSCGsfyH+sS4h5lakuYQLKlQRwXRvCAXXnwQmEWfm8UZcQ9UIz9Jf0Ugk7c9I5hzYh6lVYekZMILwqr3U0CbHvpBsBIckK0iyiS4gD1DPi7I2LUpI5KfnFGzqE+NcKajSaQHjxxlzCz7VsiAUEvsibVUVOcmX2ipxQY51G57XeGs3KCYvXK9eLpgl1XtGqsQWsIrVVTbbc79sWT6h3kBd+iiEn7FSq0mVGDULN40rwaV9OSKby0oSoQ6h5CAQ62FSuSMabN0mSJsQimlD/9ADMIVbJhCSxS0sBNKGBQy6wWzOkMdNLe9JESWIsrhkTpyMg/VROSEwlHaBYQjMnXKBOk7OqUsLrVYIuJUQ9ezJ0shUunsoJq1WrWjVIaOgwHVTer1qy2sVbb5qT/LyIekBq7tBOzMGcUkJ/ZVuWEFGEJs/twgzFikgYrBnKEmIREWjMHi8Hb9+akxD681xZQixilktNAmZW4EaUEAYzCNmsA0FomzknKBJ8DXxOtFRQfcoSYg1MaPbYNU/gxC8JmUFOkOYRKOEozj6GBlRZUvAjpnSrDZBwNCcfQ8549AjFeWAnWIyRbNPowAjLBo55kgl2nLNkq0L4oFeSEGEbFUZ3sDNoxi8SDh6hSRIiiHCUxzq3AVYULTVY9pUkRMhj/PJIz60GOKpIOFgUlcwQr6ovl4767HH1cCNuVRgsxkgSovpGhVEFmVjKSWPuDu+LgymSmBDVNyqMJk2wUp1LifGkODDUrECo+hh/FIle1KLa8cuSiDnAEIoBRULbNl6qydVSWn+bFQijgCkEodpHKuPQdk2ej5sulawhbFWIDSWYV2mjwqiDKCuFOlwkjJ6CCglRhdD0MdXDtFIZ5qkCRvx8SZghDn8EbFcMTwcVNCz5i4TRuraQEIcSjtdDB1q2Us0oEMYrhkJCHEJoW2NJEhKlmnH2Bh9Lo/U0YYZYS33IPRkDBlpMGY1C9dmJKfgZYtpjfLsypiSYoGZi+hcIqfkDnxCTCW3EUVWmtVSWM/IBk65b+ISY9BjfnqSDxlppSxkFQiqa8FFITmiX2+NPEXJJGfmUQFPwHix7yH2G+DxJGAVCiiLt2pnk89Ra4mIOT0E/QOMTIk9o20vjK7LV1Vqt0oYUCGmISgqhXa6unkU+X8uUs/JbFTp0QuASIrVRgbjnpAoYNbWarh24K/8gn1ls4hJi+BiffNJtnlnzxWo1N8rElNxYY6fxXEL0xqhdLm9MA16o5aWKzREyxTWXEIvX7crS2XZOiVq7zDdF2aTOJcTe7vQYj1KdJWQSAhdoe/VJdxalFku43nbdChluVrXiuu11lnAqTZhpsbUnd5W5WJtOwgwD2OEudtLwp0UMwwJ3ceE8ENJmqu1zF/dpN+UNPC2iCXtH3MWj3jkgpN990TvmLjLvjbg3kf7piyEscRdL541wj8/pzBt4ppWQDpc94SptQz7QToX6+xcYCTewl/f7E+ijlk7vz88XY80XhTsuMtfn759OoJcaOr1f5CTccpG7YboQ+wLgReEenrB4f5oc9fQa3/3hNixemyYjLsxzvZeMw6JwzzRFVJGQL2lIUTMmwv8D/14AuHeF1+YAAAAASUVORK5CYII=" alt="niños">
+
+                </div>
+                <div class="panel-footer">
+                    <a href="//Index" class="btn btn-sm">Ver más</a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Cursos</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="https://lefivesabadell.com/wp-content/uploads/2018/04/icono-salsa-300x300.png" />
+                </div>
+                <div class="panel-footer">
+                    <a href="/Curses/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Aulas</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 190px;height: 100px;" src="https://img.freepik.com/vector-gratis/interior-aula-escuela-universidad-concepto-educativo-pizarra-tabla_1441-1694.jpg?size=626&amp;ext=jpg" alt="Resultado de imagen para icono de aulas de arte png" />
+                </div>
+                <div class="panel-footer">
+                    <a href="/Rooms/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Profesor</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="http://www.unipamplona.edu.co/unipamplona/portalIG/home_9/recursos/2018/imagenes/09052018/icono_artes_2.png" alt="niños">
+                </div>
+                <div class="panel-footer">
+                    <a href="/Teachers/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Estudiante</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="https://images.vexels.com/media/users/3/148068/isolated/preview/ab88b9055d36ac112e95b7e8cdd09f3a-icono-de-camara-cuadrado-by-vexels.png" />
+                </div>
+                <div class="panel-footer">
+                    <a href="/Student/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Responsable</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="https://images.vexels.com/media/users/3/148068/isolated/preview/ab88b9055d36ac112e95b7e8cdd09f3a-icono-de-camara-cuadrado-by-vexels.png" />
+                </div>
+                <div class="panel-footer">
+                    <a href="/Responsable/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Usuarios</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="https://images.vexels.com/media/users/3/148068/isolated/preview/ab88b9055d36ac112e95b7e8cdd09f3a-icono-de-camara-cuadrado-by-vexels.png" />
+                </div>
+                <div class="panel-footer">
+                    <a href="/User/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Voluntarios</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="https://images.vexels.com/media/users/3/148068/isolated/preview/ab88b9055d36ac112e95b7e8cdd09f3a-icono-de-camara-cuadrado-by-vexels.png" />
+                </div>
+                <div class="panel-footer">
+                    <a href="/Voluntaries/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Patrocinadores</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="https://images.vexels.com/media/users/3/148068/isolated/preview/ab88b9055d36ac112e95b7e8cdd09f3a-icono-de-camara-cuadrado-by-vexels.png" />
+                </div>
+                <div class="panel-footer">
+                    <a href="/Sponsor/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Actividades</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="https://images.vexels.com/media/users/3/148068/isolated/preview/ab88b9055d36ac112e95b7e8cdd09f3a-icono-de-camara-cuadrado-by-vexels.png" />
+                </div>
+                <div class="panel-footer">
+                    <a href="/Activities/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Noticias</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="https://images.vexels.com/media/users/3/148068/isolated/preview/ab88b9055d36ac112e95b7e8cdd09f3a-icono-de-camara-cuadrado-by-vexels.png" />
+                </div>
+                <div class="panel-footer">
+                    <a href="/News/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Comentarios</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="https://images.vexels.com/media/users/3/148068/isolated/preview/ab88b9055d36ac112e95b7e8cdd09f3a-icono-de-camara-cuadrado-by-vexels.png" />
+                </div>
+                <div class="panel-footer">
+                    <a href="/Comments/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h3>Albúmes</h3>
+                </div>
+                <div class="panel-body">
+                    <img style="width: 100px;height: 100px;" src="https://images.vexels.com/media/users/3/148068/isolated/preview/ab88b9055d36ac112e95b7e8cdd09f3a-icono-de-camara-cuadrado-by-vexels.png" />
+                </div>
+                <div class="panel-footer">
+                    <a href="/Albums/Index" class="btn btn-sm">Ver más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
+<hr />
+
+
+<style>
+
+    .bg-3 {
+        color: #ffffff;
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 90%;
+        margin-top: 9%;
+    }
+
+    .borde {
+        border: 1px solid #234394;
+    }
+
+    .panel {
+        border: 1px solid #234394;
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+    }
+
+    .panel-body {
+        margin-top: 2%;
+    }
+
+    .panel:hover {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+    }
+
+    .panel-footer .btn:hover {
+        border: 1px solid #234394;
+        background-color: #fff !important;
+        color: #234394;
+    }
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .panel-heading {
+        color: #fff !important;
+        background-color: #234394 !important;
+        padding: 15px;
+        border-bottom: 1px solid transparent;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    .panel-footer {
+        background-color: white !important;
+    }
+
+        .panel-footer h3 {
+            font-size: 30px;
+        }
+
+        .panel-footer h4 {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .panel-footer .btn {
+            margin: 15px 0;
+            background-color: #234394;
+            color: #fff;
+        }
+
+    .col-sm-4 {
+        margin-top: 2%;
+    }
+</style>
+
