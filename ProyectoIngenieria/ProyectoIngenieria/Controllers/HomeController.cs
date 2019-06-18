@@ -25,14 +25,30 @@ namespace ProyectoIngenieria.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+          
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            
+            return View();
+        }
+
+        public ActionResult ViewAdmin()
+        {
+
+            return View();
+        }
+
+        public ActionResult UserMenu()
+        {
+
+            return View();
+        }
+
+        public ActionResult AdminMenu()
+        {
 
             return View();
         }
