@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using ProyectoIngenieria.DB;
 
 namespace ProyectoIngenieria.Controllers
@@ -15,10 +17,11 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Teachers
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 4)
         {
-            var teacher = db.Teacher.Include(t => t.Photo);
-            return View(teacher.ToList());
+            List<Teacher> teacherList = db.Teacher.ToList();
+            PagedList<Teacher> model = new PagedList<Teacher>(teacherList, page, pageSize);
+            return View(model);
         }
 
         // GET: Teachers/Details/5
@@ -48,12 +51,43 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "identification,name,last_name,address,state,description,email,phone_number,photo_id")] Teacher teacher)
+        public ActionResult Create([Bind(Include = "identification,name,last_name,address,state,description,email,phone_number,photo_id")] Teacher teacher, Boolean state, HttpPostedFileBase File, string nameFile)
         {
             if (ModelState.IsValid)
             {
-                db.Teacher.Add(teacher);
-                db.SaveChanges();
+                teacher.state = state;
+
+                if (File == null)
+                {
+                    ViewBag.MessagePhoto = "Debe ingresar una imagen";
+                    return View();
+                }
+                else
+                {
+
+                    if (nameFile == "")
+                    {
+                        ViewBag.MessagePhotoName = "Debe ingresar un nombre";
+                        ViewBag.MessagePhoto = "Debe ingresar una imagen";
+                        return View();
+                    }
+                    else
+                    {
+                        var extension = Path.GetExtension(File.FileName);
+                        var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
+
+                        var Photo = new DB.Photo();
+                        Photo.name = nameFile;
+                        Photo.image = nameFile + extension;
+                        File.SaveAs(path);
+
+                        db.Photo.Add(Photo);
+
+                        db.Teacher.Add(teacher);
+                        db.SaveChanges();
+                    }
+                }
+
                 return RedirectToAction("Index");
             }
 
