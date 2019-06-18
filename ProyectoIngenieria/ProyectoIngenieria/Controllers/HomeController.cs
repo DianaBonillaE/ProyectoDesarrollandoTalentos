@@ -35,7 +35,7 @@ namespace ProyectoIngenieria.Controllers
             return View();
         }
 
-        public ActionResult ViewAdmin()
+        public ActionResult AdminView()
         {
 
             return View();

@@ -2092,9 +2092,9 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Comments\Create.cshtml" />
     <Content Include="Views\Comments\Details.cshtml" />
-    <Content Include="Views\Home\ViewAdmin.cshtml" />
     <Content Include="Views\Home\AdminMenu.cshtml" />
     <Content Include="Views\Home\UserMenu.cshtml" />
+    <Content Include="Views\Home\AdminView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
