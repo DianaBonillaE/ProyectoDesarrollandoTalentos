@@ -20,6 +20,7 @@ namespace ProyectoIngenieria.DB
         [Required]
         [Display(Name ="Fecha")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime date { get; set; }
 
         [Required]
@@ -27,7 +28,6 @@ namespace ProyectoIngenieria.DB
         public string description { get; set; }
 
         [Required]
-        [Display(Name = "Nombre del albúm de fotos")]
         public int album_id { get; set; }
     
         public virtual Album Album { get; set; }

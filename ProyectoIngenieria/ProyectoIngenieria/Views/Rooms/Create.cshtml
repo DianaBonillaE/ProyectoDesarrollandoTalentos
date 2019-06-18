@@ -8,6 +8,8 @@
 {
     @Html.AntiForgeryToken()
 
+    @Html.Partial("AdminMenu")
+
     <div class="container md-3">
         <br />
         <h1 class="text-center">Ingresar un aula</h1>
@@ -23,6 +25,7 @@
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.room_number, new { htmlAttributes = new { @class = "form-control ", @min = "1" } })
                             @Html.ValidationMessageFor(model => model.room_number, "", new { @class = "text-danger" })
+
                         </div>
                     </div>
 

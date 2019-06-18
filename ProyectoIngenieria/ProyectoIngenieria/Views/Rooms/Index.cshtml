@@ -1,88 +1,90 @@
 ﻿@model PagedList.IPagedList<ProyectoIngenieria.DB.Room>
-    @using PagedList.Mvc;
+@using PagedList.Mvc;
 
-    @{
-        ViewBag.Title = "Index";
-    }
+@{
+    ViewBag.Title = "Index";
+}
 
-    <div class="container md-3">
+@Html.Partial("AdminMenu")
+
+<div class="container md-3">
+    <br />
+    <h1 class="text-center">Aulas</h1>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-9"></div>
+        <div class="col-sm-3 ">
+            <a href="/Rooms/Create" class="btn btn-primary btn-md text-uppercase">Añadir Nuevo</a>
+        </div>
+    </div>
+
+    <div class="panel-body">
         <br />
-        <h1 class="text-center">Aulas</h1>
-        <br />
+        <table class="table ">
+            <tr class="text-center">
+                <th>
+                    <p class="text-muted">Número de aula</p>
+                </th>
+                <th>
+                    <p class="text-muted">Ubicación</p>
+                </th>
+                <th>
+                    <p class="text-muted">Capacidad</p>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.room_number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.capacity)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.id })
+                    </td>
+                </tr>
+            }
+        </table>
         <br />
         <div class="row">
-            <div class="col-sm-9"></div>
-            <div class="col-sm-3 ">
-                <a href="/Rooms/Create" class="btn btn-primary btn-md text-uppercase">Añadir Nuevo</a>
+            <div class="col-sm-5"></div>
+            <div class="col-sm-6 ">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
             </div>
         </div>
 
-        <div class="panel-body">
-            <br />
-            <table class="table ">
-                <tr class="text-center">
-                    <th>
-                        <p class="text-muted">Número de aula</p>
-                    </th>
-                    <th>
-                        <p class="text-muted">Ubicación</p>
-                    </th>
-                    <th>
-                        <p class="text-muted">Capacidad</p>
-                    </th>
-                    <th></th>
-                </tr>
 
-                @foreach (var item in Model)
-                {
-                    <tr class="text-center">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.room_number)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.location)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.capacity)
-                        </td>
-
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.id })
-                        </td>
-                    </tr>
-                }
-            </table>
-            <br />
-            <div class="row">
-                <div class="col-sm-5"></div>
-                <div class="col-sm-6 ">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
-                </div>
-            </div>
-
-
-        </div>
-        <br />
-        <br />
     </div>
-    <hr />
+    <br />
+    <br />
+</div>
+<hr />
 
-    <style>
+<style>
 
-        #mainNav {
-            background-color: rgb(46,49,146);
-        }
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
 
-        .md-3 {
-            box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-            width: 97%;
-            margin-top: 10%;
-        }
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 97%;
+        margin-top: 10%;
+    }
 
-        .panel {
-            border-radius: 0 !important;
-            transition: box-shadow 0.5s;
-            width: 55%;
-        }
-    </style>
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+</style>
