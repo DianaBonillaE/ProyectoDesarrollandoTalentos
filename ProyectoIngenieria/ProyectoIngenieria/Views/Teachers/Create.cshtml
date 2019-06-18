@@ -7,10 +7,10 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Teachers", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Teacher</h4>
         <hr />
@@ -50,8 +50,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.state, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.state)
+                <div class="col-md-10">
+                    <select style="width:100%" ; id="state" name="state">
+                        <option value="true">Activo</option>
+                        <option value="false">No activo</option>
+
+                    </select>
                     @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -82,11 +86,38 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.photo_id, "photo_id", htmlAttributes: new { @class = "control-label col-md-2" })
+
             <div class="col-md-10">
-                @Html.DropDownList("photo_id", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.photo_id, "", new { @class = "text-danger" })
+                Seleccione una foto
+                <br />
+                <input type="file" name="File" id="File" />
             </div>
+            @if (ViewBag.MessagePhoto != null)
+            {
+                <div class="col-md-10">
+                    <div class="alert alert-danger">
+                        @ViewBag.MessagePhoto
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="form-group">
+
+            <div class="col-md-10">
+                Nombre de la imagen
+                <br />
+                <input type="text" name="nameFile" id="nameFile" />
+
+            </div>
+            @if (ViewBag.MessagePhotoName != null)
+            {
+                <div class="col-md-5">
+                    <div class="alert alert-danger">
+                        @ViewBag.MessagePhotoName
+                    </div>
+                </div>
+            }
         </div>
 
         <div class="form-group">

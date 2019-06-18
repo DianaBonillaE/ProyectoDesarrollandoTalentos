@@ -69,14 +69,6 @@ namespace ProyectoIngenieria.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Comments comments = db.Comments.Find(id);
-
-            List<SelectListItem> lst = new List<SelectListItem>();
-
-            lst.Add(new SelectListItem() { Text = "Mostrado", Value = "true" });
-            lst.Add(new SelectListItem() { Text = "No mostrado", Value = "false" });
-
-            ViewBag.States = lst;
-
             if (comments == null)
             {
                 return HttpNotFound();
