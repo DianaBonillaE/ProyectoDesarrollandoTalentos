@@ -24,7 +24,7 @@ namespace ProyectoIngenieria.Controllers
             return View(model);
         }
 
-        // GET: Activities/Details/5
+        // GET: Activities/Details/
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -63,59 +63,101 @@ namespace ProyectoIngenieria.Controllers
         }
 
         // POST: Activities/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,name,descripcion,start_date,end_date")]
             Activity activity, List<int> sponsors, List<int> users, List<int> voluntaries, HttpPostedFileBase File, string nameFile)
         {
+            List<Sponsor> sponsorReturn = db.Sponsor.ToList();
+            List<User> userReturn = db.User.ToList();
+            List<Voluntary> voluntaryReturn = db.Voluntary.ToList();
+
+
             if (ModelState.IsValid)
             {
-                if (sponsors.Count > 0)
+                if (sponsors != null)
                 {
-                    System.Collections.IList listSponsors = sponsors;
-                    for (int i = 0; i < listSponsors.Count; i++)
+                    if (sponsors.Count > 0)
                     {
-                        string id = "" + listSponsors[i];
-                        Sponsor sponsor = db.Sponsor.Find(id);
-                        activity.Sponsor.Add(sponsor);
+                        System.Collections.IList listSponsors = sponsors;
+                        for (int i = 0; i < listSponsors.Count; i++)
+                        {
+                            string id = "" + listSponsors[i];
+                            Sponsor sponsor = db.Sponsor.Find(id);
+                            activity.Sponsor.Add(sponsor);
+                        }
+                    }
+                }
+                if (users == null)
+                {
+                    ViewBag.MessageUsers = "Debe seleccionar al menos un usuario";
+                    ViewBag.sponsors = sponsorReturn;
+                    ViewBag.users = userReturn;
+                    ViewBag.voluntaries = voluntaryReturn;
+                    return View();
+                }
+                else
+                {
+                    System.Collections.IList listUsers = users;
+                    for (int i = 0; i < listUsers.Count; i++)
+                    {
+                        string id = "" + listUsers[i];
+                        User user = db.User.Find(id);
+                        activity.User.Add(user);
+                    }
+                }
+                if (sponsors != null)
+                {
+                    if (voluntaries.Count > 0)
+                    {
+
+                        System.Collections.IList listVoluntaries = voluntaries;
+                        for (int i = 0; i < listVoluntaries.Count; i++)
+                        {
+                            string id = "" + listVoluntaries[i];
+                            Voluntary voluntary = db.Voluntary.Find(id);
+                            activity.Voluntary.Add(voluntary);
+                        }
                     }
                 }
 
-                System.Collections.IList listUsers = users;
-                for (int i = 0; i < listUsers.Count; i++)
+                if (File == null)
                 {
-                    string id = "" + listUsers[i];
-                    User user = db.User.Find(id);
-                    activity.User.Add(user);
+                    ViewBag.MessagePhoto = "Debe ingresar una imagen";
+                    ViewBag.MessageList = "Debe seleccionar datos";
+                    ViewBag.sponsors = sponsorReturn;
+                    ViewBag.users = userReturn;
+                    ViewBag.voluntaries = voluntaryReturn;
+                    return View();
                 }
-
-                if (voluntaries.Count > 0)
+                else
                 {
 
-                    System.Collections.IList listVoluntaries = voluntaries;
-                    for (int i = 0; i < listVoluntaries.Count; i++)
+                    if (nameFile == "")
                     {
-                        string id = "" + listVoluntaries[i];
-                        Voluntary voluntary = db.Voluntary.Find(id);
-                        activity.Voluntary.Add(voluntary);
+                        ViewBag.MessagePhotoName = "Debe ingresar un nombre";
+                        ViewBag.MessageList = "Debe seleccionar datos";
+                        ViewBag.sponsors = sponsorReturn;
+                        ViewBag.users = userReturn;
+                        ViewBag.voluntaries = voluntaryReturn;
+                        return View();
+                    }
+                    else
+                    {
+                        var extension = Path.GetExtension(File.FileName);
+                        var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
+
+                        var Photo = new DB.Photo();
+                        Photo.name = nameFile;
+                        Photo.image = nameFile + extension;
+                        File.SaveAs(path);
+
+                        db.Photo.Add(Photo);
+
+                        db.Activity.Add(activity);
+                        db.SaveChanges();
                     }
                 }
-
-                var fileName = Path.GetFileName(File.FileName);
-                var path = Path.Combine(Server.MapPath("/Static/"), fileName);
-
-                var Photo = new DB.Photo();
-                Photo.name = nameFile;
-                Photo.image = "/Static/" + fileName;
-                File.SaveAs(path);
-
-                db.Photo.Add(Photo);
-
-                db.Activity.Add(activity);
-                db.SaveChanges();
-
                 return RedirectToAction("/Index");
             }
 
@@ -123,7 +165,7 @@ namespace ProyectoIngenieria.Controllers
             return View(activity);
         }
 
-        // GET: Activities/Edit/5
+        // GET: Activities/Edit/
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -140,7 +182,7 @@ namespace ProyectoIngenieria.Controllers
             List<Voluntary> voluntaries = db.Voluntary.ToList();
             List<User> users = db.User.ToList();
 
-            ViewBag.image = activity.Photo.image;
+            ViewBag.image = Path.Combine("/Static/", activity.Photo.image);
             ViewBag.name = activity.Photo.name;
             ViewBag.photo = activity.Photo.id;
             ViewBag.sponsors = sponsors;
@@ -150,43 +192,79 @@ namespace ProyectoIngenieria.Controllers
             return View(activity);
         }
 
-        // POST: Activities/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Activities/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,descripcion,start_date,end_date")] Activity activity, List<int> sponsors, List<int> voluntaries, List<int> users)
+        public ActionResult Edit([Bind(Include = "id,name,descripcion,start_date,end_date,photo_id")] Activity activity, List<int> sponsors, List<int> voluntaries, List<int> users, HttpPostedFileBase File, string nameFile)
         {
             if (ModelState.IsValid)
             {
 
                 db.Entry(activity).State = EntityState.Modified;
 
-                Activity act = db.Activity.Include(a => a.Sponsor).Include(a => a.Voluntary).Include(a => a.User).ToList().Find(ca => ca.id == activity.id);
+                Activity act = db.Activity.Include(a => a.Sponsor)
+                    .Include(a => a.Voluntary).Include(a => a.User).ToList().Find(ca => ca.id == activity.id);
+
+                //se ejecuta si hubo un cambio de imagen
+                if (File != null)
+                {
+                    Photo image = db.Photo.Find(act.photo_id);
+                    image.name = nameFile;
+
+                    //elimina la imagen anterior
+                    var locationStatic = Path.Combine(Server.MapPath("/Static/"));
+                    System.IO.File.Delete(locationStatic + image.image);
+
+                    //Escribe la nueva ruta de la imagen
+                    var fileName = Path.GetExtension(File.FileName);
+                    image.image = nameFile + fileName;
+                    var path = Path.Combine(Server.MapPath("/Static/"), nameFile + fileName);
+
+                    File.SaveAs(path);
+
+                    db.SaveChanges();
+                }
+                else
+                {
+                        /*/ViewBag.MessagePhoto = "Debe ingresar una imagen";
+                        ViewBag.MessageList = "Debe seleccionar datos";
+                        ViewBag.sponsors = sponsorReturn;
+                        ViewBag.users = userReturn;
+                        ViewBag.voluntaries = voluntaryReturn;
+                        return View();/*/
+                }
+
                 act.Sponsor.Clear();
                 act.Voluntary.Clear();
                 act.User.Clear();
 
-                if (sponsors.Count > 0)
+                if (sponsors != null)
                 {
-                    System.Collections.IList listSponsors = sponsors;
-                    for (int i = 0; i < listSponsors.Count; i++)
+                    if (sponsors.Count > 0)
                     {
-                        string id = "" + listSponsors[i];
-                        Sponsor s = db.Sponsor.Find(id);
-                        act.Sponsor.Add(s);
+                        System.Collections.IList listSponsors = sponsors;
+                        for (int i = 0; i < listSponsors.Count; i++)
+                        {
+                            string id = "" + listSponsors[i];
+                            Sponsor s = db.Sponsor.Find(id);
+                            act.Sponsor.Add(s);
+                        }
                     }
                 }
-                if (voluntaries.Count > 0)
+                if (voluntaries != null)
                 {
-                    System.Collections.IList listVoluntaries = voluntaries;
-                    for (int i = 0; i < listVoluntaries.Count; i++)
+                    if (voluntaries.Count > 0)
                     {
-                        string id = "" + listVoluntaries[i];
-                        Voluntary s = db.Voluntary.Find(id);
-                        act.Voluntary.Add(s);
+                        System.Collections.IList listVoluntaries = voluntaries;
+                        for (int i = 0; i < listVoluntaries.Count; i++)
+                        {
+                            string id = "" + listVoluntaries[i];
+                            Voluntary s = db.Voluntary.Find(id);
+                            act.Voluntary.Add(s);
+                        }
                     }
                 }
+
                 if (users.Count > 0)
                 {
                     System.Collections.IList listUsers = users;
@@ -197,19 +275,13 @@ namespace ProyectoIngenieria.Controllers
                         act.User.Add(s);
                     }
                 }
-                activity.photo_id = 13;
+
 
                 db.SaveChanges();
 
                 return RedirectToAction("/Index");
 
             }
-            List<Sponsor> sponsorsList = db.Sponsor.ToList();
-            List<Voluntary> voluntariesList = db.Voluntary.ToList();
-            List<User> usersList = db.User.ToList();
-            ViewBag.sponsors = sponsorsList;
-            ViewBag.voluntaries = voluntariesList;
-            ViewBag.users = usersList;
 
             return View(activity);
         }
@@ -256,7 +328,7 @@ namespace ProyectoIngenieria.Controllers
             db.SaveChanges();
             try
             {
-                
+
             }
             catch (Exception e)
             {

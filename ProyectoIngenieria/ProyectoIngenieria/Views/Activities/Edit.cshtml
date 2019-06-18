@@ -1,142 +1,177 @@
 ﻿@model ProyectoIngenieria.DB.Activity
 
 @{
-    ViewBag.Title = "Edit";
+                /**/
+
+                ViewBag.Title = "Edit";
 }
 
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Activities", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
- 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
 
-        <div class="container md-3">
-            <br />
-            <h1 class="text-center">Actualizar actividad</h1>
-            <br />
-            <br />
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-                            </div>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+
+    <div class="container md-3">
+        <br />
+        <h1 class="text-center">Actualizar actividad</h1>
+        <br />
+        <br />
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
-                            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.start_date, htmlAttributes: new { @class = "control-label col-md-4" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.start_date, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.start_date, "", new { @class = "text-danger" })
-                            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.start_date, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.start_date, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.start_date, "", new { @class = "text-danger" })
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.end_date, htmlAttributes: new { @class = "control-label col-md-4" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.end_date, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.end_date, "", new { @class = "text-danger" })
-                            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.end_date, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.end_date, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.end_date, "", new { @class = "text-danger" })
                         </div>
+                    </div>
 
 
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Sponsor, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                <select multiple="multiple" style="width:100%;" id="sponsors" name="sponsors">
-                                    @foreach (var item in ViewBag.sponsors)
-                                    {
-                                        var sel = (Model.Sponsor.Where(ca => ca.identificacion == item.identificacion).Count() > 0) ? "selected" : "";
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Sponsor, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select multiple="multiple" style="width:100%;" id="sponsors" name="sponsors">
+                                @foreach (var item in ViewBag.sponsors)
+                                {
+                                    var sel = (Model.Sponsor.Where(ca => ca.identificacion == item.identificacion).Count() > 0) ? "selected" : "";
 
-                                        <option value="@item.identificacion" @sel>@item.name</option>
+                                    <option value="@item.identificacion" @sel>@item.name</option>
 
-                                    }
-                                    <option value="0">Ninguno</option>
-                                </select>
-                            </div>
+                                }
+                                <option value="0">Ninguno</option>
+                            </select>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.User, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                <select multiple="multiple" style="width:100%;" id="users" name="users">
-                                    @foreach (var item in ViewBag.users)
-                                    {
-                                        var sel = (Model.User.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.User, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select multiple="multiple" style="width:100%;" id="users" name="users">
+                                @foreach (var item in ViewBag.users)
+                                {
+                                    var sel = (Model.User.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
 
-                                        <option value="@item.identification" @sel>@item.name</option>
+                                    <option value="@item.identification" @sel>@item.name</option>
 
-                                    }
-                                </select>
-                            </div>
+                                }
+                            </select>
+
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Voluntary, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                <select multiple="multiple" style="width:100%;" id="voluntaries" name="voluntaries">
-                                    @foreach (var item in ViewBag.voluntaries)
-                                    {
-                                        var sel = (Model.Voluntary.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Voluntary, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <select multiple="multiple" style="width:100%;" id="voluntaries" name="voluntaries">
+                                @foreach (var item in ViewBag.voluntaries)
+                                {
+                                    var sel = (Model.Voluntary.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
 
-                                        <option value="@item.identification" @sel>@item.name</option>
+                                    <option value="@item.identification" @sel>@item.name</option>
 
-                                    }
-                                    <option value="0">Ninguno</option>
-                                </select>
-                            </div>
+
+                                }
+                                <option value="0">Ninguno</option>
+
+                            </select>
+
                         </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <img src="@(ViewBag.image)" width="50%;" height="100%;" />
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.photo_id, "photo_id", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <img src="@(ViewBag.image)" width="50%;" height="100%;" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.photo_id, "photo_id", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.photo_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-10">
+                            Seleccione una foto
+                            <br />
+                            <input type="file" name="File" id="File" />ViewBag.name
+                        </div>
+                        @if (ViewBag.MessagePhoto != null)
+                        {
+                            <div class="col-md-5">
+                                <div class="alert alert-danger">
+                                    @ViewBag.MessagePhoto
                                 </div>
-                                <div class="col-md-6">
-                                    @(ViewBag.name)
-                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-10">
+                            Nombre de la imagen
+                            <br />
+                            <input type="text" name="nameFile" id="nameFile" />
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <a href="~/Activities/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-md-2">
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <a href="~/Activities/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <input type="submit" value="Guardar Cambios" class="btn btn-primary btn-md text-uppercase" />
-                                </div>
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <input type="submit" value="Guardar Cambios" class="btn btn-primary btn-md text-uppercase" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <br />
         </div>
-   
+        <br />
+    </div>
+
 }
 <hr />
 

@@ -52,7 +52,56 @@
                     </div>
 
 
+
                     <div class="form-group">
+
+                        <div class="col-md-10">
+                            Seleccione una foto
+                            <br />
+                            <input type="file" name="File" id="File" />
+                        </div>
+                        @if (ViewBag.MessagePhoto != null)
+                        {
+                            <div class="col-md-10">
+                                <div class="alert alert-danger">
+                                    @ViewBag.MessagePhoto
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-10">
+                            Nombre de la imagen
+                            <br />
+                            <input type="text" name="nameFile" id="nameFile" />
+
+                        </div>
+                        @if (ViewBag.MessagePhotoName != null)
+                        {
+                            <div class="col-md-5">
+                                <div class="alert alert-danger">
+                                    @ViewBag.MessagePhotoName
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+
+                    <div class="form-group">
+                        @if (ViewBag.MessagePhotoName != null || ViewBag.MessagePhoto != null)
+                        {
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-5">
+                                    <div class="alert alert-danger align-content-center">
+                                        @ViewBag.MessageList
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
                         @Html.LabelFor(model => model.Sponsor, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
                             <select multiple="multiple" style="width:100%" ; id="sponsors" name="sponsors">
@@ -74,6 +123,14 @@
                                     <option value="@item.identification">@item.name @item.last_name</option>
                                 }
                             </select>
+                            @if (ViewBag.MessageUsers != null)
+                            {
+                                <div class="col-md-8">
+                                    <div class="alert alert-danger">
+                                        @ViewBag.MessageUsers
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
 
@@ -91,24 +148,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
 
-                        <div class="col-md-10">
-                            Seleccione una foto
-                            <br />
-                            <input type="file" name="File" id="File" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-
-                        <div class="col-md-10">
-                            Nombre de la imagen
-                            <br />
-                            <input type="text" name="nameFile" id="nameFile" />
-
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-2">
                         </div>
