@@ -46,7 +46,15 @@
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.state)
+                        @if (item.state == true)
+                        {
+                            <a>Activo</a>
+                        }
+                        else
+                        {
+                            <a>No activo</a>
+                        }
+
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.phone_number)

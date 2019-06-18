@@ -51,9 +51,9 @@ namespace ProyectoIngenieria.DB
         [Required]
         [Phone]
         [Display(Name = "Teléfono")]
-        public string phone_number { get; set; }
+        public string phone_number { get; set; }       
         public int photo_id { get; set; }
-    
+
         public virtual Photo Photo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Curse> Curse { get; set; }

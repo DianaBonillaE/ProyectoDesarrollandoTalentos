@@ -37,7 +37,14 @@
                         @Html.DisplayFor(modelItem => item.description)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.state)
+                        @if (item.state == true)
+                        {
+                            <a>Mostrado</a>
+                        }
+                        else
+                        {
+                            <a>No mostrado</a>
+                        }
                     </td>
                     <td>
                         @Html.ActionLink("Editar", "Edit", new { id = item.id }) |

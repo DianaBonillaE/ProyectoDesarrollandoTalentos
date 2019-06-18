@@ -14,20 +14,20 @@
 
         <div class="row" style="text-align: center;">
             <div class="col-sm-4"></div>
-                <div class="col-sm-2">
+            <div class="col-sm-2">
 
-                    @Html.DisplayNameFor(model => model.name)
-                    <br />
-                    •  @Html.DisplayFor(model => model.name)
-                </div>
-
-
-                <div class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.descripcion)
-                    <br />
-                    •  @Html.DisplayFor(model => model.descripcion)
-                </div>
+                @Html.DisplayNameFor(model => model.name)
+                <br />
+                •  @Html.DisplayFor(model => model.name)
             </div>
+
+
+            <div class="col-sm-2">
+                @Html.DisplayNameFor(model => model.descripcion)
+                <br />
+                •  @Html.DisplayFor(model => model.descripcion)
+            </div>
+        </div>
         <div class="row" style="margin-top: 5%; text-align: center;">
             <div class="col-sm-3"></div>
             <div class="col-sm-2">
@@ -67,26 +67,26 @@
             </div>
         </div>
 
-            <div class="row" style="margin-top:2%;">
-                <div class="col-md-4">
+        <div class="row" style="margin-top:2%;">
+            <div class="col-md-4">
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    <a href="/Activities/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-2">
-                        <a href="/Activities/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-2">
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
+            </div>
+            <div class="form-group">
+                <div class="col-md-2">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
 
-                            <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
-                        }
-                    </div>
+                        <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
+                    }
                 </div>
             </div>
         </div>
+    </div>
 </div>
 <style>
 
