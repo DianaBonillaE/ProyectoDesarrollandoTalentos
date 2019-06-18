@@ -2095,11 +2095,12 @@
     <Content Include="Views\Voluntaries\Details.cshtml" />
     <Content Include="Views\Voluntaries\Edit.cshtml" />
     <Content Include="Views\Voluntaries\Index.cshtml" />
+    <Content Include="Views\Enrollment\CreateEnrollment.cshtml" />
+    <Content Include="Views\Enrollment\IndexEnrollment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Static\" />
-    <Folder Include="Views\Enrollment\" />
     <Folder Include="Views\Prueba\" />
   </ItemGroup>
   <ItemGroup>
