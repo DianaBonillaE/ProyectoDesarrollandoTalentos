@@ -9,12 +9,14 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-
+        <h4>Comments</h4>
+        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
+
         <div class="container md-3">
             <br />
-            <h1 class="text-center">Actualizar un comentario</h1>
+            <h1 class="text-center">Actualizar actividad</h1>
             <br />
             <br />
             <div class="panel-body">
@@ -40,18 +42,32 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.state, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                <div class="checkbox">
-                                    @Html.EditorFor(model => model.state, new { @class = "input-lg" })
-                                    @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
-                                </div>
+                                <select style="width:100%" ; id="state" name="state">
+                                    @if (Model.state == false)
+                                    {
+                                        <option value="true">mostrado</option>
+                                        <option value="false" selected>No mostrado</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="true" selected>mostrado</option>
+                                        <option value="false">No mostrado</option>
+                                    }
+
+                                </select>
+
                             </div>
+                            @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
                         </div>
+
+
+
                         <div class="row">
                             <div class="col-md-2">
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <a href="~/Comments/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
+                                    <a href="~/Activities/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -68,6 +84,7 @@
             <br />
         </div>
     </div>
+
 }
 <hr />
 
@@ -93,8 +110,6 @@
         align-content: center;
     }
 </style>
-
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

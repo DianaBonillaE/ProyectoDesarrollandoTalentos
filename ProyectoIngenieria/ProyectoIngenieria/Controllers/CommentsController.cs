@@ -41,12 +41,11 @@ namespace ProyectoIngenieria.Controllers
         // GET: Comments/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
         // POST: Comments/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,name,description,state")] Comments comments)
@@ -56,10 +55,10 @@ namespace ProyectoIngenieria.Controllers
                 comments.state = false;
                 db.Comments.Add(comments);
                 db.SaveChanges();
-                return View();
+                return RedirectToAction("Create");
             }
 
-            return View(comments);
+            return View();
         }
 
         // GET: Comments/Edit/5
@@ -70,6 +69,14 @@ namespace ProyectoIngenieria.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Comments comments = db.Comments.Find(id);
+
+            List<SelectListItem> lst = new List<SelectListItem>();
+
+            lst.Add(new SelectListItem() { Text = "Mostrado", Value = "true" });
+            lst.Add(new SelectListItem() { Text = "No mostrado", Value = "false" });
+
+            ViewBag.States = lst;
+
             if (comments == null)
             {
                 return HttpNotFound();
@@ -78,15 +85,14 @@ namespace ProyectoIngenieria.Controllers
         }
 
         // POST: Comments/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,description,state")] Comments comments)
+        public ActionResult Edit([Bind(Include = "id,name,description,States")] Comments comments, Boolean state)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(comments).State = EntityState.Modified;
+                comments.state = state;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
