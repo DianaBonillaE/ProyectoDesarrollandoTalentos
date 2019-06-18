@@ -50,6 +50,8 @@ namespace ProyectoIngenieria.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.password = Proteccion.Encriptar(user.password);
+
                 db.User.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,6 +84,8 @@ namespace ProyectoIngenieria.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.password = Proteccion.Encriptar(user.password);
+
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
