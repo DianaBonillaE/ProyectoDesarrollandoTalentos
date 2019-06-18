@@ -75,8 +75,8 @@ namespace ProyectoIngenieria.Controllers
             User user = db.User.Find(model.Identification);
 
             /*/ Este user.password deberia venir encriptado/*/
-            if (user.password == model.Password)
-            {   return RedirectToAction("../Home/About");
+            if (Proteccion.DesEncriptar(user.password) == model.Password)
+            {   return RedirectToAction("../Home/AdminView");
                 }
             else{
                 ModelState.AddModelError("", "Intento de inicio de sesión no válido.");
