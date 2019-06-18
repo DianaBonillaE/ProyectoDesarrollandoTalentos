@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoIngenieria.DB;
+using PagedList;
 
 namespace ProyectoIngenieria.Controllers
 {
@@ -15,10 +16,14 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Voluntaries
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 4)
         {
-            var voluntary = db.Voluntary.Include(v => v.Photo);
-            return View(voluntary.ToList());
+            //var voluntary = db.Voluntary.Include(v => v.Photo);
+            //return View(voluntary.ToList());
+
+            List<Voluntary> voluntaryList = db.Voluntary.ToList();
+            PagedList<Voluntary> model = new PagedList<Voluntary>(voluntaryList, page, pageSize);
+            return View(model);
         }
 
         // GET: Voluntaries/Details/5
