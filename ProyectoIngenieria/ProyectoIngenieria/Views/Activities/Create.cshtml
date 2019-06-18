@@ -16,8 +16,8 @@
         <br />
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-8">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -80,7 +80,7 @@
                         </div>
                         @if (ViewBag.MessagePhotoName != null)
                         {
-                            <div class="col-md-5">
+                            <div class="col-md-10">
                                 <div class="alert alert-danger">
                                     @ViewBag.MessagePhotoName
                                 </div>
@@ -88,13 +88,14 @@
                         }
                     </div>
 
-
+                </div>
+                <div class="col-md-5">
                     <div class="form-group">
                         @if (ViewBag.MessagePhotoName != null || ViewBag.MessagePhoto != null)
                         {
                             <div class="row">
                                 <div class="col-md-3"></div>
-                                <div class="col-md-5">
+                                <div class="col-md-10">
                                     <div class="alert alert-danger align-content-center">
                                         @ViewBag.MessageList
                                     </div>
@@ -125,11 +126,11 @@
                             </select>
                             @if (ViewBag.MessageUsers != null)
                             {
-                                <div class="col-md-8">
-                                    <div class="alert alert-danger">
-                                        @ViewBag.MessageUsers
-                                    </div>
+
+                                <div class="alert alert-danger">
+                                    @ViewBag.MessageUsers
                                 </div>
+
                             }
                         </div>
                     </div>
@@ -147,21 +148,19 @@
 
                         </div>
                     </div>
-
-
-                    <div class="row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <a href="~/Activities/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <input type="submit" value="Guardar" class="btn btn-primary btn-md text-uppercase" />
-                            </div>
-                        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <a href="~/Activities/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <input type="submit" value="Guardar" class="btn btn-primary btn-md text-uppercase" />
                     </div>
                 </div>
             </div>

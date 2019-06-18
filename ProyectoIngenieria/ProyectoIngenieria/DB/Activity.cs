@@ -34,12 +34,12 @@ namespace ProyectoIngenieria.DB
         public string descripcion { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Fecha inicio")]
+        [Display(Name = "Inicio")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime start_date { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Fecha Finalización")]
+        [Display(Name = "Finalización")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode =true)]
         public System.DateTime end_date { get; set; }
 

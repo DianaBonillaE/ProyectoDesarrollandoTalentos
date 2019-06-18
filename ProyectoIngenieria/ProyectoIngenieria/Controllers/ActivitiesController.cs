@@ -135,7 +135,7 @@ namespace ProyectoIngenieria.Controllers
 
                     if (nameFile == "")
                     {
-                        ViewBag.MessagePhotoName = "Debe ingresar un nombre";
+                        ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
                         ViewBag.MessageList = "Debe seleccionar datos";
                         ViewBag.sponsors = sponsorReturn;
                         ViewBag.users = userReturn;
@@ -184,7 +184,6 @@ namespace ProyectoIngenieria.Controllers
 
             ViewBag.image = Path.Combine("/Static/", activity.Photo.image);
             ViewBag.name = activity.Photo.name;
-            ViewBag.photo = activity.Photo.id;
             ViewBag.sponsors = sponsors;
             ViewBag.voluntaries = voluntaries;
             ViewBag.users = users;
@@ -317,23 +316,19 @@ namespace ProyectoIngenieria.Controllers
         {
 
             Activity act = db.Activity.Include(a => a.Sponsor).Include(a => a.Voluntary).Include(a => a.User).ToList().Find(ca => ca.id == id);
+            Photo Photo = db.Photo.Find(act.photo_id);
+
+            //eliminar imagen
+            var locationStatic = Path.Combine(Server.MapPath("/Static/"));
+            System.IO.File.Delete(locationStatic + Photo.image);
 
             act.Sponsor.Clear();
             act.Voluntary.Clear();
             act.User.Clear();
 
-            //Photo photo = db.Photo.Find(act.photo_id);
-            ///db.Photo.Remove(photo);
+            db.Photo.Remove(Photo);
             db.Activity.Remove(act);
             db.SaveChanges();
-            try
-            {
-
-            }
-            catch (Exception e)
-            {
-
-            }
 
             return RedirectToAction("/Index");
         }

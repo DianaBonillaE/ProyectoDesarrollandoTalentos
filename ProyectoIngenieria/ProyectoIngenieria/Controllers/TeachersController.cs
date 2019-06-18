@@ -90,8 +90,6 @@ namespace ProyectoIngenieria.Controllers
 
                 return RedirectToAction("Index");
             }
-
-            ViewBag.photo_id = new SelectList(db.Photo, "id", "name", teacher.photo_id);
             return View(teacher);
         }
 
@@ -107,24 +105,46 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.photo_id = new SelectList(db.Photo, "id", "name", teacher.photo_id);
+            ViewBag.image = Path.Combine("/Static/", teacher.Photo.image);
+            ViewBag.name = teacher.Photo.name;
             return View(teacher);
         }
 
         // POST: Teachers/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "identification,name,last_name,address,state,description,email,phone_number,photo_id")] Teacher teacher)
+        public ActionResult Edit([Bind(Include = "identification,name,last_name,address,state,description,email,phone_number,photo_id")] Teacher teacher, Boolean state, HttpPostedFileBase File, string nameFile)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(teacher).State = EntityState.Modified;
+                teacher.state = state;
+
+                if (File != null)
+                {
+                    if (nameFile != "")
+                    {
+                        var Photo = db.Photo.Find(teacher.photo_id);
+                        Photo.name = nameFile;
+
+                        //elimina la imagen anterior
+                        var locationStatic = Path.Combine(Server.MapPath("/Static/"));
+                        System.IO.File.Delete(locationStatic + Photo.image);
+
+                        var extension = Path.GetExtension(File.FileName);
+                        var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
+                        File.SaveAs(path);
+                        Photo.image = nameFile + extension;
+
+                        db.SaveChanges();
+                    }
+                }
+
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-            ViewBag.photo_id = new SelectList(db.Photo, "id", "name", teacher.photo_id);
+            
             return View(teacher);
         }
 
@@ -136,6 +156,7 @@ namespace ProyectoIngenieria.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Teacher teacher = db.Teacher.Find(id);
+
             if (teacher == null)
             {
                 return HttpNotFound();
@@ -148,10 +169,20 @@ namespace ProyectoIngenieria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+
             Teacher teacher = db.Teacher.Find(id);
-            db.Teacher.Remove(teacher);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            Photo Photo = db.Photo.Find(teacher.photo_id);
+           
+                //eliminar imagen
+                var locationStatic = Path.Combine(Server.MapPath("/Static/"));
+                System.IO.File.Delete(locationStatic + Photo.image);
+
+                db.Photo.Remove(Photo);
+                db.Teacher.Remove(teacher);
+
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            
         }
 
         protected override void Dispose(bool disposing)
