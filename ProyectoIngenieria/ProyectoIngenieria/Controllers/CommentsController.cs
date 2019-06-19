@@ -73,6 +73,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.description = comments.description;
             return View(comments);
         }
 
