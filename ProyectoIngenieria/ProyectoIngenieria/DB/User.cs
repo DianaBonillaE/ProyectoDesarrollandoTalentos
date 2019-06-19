@@ -46,6 +46,7 @@ namespace ProyectoIngenieria.DB
         [Display(Name = "Nombre de Usuario")]
         public string user_name { get; set; }
         [Required]
+        [DataType(DataType.Password)]
         [StringLength(50)]
         [Display(Name = "Contraseña")]
         public string password { get; set; }
