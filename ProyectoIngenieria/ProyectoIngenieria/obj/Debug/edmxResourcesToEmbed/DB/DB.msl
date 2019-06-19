@@ -152,6 +152,9 @@
     <EntitySetMapping Name="Voluntary">
       <EntityTypeMapping TypeName="ProyectoIngenieriaModel.Voluntary">
         <MappingFragment StoreEntitySet="Voluntary">
+          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="identification" ColumnName="identification" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="state" ColumnName="state" />

@@ -133,8 +133,9 @@ namespace ProyectoIngenieria.Controllers
                         File.SaveAs(path);
 
                         db.Photo.Add(Photo);
+                        db.SaveChanges();
 
-                       // var imageID = db.Photo.Find(Photo);
+                        sponsor.photo_id = Photo.id;
 
                         db.Sponsor.Add(sponsor);
                         db.SaveChanges();
