@@ -57,9 +57,9 @@ namespace ProyectoIngenieria.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
+          
             return View();
         }
 
