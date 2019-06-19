@@ -122,6 +122,7 @@ namespace ProyectoIngenieria.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Student student = db.Student.Find(id);
+            
             db.Student.Remove(student);
             db.SaveChanges();
             return RedirectToAction("Index");

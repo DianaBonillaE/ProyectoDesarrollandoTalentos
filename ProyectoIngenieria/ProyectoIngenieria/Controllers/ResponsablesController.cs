@@ -147,7 +147,7 @@ namespace ProyectoIngenieria.Controllers
             }
 
             if (students.Count >0)
-            { return RedirectToAction("/DeleteWarning"); }
+            { return RedirectToAction("/DeleteWarning/"+id); }
             else { return View(responsable); }
 
 
@@ -184,5 +184,16 @@ namespace ProyectoIngenieria.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult DeleteWarning(string id, int page = 1, int pageSize = 5){
+            Responsable responsable = db.Responsable.Include(a => a.Student).ToList().Find(c => c.identification == id);
+
+            List<Student> studentList = responsable.Student.ToList();
+
+            
+            PagedList<Student> model = new PagedList<Student>(studentList, page, pageSize);
+            return View(model);
+        }
+
     }
 }
