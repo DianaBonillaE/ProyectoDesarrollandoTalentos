@@ -21,13 +21,15 @@ namespace ProyectoIngenieria.Controllers
         }
 
         // GET: Curses/Enrollment
-        public ActionResult ViewEnrollment(int? id)
+        public ActionResult ViewEnrollment(int? id, int page = 1, int pageSize = 4)
         {
             Curse course = db.Curse.Find(id);
             ViewBag.name = course.name;
 
             List<Curse_Student> courseStudentList = db.Curse_Student.ToList();
             List<Student> mostrarCourseStudentList = new List<Student>();
+
+            PagedList<Student> model = new PagedList<Student>(mostrarCourseStudentList, page, pageSize);
 
             for (int i = 0; i < courseStudentList.Count; i++)
             {
@@ -73,20 +75,14 @@ namespace ProyectoIngenieria.Controllers
             //Estudiantes sin matricular
             for (int i = 0; i < students.Count; i++)
             {
-                for (int j = 0; j < enrollmentCourseStudentList.Count; j++)
-                {
-                    if (students[i].identification != enrollmentCourseStudentList[j].identification)
+                Student student = db.Student.Find(students[i].identification);
+                if (!enrollmentCourseStudentList.Contains(student))
                     {
-                        Student student = db.Student.Find(students[i].identification);
                         noEnrollmentCourseStudentList.Add(student);
-
                     }
-                }
             }
 
             ViewBag.students = noEnrollmentCourseStudentList;
-
-
 
             return View();
         }
@@ -97,17 +93,15 @@ namespace ProyectoIngenieria.Controllers
             enrollment.curse_id = idCourse;
             enrollment.student_identification = idStudent;
 
-            Curse course = db.Curse.Find(idCourse);
-            enrollment.Curse = course;
-
-            Student student = db.Student.Find(idStudent);
-            enrollment.Student = student;
 
             db.Curse_Student.Add(enrollment);
 
             Student student1 = db.Student.Find(idStudent);
-            
+
             student1.Curse_Student.Add(enrollment);
+
+
+            db.SaveChanges();
 
             return View();
         }
