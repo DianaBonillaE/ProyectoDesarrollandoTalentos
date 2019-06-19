@@ -4,6 +4,8 @@
     ViewBag.Title = "Index";
 }
 
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
+
 <div class="container md-3">
     <br />
     <h1 class="text-center">Usuarios</h1>
@@ -58,9 +60,9 @@
                     </td>
 
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.identification }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.identification }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.identification })
+                        @Html.ActionLink("Editar", "Edit", new { id = item.identification }) |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.identification }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.identification })
                     </td>
                 </tr>
             }

@@ -68,6 +68,7 @@ namespace ProyectoIngenieria.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             User user = db.User.Find(id);
+            user.password = Proteccion.DesEncriptar(user.password);
             if (user == null)
             {
                 return HttpNotFound();

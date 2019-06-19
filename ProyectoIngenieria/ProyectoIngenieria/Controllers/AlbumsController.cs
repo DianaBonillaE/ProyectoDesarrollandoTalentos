@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,10 +47,29 @@ namespace ProyectoIngenieria.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,descripcion,creation_date")] Album album)
+        public ActionResult Create([Bind(Include = "id,name,descripcion,creation_date")] Album album, HttpPostedFileBase File, [Bind(Include = "id,name,image")] Photo photo)
         {
             if (ModelState.IsValid)
             {
+                if (File == null)
+                {
+                    ViewBag.MessagePhoto = "Debe ingresar una imagen";
+                    ViewBag.MessageList = "Debe seleccionar datos";
+                    return View();
+                }
+                else
+                {
+                    var extension = Path.GetExtension(File.FileName);
+                    var path = Path.Combine(Server.MapPath("/Static/"), photo.name + extension);
+
+
+                    photo.name = photo.name;
+                    photo.image = photo.name + extension;
+                    File.SaveAs(path);
+                }
+
+                db.Photo.Add(photo);
+
                 db.Album.Add(album);
                 db.SaveChanges();
                 return RedirectToAction("Index");
