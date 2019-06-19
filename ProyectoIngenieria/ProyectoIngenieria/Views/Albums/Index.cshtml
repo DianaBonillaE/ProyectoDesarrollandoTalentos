@@ -52,7 +52,7 @@
 
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.id })|
                         @Html.ActionLink("Detalles", "Details", new { id = item.id })
-                        |
+                        |@Html.ActionLink("Fotos", "Photos", new { id = item.id })|
                         @Html.ActionLink("AgregarFotos", "AddPhoto", new { id = item.id })
 
                     </td>

@@ -21,8 +21,8 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        
-                        
+
+
                         <div class="form-group">
 
                             <div class="col-md-10">
@@ -33,11 +33,11 @@
                             </div>
                             @if (ViewBag.MessagePhotoName != null)
                             {
-                                <div class="col-md-10">
-                                    <div class="alert alert-danger">
-                                        @ViewBag.MessagePhotoName
-                                    </div>
+                            <div class="col-md-10">
+                                <div class="alert alert-danger">
+                                    @ViewBag.MessagePhotoName
                                 </div>
+                            </div>
                             }
                         </div>
 
@@ -49,17 +49,21 @@
                         </div>
                         @if (ViewBag.MessagePhoto != null)
                         {
-                            <div class="col-md-10">
-                                <div class="alert alert-danger">
-                                    @ViewBag.MessagePhoto
-                                </div>
+                        <div class="col-md-10">
+                            <div class="alert alert-danger">
+                                @ViewBag.MessagePhoto
                             </div>
+                        </div>
                         }
                     </div>
+                </div>
+                <div class="col-sm-3 ">
+                 <a href="~/Albums/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
                 </div>
             </div>
             <br />
         </div>
+        
     </div>
 }
 <style>

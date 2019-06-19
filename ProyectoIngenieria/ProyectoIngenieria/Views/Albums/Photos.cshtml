@@ -1,0 +1,96 @@
+﻿
+
+@model IEnumerable<ProyectoIngenieria.DB.Photo>
+@{
+
+
+    ViewBag.Title = "DeleteWarning";
+}
+
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
+
+    <div class="container md-3">
+        <br />
+
+        <h1 class="text-center">Fotos Asociadas</h1>
+        <br />
+
+       
+        <br />
+        <div class="row">
+            <div class="col-sm-9"></div>
+        </div>
+        <div class="panel-body">
+            <br />
+            <table class="table ">
+                <tr class="text-center">
+                    <th>
+                        Identificación
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Apellido
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center">
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.image)
+                        </td>
+
+
+                    </tr>
+                }
+
+            </table>
+            <br />
+
+
+
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-6 ">
+
+                </div>
+            </div>
+            <div class="col-sm-3 ">
+                <a href="~/Albums/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
+            </div>
+
+        </div>
+        <br />
+        <br />
+    </div>
+<hr />
+
+<style>
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 97%;
+        margin-top: 10%;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+</style>
+

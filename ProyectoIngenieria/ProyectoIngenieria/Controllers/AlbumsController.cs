@@ -73,6 +73,7 @@ namespace ProyectoIngenieria.Controllers
 
                 db.Photo.Add(photo);
 
+                album.Photo.Add(photo);
                 db.Album.Add(album);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -195,6 +196,18 @@ namespace ProyectoIngenieria.Controllers
                 return RedirectToAction("Index");
             }
             return View(album);
+        }
+
+
+        public ActionResult Photos(int id, int page = 1, int pageSize = 5)
+        {
+            Album album = db.Album.Include(a => a.Photo).ToList().Find(c => c.id == id);
+
+            List<Photo> phototList = album.Photo.ToList();
+
+
+            PagedList<Photo> model = new PagedList<Photo>(phototList, page, pageSize);
+            return View(model);
         }
 
 
