@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProyectoIngenieriaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ProyectoIngenieriaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="id" />
@@ -136,11 +136,11 @@
             <PropertyRef Name="identificacion" />
           </Key>
           <Property Name="identificacion" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="50" />
-          <Property Name="last_name" Type="varchar" MaxLength="50" />
-          <Property Name="email" Type="varchar" MaxLength="50" />
-          <Property Name="phone_number" Type="varchar" MaxLength="50" />
-          <Property Name="description" Type="varchar" MaxLength="300" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="photo_id" Type="int" />
         </EntityType>
         <EntityType Name="Student">
@@ -191,6 +191,9 @@
           <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="photo_id" Type="int" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Voluntary_Activity">
           <Key>
@@ -440,18 +443,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Curse_Curse">
-          <End Role="Curse" Type="Self.Curse" Multiplicity="1" />
-          <End Role="Curse1" Type="Self.Curse" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Curse">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Curse1">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ProyectoIngenieriaModelStoreContainer">
           <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Activity_Sponsor" EntityType="Self.Activity_Sponsor" Schema="dbo" store:Type="Tables" />
@@ -553,13 +544,8 @@
             <End Role="Photo" EntitySet="Photo" />
             <End Role="Activity" EntitySet="Activity" />
           </AssociationSet>
-          <AssociationSet Name="FK_Curse_Curse" Association="Self.FK_Curse_Curse">
-            <End Role="Curse" EntitySet="Curse" />
-            <End Role="Curse1" EntitySet="Curse" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProyectoIngenieriaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -673,11 +659,11 @@
             <PropertyRef Name="identificacion" />
           </Key>
           <Property Name="identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="photo_id" Type="Int32" />
           <NavigationProperty Name="Photo" Relationship="Self.FK__Sponsor__photo_i__04E4BC85" FromRole="Sponsor" ToRole="Photo" />
           <NavigationProperty Name="Activity" Relationship="Self.Activity_Sponsor" FromRole="Sponsor" ToRole="Activity" />
@@ -737,6 +723,9 @@
           <Property Name="photo_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Photo" Relationship="Self.FK__Voluntary__photo__5441852A" FromRole="Voluntary" ToRole="Photo" />
           <NavigationProperty Name="Activity" Relationship="Self.Voluntary_Activity" FromRole="Voluntary" ToRole="Activity" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="phone_number" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Activity_Photo">
           <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
@@ -1087,6 +1076,9 @@
           <EntitySetMapping Name="Voluntary">
             <EntityTypeMapping TypeName="ProyectoIngenieriaModel.Voluntary">
               <MappingFragment StoreEntitySet="Voluntary">
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="identification" ColumnName="identification" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="state" ColumnName="state" />
