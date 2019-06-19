@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ConfirmEnrollment";
+    ViewBag.Title = "Delete";
 }
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
@@ -12,7 +12,7 @@
     <div class="panel-body">
         <br />
         <br />
-        <h6 class="text-center alert alert-success">Usted ha insertado de maner exitosa al estudiante "Cédula: @ViewBag.studentId  Nombre: @ViewBag.studentName @ViewBag.studentLastName" en el curso "@ViewBag.curseName" </h6>
+        <h6 class="text-center alert alert-danger">Usted ha eliminado de maner exitosa al estudiante "Cédula: @ViewBag.studentId  Nombre: @ViewBag.studentName @ViewBag.studentLastName" del curso "@ViewBag.curseName" </h6>
         <br />
         <br />
         <a href="~/Enrollment/IndexEnrollment" class="btn btn-primary btn-md text-uppercase">Regresar</a>
@@ -41,3 +41,4 @@
         width: 55%;
     }
 </style>
+

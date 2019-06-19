@@ -3,7 +3,7 @@
     ViewBag.Title = "ViewEnrollment";
 }
 
-@model PagedList.IPagedList<ProyectoIngenieria.DB.Curse_Student>
+@model PagedList.IPagedList<ProyectoIngenieria.DB.Student>
 @using PagedList.Mvc;
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
@@ -28,6 +28,7 @@
                 <th>
                     Teléfono
                 </th>
+                <th></th>
             </tr>
 
             @foreach (var item in ViewBag.students)
@@ -46,12 +47,20 @@
                     <td>
                         @item.phone_number
                     </td>
+                    <td>
+                        @Html.ActionLink("Eliminar", "DeleteEnrollment", new { idStudent = item.identification, idCourse = ViewBag.id})
+                    </td>
                 </tr>
             }
 
         </table>
         <br />
         <br />
+        <div class="col-sm-5"></div>
+        <div class="col-sm-6 ">
+            @Html.PagedListPager(Model, page => Url.Action("ViewEnrollment", new { page, pageSize = Model.PageSize }))
+        </div>
+        
         <a href="~/Enrollment/IndexEnrollment" class="btn btn-primary btn-md text-uppercase">Regresar</a>
 
     </div>
