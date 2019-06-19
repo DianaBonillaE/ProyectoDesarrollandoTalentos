@@ -1,5 +1,6 @@
-﻿@model IEnumerable<ProyectoIngenieria.DB.Album>
-
+﻿
+@model PagedList.PagedList<ProyectoIngenieria.DB.Album>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
 }
@@ -22,13 +23,13 @@
         <table class="table ">
             <tr class="text-center">
                 <th>
-                    @Html.DisplayNameFor(model => model.name)
+                  Nombre
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.descripcion)
+                    Descripcion
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.creation_date)
+                    Fecha de creación
                 </th>
                 <th></th>
             </tr>
@@ -51,6 +52,8 @@
 
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.id })|
                         @Html.ActionLink("Detalles", "Details", new { id = item.id })
+                        |
+                        @Html.ActionLink("AgregarFotos", "AddPhoto", new { id = item.id })
 
                     </td>
                 </tr>
@@ -58,6 +61,12 @@
 
         </table>
         <br />
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-6 ">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-5"></div>
             <div class="col-sm-6 ">

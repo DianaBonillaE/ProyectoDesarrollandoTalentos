@@ -52,5 +52,10 @@ namespace ProyectoIngenieria.Controllers
 
             return View();
         }
+        public ActionResult Galery()
+        {
+
+            return View();
+        }
     }
 }

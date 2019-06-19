@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using ProyectoIngenieria.DB;
 
 namespace ProyectoIngenieria.Controllers
@@ -16,9 +17,11 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Albums
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 5)
         {
-            return View(db.Album.ToList());
+            List<Album> albumList = db.Album.ToList();
+            PagedList<Album> model = new PagedList<Album>(albumList, page, pageSize);
+            return View(model);
         }
 
         // GET: Albums/Details/5
@@ -143,5 +146,57 @@ namespace ProyectoIngenieria.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult AddPhoto(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Album album = db.Album.Find(id);
+            if (album == null)
+            {
+                return HttpNotFound();
+            }
+            return View(album);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddPhoto([Bind(Include = "id")] Album album, HttpPostedFileBase File, string nameFile)
+        {
+            if (ModelState.IsValid)
+            {
+                if (nameFile == "")
+                {
+                    ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
+                    ViewBag.MessageList = "Debe seleccionar datos";
+                    
+                    return View();
+                }
+                else
+                {
+                    var extension = Path.GetExtension(File.FileName);
+                    var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
+
+                    var Photo = new DB.Photo();
+                    Photo.name = nameFile;
+                    Photo.image = nameFile + extension;
+                    File.SaveAs(path);
+
+                    db.Photo.Add(Photo);
+                 //   db.Album.Add(album.Photo);
+
+                    
+                    db.SaveChanges();
+                }
+                db.Entry(album).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(album);
+        }
+
+
     }
 }
