@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "ViewEnrollment";
+}
+
+@model PagedList.IPagedList<ProyectoIngenieria.DB.Curse_Student>
+@using PagedList.Mvc;
+
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
+
+<div class="container md-3">
+    <br />
+    <h2 class="text-center">Curso: @(ViewBag.name) </h2>
+    <br />
+    <div class="panel-body">
+
+        <table class="table">
+            <tr class="text-center">
+                <th>
+                    Identificación
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Apellidos
+                </th>
+                <th>
+                    Teléfono
+                </th>
+            </tr>
+
+            @foreach (var item in ViewBag.students)
+            {
+
+                <tr class="text-center">
+                    <td>
+                        @item.identification
+                    </td>
+                    <td>
+                        @item.name
+                    </td>
+                    <td>
+                        @item.last_name
+                    </td>
+                    <td>
+                        @item.phone_number
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+    <br />
+    <br />
+</div>
+<hr />
+
+<style>
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 97%;
+        margin-top: 10%;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+</style>
+
+
+
