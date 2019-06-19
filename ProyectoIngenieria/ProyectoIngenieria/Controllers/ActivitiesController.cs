@@ -72,7 +72,6 @@ namespace ProyectoIngenieria.Controllers
             List<User> userReturn = db.User.ToList();
             List<Voluntary> voluntaryReturn = db.Voluntary.ToList();
 
-
             if (ModelState.IsValid)
             {
                 if (sponsors != null)
