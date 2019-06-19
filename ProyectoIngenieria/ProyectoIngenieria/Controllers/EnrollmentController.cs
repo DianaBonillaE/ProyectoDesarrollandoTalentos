@@ -53,8 +53,11 @@ namespace ProyectoIngenieria.Controllers
             ViewBag.fechaFinalizacion = course.end_date;
 
             List<Curse_Student> courseStudentList = db.Curse_Student.ToList();
-            List<Student> mostrarCourseStudentList = new List<Student>();
+            List<Student> enrollmentCourseStudentList = new List<Student>();
+            List<Student> noEnrollmentCourseStudentList = new List<Student>();
+            List<Student> students = db.Student.ToList();
 
+            //Estudiantes matriculados
             for (int i = 0; i < courseStudentList.Count; i++)
             {
 
@@ -62,11 +65,23 @@ namespace ProyectoIngenieria.Controllers
                 {
                     var idStudent = courseStudentList[i].student_identification;
                     Student student = db.Student.Find(idStudent);
-                    mostrarCourseStudentList.Add(student);
+                    enrollmentCourseStudentList.Add(student);
                 }
             }
 
-            ViewBag.students = mostrarCourseStudentList;
+            //Estudiantes sin matricular
+            for (int i = 0; i < students.Count; i++)
+            {
+                for (int j = 0; j < courseStudentList.Count; j++)
+                {
+                    if (students[i].identification != courseStudentList[i].student_identification)
+                    {
+                        noEnrollmentCourseStudentList.Add(students[i]);
+                    }
+                }
+            }
+
+            ViewBag.students = noEnrollmentCourseStudentList;
 
             return View();
         }
