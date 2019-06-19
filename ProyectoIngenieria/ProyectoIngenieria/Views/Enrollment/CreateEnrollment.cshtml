@@ -3,7 +3,7 @@
     ViewBag.Title = "CreateEnrollment";
 }
 
-@model PagedList.IPagedList<ProyectoIngenieria.DB.Curse_Student>
+@model PagedList.IPagedList<ProyectoIngenieria.DB.Student>
 @using PagedList.Mvc;
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
@@ -71,6 +71,13 @@
 
         <br />
         <br />
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-6 ">
+                @Html.PagedListPager(Model, page => Url.Action("CreateEnrollment", new { page, pageSize = Model.PageSize }))
+            </div>
+        </div>
+      
         <a href="~/Enrollment/IndexEnrollment" class="btn btn-primary btn-md text-uppercase">Regresar</a>
     </div>
     <br />

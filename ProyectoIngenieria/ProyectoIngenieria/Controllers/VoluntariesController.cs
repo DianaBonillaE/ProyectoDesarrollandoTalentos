@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProyectoIngenieria.DB;
-using PagedList;
 
 namespace ProyectoIngenieria.Controllers
 {
@@ -16,14 +15,10 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Voluntaries
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        public ActionResult Index()
         {
-            //var voluntary = db.Voluntary.Include(v => v.Photo);
-            //return View(voluntary.ToList());
-
-            List<Voluntary> voluntaryList = db.Voluntary.ToList();
-            PagedList<Voluntary> model = new PagedList<Voluntary>(voluntaryList, page, pageSize);
-            return View(model);
+            var voluntary = db.Voluntary.Include(v => v.Photo);
+            return View(voluntary.ToList());
         }
 
         // GET: Voluntaries/Details/5
@@ -53,7 +48,7 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "identification,name,state,last_name,descripcion,photo_id")] Voluntary voluntary)
+        public ActionResult Create([Bind(Include = "identification,name,state,last_name,descripcion,photo_id,email,address,phone_number")] Voluntary voluntary)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +82,7 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "identification,name,state,last_name,descripcion,photo_id")] Voluntary voluntary)
+        public ActionResult Edit([Bind(Include = "identification,name,state,last_name,descripcion,photo_id,email,address,phone_number")] Voluntary voluntary)
         {
             if (ModelState.IsValid)
             {
