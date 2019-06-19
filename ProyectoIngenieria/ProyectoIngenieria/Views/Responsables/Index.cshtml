@@ -19,16 +19,16 @@
         <table class="table ">
             <tr class="text-center">
                 <th>
-                    Identificación
+                    @Html.DisplayNameFor(model => model.identification)
                 </th>
                 <th>
-                    Nombre
+                    @Html.DisplayNameFor(model => model.name)
                 </th>
                 <th>
-                    Apellidos
+                    @Html.DisplayNameFor(model => model.last_name)
                 </th>
                 <th>
-                    Descripción
+                    @Html.DisplayNameFor(model => model.description)
                 </th>
                 <th></th>
             </tr>
@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="col-sm-3 ">
-            <a href="~/Home/About" class="btn btn-primary btn-md text-uppercase">Regresar</a>
+            <a href="~/Home/AdminView" class="btn btn-primary btn-md text-uppercase">Regresar</a>
         </div>
 
     </div>
