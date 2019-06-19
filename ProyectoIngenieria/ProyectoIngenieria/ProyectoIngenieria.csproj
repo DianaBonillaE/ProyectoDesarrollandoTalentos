@@ -2097,6 +2097,7 @@
     <Content Include="Views\Voluntaries\Index.cshtml" />
     <Content Include="Views\Enrollment\CreateEnrollment.cshtml" />
     <Content Include="Views\Enrollment\IndexEnrollment.cshtml" />
+    <Content Include="Views\Enrollment\ViewEnrollment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
