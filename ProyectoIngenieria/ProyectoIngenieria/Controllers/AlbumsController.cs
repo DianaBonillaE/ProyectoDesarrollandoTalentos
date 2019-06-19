@@ -159,47 +159,48 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
-            return View(album);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddPhoto([Bind(Include = "id")] Album album, HttpPostedFileBase File, string nameFile)
+        public ActionResult AddPhoto([Bind(Include = "id,name,image")] Photo photo, int? id, HttpPostedFileBase File, string nameFile)
         {
+            Album album = db.Album.ToList().Find(c => c.id == id);
             if (ModelState.IsValid)
             {
-                if (nameFile == "")
+             
+
+                if (File == null)
                 {
-                    ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
+                    ViewBag.MessagePhoto = "Debe ingresar una imagen";
                     ViewBag.MessageList = "Debe seleccionar datos";
-                    
                     return View();
                 }
                 else
                 {
                     var extension = Path.GetExtension(File.FileName);
-                    var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
+                    var path = Path.Combine(Server.MapPath("/Static/"), photo.name + extension);
 
-                    var Photo = new DB.Photo();
-                    Photo.name = nameFile;
-                    Photo.image = nameFile + extension;
+
+                    photo.name = photo.name;
+                    photo.image = photo.name + extension;
                     File.SaveAs(path);
-
-                    db.Photo.Add(Photo);
-                 //   db.Album.Add(album.Photo);
-
-                    
-                    db.SaveChanges();
                 }
-                db.Entry(album).State = EntityState.Modified;
+
+                photo.Album.Add(album);
+                db.Photo.Add(photo);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                string direccion = "/AddPhoto/" + id;
+                return RedirectToAction(direccion);
             }
-            return View(album);
+
+            ViewBag.album = new SelectList(db.Album, "identification", "name", photo.Album);
+            return RedirectToAction("Index");
         }
 
 
-        public ActionResult Photos(int id, int page = 1, int pageSize = 5)
+        public ActionResult Photos(int id, int page = 1, int pageSize = 25)
         {
             Album album = db.Album.Include(a => a.Photo).ToList().Find(c => c.id == id);
 

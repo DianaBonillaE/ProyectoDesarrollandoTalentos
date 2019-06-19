@@ -2105,6 +2105,7 @@
     <Content Include="Views\Voluntaries\Edit.cshtml" />
     <Content Include="Views\Voluntaries\Index.cshtml" />
     <Content Include="Views\Albums\Photos.cshtml" />
+    <Content Include="Views\Albums\AddPhoto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
