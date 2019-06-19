@@ -49,7 +49,6 @@ namespace ProyectoIngenieria.Controllers
         // GET: Sponsors/CreateEnterprise
         public ActionResult CreateSponsorEnterprise()
         {
-            ViewBag.type = "Empresa";
             ViewBag.photo_id = new SelectList(db.Photo, "id", "name");
             return View();
         }
@@ -110,7 +109,6 @@ namespace ProyectoIngenieria.Controllers
 
                 if (File == null)
                 {
-                    ViewBag.type = "Empresa";
                     ViewBag.Photo = "Debe ingresar una imagen";
                     return View();
                 }
@@ -118,7 +116,6 @@ namespace ProyectoIngenieria.Controllers
                 {
                     if (nameFile == "")
                     {
-                        ViewBag.type = "Empresa";
                         ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
                         return View();
                     }

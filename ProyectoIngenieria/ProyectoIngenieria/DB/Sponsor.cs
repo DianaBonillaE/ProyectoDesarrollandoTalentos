@@ -33,7 +33,7 @@ namespace ProyectoIngenieria.DB
         [Display(Name = "Apellidos")]
         public string last_name { get; set; }
         [Required]
-        [StringLength(50)]
+        [EmailAddress]
         [Display(Name = "Correo")]
         public string email { get; set; }
         [Required]
