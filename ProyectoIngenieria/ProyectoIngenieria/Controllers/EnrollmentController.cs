@@ -50,6 +50,7 @@ namespace ProyectoIngenieria.Controllers
         {
             Curse course = db.Curse.Find(id);
             ViewBag.name = course.name;
+            ViewBag.id = course.id;
             ViewBag.fechaFinalizacion = course.end_date;
 
             List<Curse_Student> courseStudentList = db.Curse_Student.ToList();
@@ -61,7 +62,7 @@ namespace ProyectoIngenieria.Controllers
             for (int i = 0; i < courseStudentList.Count; i++)
             {
 
-                if (id != courseStudentList[i].curse_id)
+                if (id.Equals(courseStudentList[i].curse_id))
                 {
                     var idStudent = courseStudentList[i].student_identification;
                     Student student = db.Student.Find(idStudent);
@@ -72,16 +73,41 @@ namespace ProyectoIngenieria.Controllers
             //Estudiantes sin matricular
             for (int i = 0; i < students.Count; i++)
             {
-                for (int j = 0; j < courseStudentList.Count; j++)
+                for (int j = 0; j < enrollmentCourseStudentList.Count; j++)
                 {
-                    if (students[i].identification != courseStudentList[i].student_identification)
+                    if (students[i].identification != enrollmentCourseStudentList[j].identification)
                     {
-                        noEnrollmentCourseStudentList.Add(students[i]);
+                        Student student = db.Student.Find(students[i].identification);
+                        noEnrollmentCourseStudentList.Add(student);
+
                     }
                 }
             }
 
             ViewBag.students = noEnrollmentCourseStudentList;
+
+
+
+            return View();
+        }
+
+        public ActionResult ConfirmEnrollment(string idStudent, int idCourse)
+        {
+            Curse_Student enrollment = new Curse_Student();
+            enrollment.curse_id = idCourse;
+            enrollment.student_identification = idStudent;
+
+            Curse course = db.Curse.Find(idCourse);
+            enrollment.Curse = course;
+
+            Student student = db.Student.Find(idStudent);
+            enrollment.Student = student;
+
+            db.Curse_Student.Add(enrollment);
+
+            Student student1 = db.Student.Find(idStudent);
+            
+            student1.Curse_Student.Add(enrollment);
 
             return View();
         }
