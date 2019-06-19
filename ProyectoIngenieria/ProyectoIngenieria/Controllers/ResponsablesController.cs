@@ -16,7 +16,7 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Responsables
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        public ActionResult Index(int page = 1, int pageSize = 15)
         {
             List<Responsable> responsableList = db.Responsable.ToList();
             PagedList<Responsable> model = new PagedList<Responsable>(responsableList, page, pageSize);
@@ -107,7 +107,7 @@ namespace ProyectoIngenieria.Controllers
 
                 Responsable responsab1e = db.Responsable.Include(a => a.Student).ToList().Find(c => c.identification == responsable.identification);
                 responsab1e.Student.Clear();
-                /* if (students.Count > 0)
+                 if (students.Count > 0)
                  {
                      System.Collections.IList listStudents = students;
                      for (int i = 0; i < listStudents.Count; i++)
@@ -117,7 +117,7 @@ namespace ProyectoIngenieria.Controllers
                          responsable.Student.Add(student);
                      }
                  }
-                 */
+                
 
 
                 db.SaveChanges();

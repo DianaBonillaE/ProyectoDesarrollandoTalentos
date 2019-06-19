@@ -37,9 +37,7 @@ namespace ProyectoIngenieria.DB
         [StringLength(50)]
         [Display(Name = "Número de Teléfono")]
         public string phone_number { get; set; }
-        [Required]
-        [StringLength(50)]
-        [Display(Name = "Identificacion del Responsable")]
+        
         public string responsable_identification { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
