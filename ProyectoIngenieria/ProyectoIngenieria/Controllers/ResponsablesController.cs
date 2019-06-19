@@ -56,27 +56,21 @@ namespace ProyectoIngenieria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "identification,name,last_name,address,phone_number,description,email")]
-        Responsable responsable, List<int> students, HttpPostedFileBase File, string nameFile)
+        Responsable responsable, [Bind(Include = "identification,name,last_name,phone_number,responsable_identification")]Student student, List<int> students, HttpPostedFileBase File, string nameFile)
         {
             if (ModelState.IsValid)
             {
-                if (students.Count > 0)
-                {
-                    System.Collections.IList listStudents = students;
-                    for (int i = 0; i < listStudents.Count; i++)
-                    {
-                        string id = "" + listStudents[i];
-                        Student student = db.Student.Find(id);
-                        responsable.Student.Add(student);
-                    }
-                }
-
-
-
-
 
                 db.Responsable.Add(responsable);
                 db.SaveChanges();
+
+                student.responsable_identification = responsable.identification;
+                db.Student.Add(student);
+                db.SaveChanges();
+
+
+
+
                 return RedirectToAction("/Index");
             }
 
@@ -113,17 +107,17 @@ namespace ProyectoIngenieria.Controllers
 
                 Responsable responsab1e = db.Responsable.Include(a => a.Student).ToList().Find(c => c.identification == responsable.identification);
                 responsab1e.Student.Clear();
-                if (students.Count > 0)
-                {
-                    System.Collections.IList listStudents = students;
-                    for (int i = 0; i < listStudents.Count; i++)
-                    {
-                        string id = "" + listStudents[i];
-                        Student student = db.Student.Find(id);
-                        responsable.Student.Add(student);
-                    }
-                }
-
+                /* if (students.Count > 0)
+                 {
+                     System.Collections.IList listStudents = students;
+                     for (int i = 0; i < listStudents.Count; i++)
+                     {
+                         string id = "" + listStudents[i];
+                         Student student = db.Student.Find(id);
+                         responsable.Student.Add(student);
+                     }
+                 }
+                 */
 
 
                 db.SaveChanges();

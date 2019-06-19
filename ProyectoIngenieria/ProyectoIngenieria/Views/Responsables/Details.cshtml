@@ -16,63 +16,48 @@
                 <div class="row" style="text-align: center;">
                     <div class="col-sm-2">
 
-                        Identificación
+                        @Html.DisplayNameFor(model => model.identification)
                         <br />
                         •  @Html.DisplayFor(model => model.identification)
                     </div>
 
                     <div class="col-sm-2">
 
-                        Nombre
+                        @Html.DisplayNameFor(model => model.name)
                         <br />
                         •  @Html.DisplayFor(model => model.name)
                     </div>
                     <div class="col-sm-2">
 
-                      Apellidos
+                        @Html.DisplayNameFor(model => model.last_name)
                         <br />
                         •  @Html.DisplayFor(model => model.last_name)
                     </div>
 
                     <div class="col-sm-2">
-                        Número de Teléfono
+                        @Html.DisplayNameFor(model => model.phone_number)
                         <br />
                         •  @Html.DisplayFor(model => model.phone_number)
                     </div>
 
                     <div class="col-sm-2">
-                       Dirección
+                        @Html.DisplayNameFor(model => model.address)
                         <br />
                         •  @Html.DisplayFor(model => model.address)
                     </div>
 
                     <div class="col-sm-2">
-                        Descripción
+                        @Html.DisplayNameFor(model => model.description)
                         <br />
                         •  @Html.DisplayFor(model => model.description)
                     </div>
                     <div class="col-sm-2">
-                        Correo
+                        @Html.DisplayNameFor(model => model.email)
                         <br />
-                         @Html.DisplayFor(model => model.email)
+                        @Html.DisplayFor(model => model.email)
                     </div>
                 </div>
-                <div class="row" style="margin-top: 5%; text-align: center;">
-                    <div class="col-sm-2">
-                       Estudiante Asignado
 
-                        <br />
-                        @foreach (var item in ViewBag.students)
-                        {
-
-                            var sel = (Model.Student.Where(ca => ca.responsable_identification == item.identification).Count() > 0) ? "selected" : "ninguno";
-
-                            <option value="@item.identification" @sel>•  @item.name @item.last_name</option>
-
-                        }
-                    </div>
-                    
-                                  </div>
                 <div class="row">
                     <div class="col-md-2">
                     </div>

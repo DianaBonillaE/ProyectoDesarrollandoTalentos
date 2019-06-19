@@ -39,7 +39,7 @@ namespace ProyectoIngenieria.Controllers
         // GET: Students/Create
         public ActionResult Create()
         {
-            ViewBag.responsable_identification = new SelectList(db.Responsable, "identification", "name");
+            ViewBag.responsable_identification = new SelectList(db.Responsable, "identification", "identification");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace ProyectoIngenieria.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.responsable_identification = new SelectList(db.Responsable, "identification", "name", student.responsable_identification);
+            ViewBag.responsable_identification = new SelectList(db.Responsable, "identification", "identification", student.responsable_identification);
             return View(student);
         }
 
@@ -73,7 +73,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.responsable_identification = new SelectList(db.Responsable, "identification", "name", student.responsable_identification);
+            ViewBag.responsable_identification = new SelectList(db.Responsable, "identification", "identification", student.responsable_identification);
             return View(student);
         }
 
@@ -90,7 +90,7 @@ namespace ProyectoIngenieria.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.responsable_identification = new SelectList(db.Responsable, "identification", "name", student.responsable_identification);
+            ViewBag.responsable_identification = new SelectList(db.Responsable, "identification", "identification", student.responsable_identification);
             return View(student);
         }
 

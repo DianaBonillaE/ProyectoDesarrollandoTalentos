@@ -27,7 +27,8 @@
                     <div class="col-md-3"></div>
                     <div class="col-md-8">
                         <div class="form-group">
-                           Nombre
+                            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
@@ -35,7 +36,8 @@
                         </div>
 
                         <div class="form-group">
-                            Apellidos
+                            @Html.LabelFor(model => model.last_name, htmlAttributes: new { @class = "control-label col-md-2" })
+
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.last_name, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.last_name, "", new { @class = "text-danger" })
@@ -43,7 +45,8 @@
                         </div>
 
                         <div class="form-group">
-                           Dirección
+                            @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label col-md-2" })
+
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
@@ -51,7 +54,8 @@
                         </div>
 
                         <div class="form-group">
-                           Número de Teléfono
+                            @Html.LabelFor(model => model.phone_number, htmlAttributes: new { @class = "control-label col-md-2" })
+
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.phone_number, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger" })
@@ -59,7 +63,8 @@
                         </div>
 
                         <div class="form-group">
-                           Descripción
+                            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
@@ -67,31 +72,18 @@
                         </div>
 
                         <div class="form-group">
-                           Correo 
+                            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+
                             <div class="col-md-10">
                                 @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            Estudiante Asignado
-                            <div class="col-md-10">
-                                <select multiple="multiple" style="width:100%;" id="students" name="students">
-                                    @foreach (var item in ViewBag.students)
-                                    {
-                                        var sel = (Model.Student.Where(ca => ca.responsable_identification == item.identification).Count() > 0) ? "selected" : "";
 
-                                        <option value="@item.identification" @sel>@item.name</option>
-
-                                    }
-                                    <option value="0">Ninguno</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="form-group">
                             <div class="row">
-                                    <div class="col-md-6">
+                                <div class="col-md-6">
                                     @(ViewBag.name)
                                 </div>
                             </div>
