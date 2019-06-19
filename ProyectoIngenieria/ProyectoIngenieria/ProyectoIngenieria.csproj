@@ -2091,11 +2091,6 @@
     <Content Include="Views\Home\AdminMenu.cshtml" />
     <Content Include="Views\Home\UserMenu.cshtml" />
     <Content Include="Views\Home\AdminView.cshtml" />
-    <Content Include="Views\Voluntaries\Create.cshtml" />
-    <Content Include="Views\Voluntaries\Delete.cshtml" />
-    <Content Include="Views\Voluntaries\Details.cshtml" />
-    <Content Include="Views\Voluntaries\Edit.cshtml" />
-    <Content Include="Views\Voluntaries\Index.cshtml" />
     <Content Include="Views\Enrollment\CreateEnrollment.cshtml" />
     <Content Include="Views\Enrollment\IndexEnrollment.cshtml" />
     <Content Include="Views\Enrollment\ViewEnrollment.cshtml" />
@@ -2104,6 +2099,11 @@
     <Content Include="Views\Responsables\DeleteWarning.cshtml" />
     <Content Include="Views\Enrollment\DeleteEnrollment.cshtml" />
     <Content Include="Views\Enrollment\Delete.cshtml" />
+    <Content Include="Views\Voluntaries\Create.cshtml" />
+    <Content Include="Views\Voluntaries\Delete.cshtml" />
+    <Content Include="Views\Voluntaries\Details.cshtml" />
+    <Content Include="Views\Voluntaries\Edit.cshtml" />
+    <Content Include="Views\Voluntaries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
