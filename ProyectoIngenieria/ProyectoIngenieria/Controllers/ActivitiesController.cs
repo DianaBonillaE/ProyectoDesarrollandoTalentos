@@ -195,6 +195,10 @@ namespace ProyectoIngenieria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name,descripcion,start_date,end_date,photo_id")] Activity activity, List<int> sponsors, List<int> voluntaries, List<int> users, HttpPostedFileBase File, string nameFile)
         {
+            List<Sponsor> sponsorReturn = db.Sponsor.ToList();
+            List<User> userReturn = db.User.ToList();
+            List<Voluntary> voluntaryReturn = db.Voluntary.ToList();
+
             if (ModelState.IsValid)
             {
 
@@ -202,7 +206,7 @@ namespace ProyectoIngenieria.Controllers
 
                 Activity act = db.Activity.Include(a => a.Sponsor)
                     .Include(a => a.Voluntary).Include(a => a.User).ToList().Find(ca => ca.id == activity.id);
-
+                var imageAct = db.Photo.Find(act.photo_id);
                 //se ejecuta si hubo un cambio de imagen
                 if (File != null)
                 {
@@ -222,14 +226,12 @@ namespace ProyectoIngenieria.Controllers
 
                     db.SaveChanges();
                 }
-                else
+                if (nameFile != imageAct.name)
                 {
-                        /*/ViewBag.MessagePhoto = "Debe ingresar una imagen";
-                        ViewBag.MessageList = "Debe seleccionar datos";
-                        ViewBag.sponsors = sponsorReturn;
-                        ViewBag.users = userReturn;
-                        ViewBag.voluntaries = voluntaryReturn;
-                        return View();/*/
+                    var Photo = db.Photo.Find(act.photo_id);
+                    Photo.name = nameFile;
+
+                    db.SaveChanges();
                 }
 
                 act.Sponsor.Clear();

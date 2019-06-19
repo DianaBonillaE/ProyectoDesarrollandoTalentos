@@ -1,10 +1,7 @@
 ﻿@model PagedList.IPagedList<ProyectoIngenieria.DB.Teacher>
 @using PagedList.Mvc;
 
-@{
-    ViewBag.Title = "Index";
-}
-
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
 <div class="container md-3">
     <br />
     <h1 class="text-center">Profesores</h1>
@@ -30,7 +27,7 @@
                     Estado
                 </th>
                 <th>
-                   Teléfono
+                    Teléfono
                 </th>
                 <th></th>
             </tr>

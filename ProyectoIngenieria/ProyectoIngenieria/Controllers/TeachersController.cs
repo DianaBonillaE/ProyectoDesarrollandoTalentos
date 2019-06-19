@@ -139,6 +139,13 @@ namespace ProyectoIngenieria.Controllers
                         db.SaveChanges();
                     }
                 }
+                if (nameFile != "")
+                {
+                    var Photo = db.Photo.Find(teacher.photo_id);
+                    Photo.name = nameFile;
+
+                    db.SaveChanges();
+                }
 
                 db.SaveChanges();
 

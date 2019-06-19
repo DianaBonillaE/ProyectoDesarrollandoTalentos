@@ -4,6 +4,7 @@
     ViewBag.Title = "Create";
 }
 
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
 @using (Html.BeginForm("Create", "Activities", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

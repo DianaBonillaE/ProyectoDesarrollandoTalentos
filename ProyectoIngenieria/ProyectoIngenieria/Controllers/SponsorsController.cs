@@ -64,17 +64,17 @@ namespace ProyectoIngenieria.Controllers
             if (ModelState.IsValid)
             {
 
-                if(File == null)
+                if (File == null)
                 {
                     ViewBag.Photo = "Debe ingresar una imagen";
-                    return View("CreateSponsorEnterprise");
+                    return View();
                 }
                 else
                 {
                     if (nameFile == "")
                     {
                         ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
-                        return View("CreateSponsorEnterprise");
+                        return View();
                     }
                     else
                     {
@@ -87,18 +87,18 @@ namespace ProyectoIngenieria.Controllers
                         File.SaveAs(path);
 
                         db.Photo.Add(Photo);
+                        db.SaveChanges();
+
+                        sponsor.photo_id = Photo.id;
 
                         db.Sponsor.Add(sponsor);
                         db.SaveChanges();
                     }
                 }
-                db.Sponsor.Add(sponsor);
-                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
-
-            ViewBag.photo_id = new SelectList(db.Photo, "id", "name", sponsor.photo_id);
-            return View(sponsor);
+            return View();
         }
 
         [HttpPost]
@@ -160,21 +160,55 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.photo_id = new SelectList(db.Photo, "id", "name", sponsor.photo_id);
+           
+            if(sponsor.last_name== "Empresa")
+            {
+                ViewBag.enterprise = "Empresa";
+            }
+            ViewBag.name = sponsor.Photo.name;
+            ViewBag.image = Path.Combine("/Static/", sponsor.Photo.image);
             return View(sponsor);
         }
 
         // POST: Sponsors/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "identificacion,name,last_name,email,phone_number,description,photo_id")] Sponsor sponsor)
+        public ActionResult Edit([Bind(Include = "identificacion,name,last_name,email,phone_number,description,photo_id")] Sponsor sponsor, HttpPostedFileBase File, string nameFile)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(sponsor).State = EntityState.Modified;
-                db.SaveChanges();
+
+                if (File != null )
+                {
+                    if (nameFile != "")
+                    {
+                        var Photo = db.Photo.Find(sponsor.photo_id);
+                        Photo.name = nameFile;
+
+                        //elimina la imagen anterior
+                        var locationStatic = Path.Combine(Server.MapPath("/Static/"));
+                        System.IO.File.Delete(locationStatic + Photo.image);
+
+                        var extension = Path.GetExtension(File.FileName);
+                        var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
+                        File.SaveAs(path);
+                        Photo.image = nameFile + extension;
+
+                        db.SaveChanges();
+                    }
+                }
+
+                if (nameFile != "")
+                {
+                    var Photo = db.Photo.Find(sponsor.photo_id);
+                    Photo.name = nameFile;
+
+                    db.SaveChanges();
+                }
+
+                    db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.photo_id = new SelectList(db.Photo, "id", "name", sponsor.photo_id);
@@ -202,7 +236,16 @@ namespace ProyectoIngenieria.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Sponsor sponsor = db.Sponsor.Find(id);
+
+            Photo Photo = db.Photo.Find(sponsor.photo_id);
+
+            //eliminar imagen
+            var locationStatic = Path.Combine(Server.MapPath("/Static/"));
+            System.IO.File.Delete(locationStatic + Photo.image);
+
+            db.Photo.Remove(Photo);
             db.Sponsor.Remove(sponsor);
+
             db.SaveChanges();
             return RedirectToAction("Index");
         }
