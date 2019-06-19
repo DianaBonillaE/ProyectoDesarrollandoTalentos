@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using ProyectoIngenieria.DB;
 
 namespace ProyectoIngenieria.Controllers
@@ -15,8 +16,14 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Students
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 4)
         {
+
+            List<Student> studentList = db.Student.ToList();
+            PagedList<Student> model = new PagedList<Student>(studentList, page, pageSize);
+            return View(model);
+
+
             var student = db.Student.Include(s => s.Responsable);
             return View(student.ToList());
         }
@@ -128,5 +135,8 @@ namespace ProyectoIngenieria.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
+    
     }
 }

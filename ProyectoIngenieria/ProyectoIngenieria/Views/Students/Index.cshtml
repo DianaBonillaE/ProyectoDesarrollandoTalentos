@@ -1,8 +1,11 @@
-﻿@model IEnumerable<ProyectoIngenieria.DB.Student>
+﻿
 
-@{
-    ViewBag.Title = "Index";
-}
+@model PagedList.PagedList<ProyectoIngenieria.DB.Student>
+
+@using PagedList.Mvc;
+
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
+
 
 <div class="container md-3">
     <br />
@@ -20,13 +23,13 @@
         <table class="table ">
             <tr class="text-center">
                 <th>
-                    @Html.DisplayNameFor(model => model.identification)
+                    Identificación
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.name)
+                    Nombre
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.last_name)
+                    Apellido
                 </th>
                 <th></th>
             </tr>
@@ -55,6 +58,14 @@
             }
 
         </table>
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-6 ">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+            </div>
+        </div>
+
+
         <br />
         <div class="row">
             <div class="col-sm-5"></div>
