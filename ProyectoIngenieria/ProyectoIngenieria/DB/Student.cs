@@ -11,7 +11,8 @@ namespace ProyectoIngenieria.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Student
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +20,22 @@ namespace ProyectoIngenieria.DB
         {
             this.Curse_Student = new HashSet<Curse_Student>();
         }
-    
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Identificación")]
         public string identification { get; set; }
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Nombre")]
         public string name { get; set; }
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Apellido")]
         public string last_name { get; set; }
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Número de Teléfono")]
         public string phone_number { get; set; }
         public string responsable_identification { get; set; }
     

@@ -2101,6 +2101,7 @@
     <Content Include="Views\Enrollment\ViewEnrollment.cshtml" />
     <Content Include="Views\Sponsors\CreateSponsorEnterprise.cshtml" />
     <Content Include="Views\Enrollment\ConfirmEnrollment.cshtml" />
+    <Content Include="Views\Responsables\DeleteWarning.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

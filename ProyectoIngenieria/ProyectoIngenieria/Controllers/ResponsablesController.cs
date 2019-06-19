@@ -145,7 +145,13 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
-            return View(responsable);
+
+            if (students.Count >0)
+            { return RedirectToAction("/DeleteWarning"); }
+            else { return View(responsable); }
+
+
+           
         }
 
         // POST: Responsables/Delete/5
