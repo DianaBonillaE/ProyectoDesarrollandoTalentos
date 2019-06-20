@@ -81,12 +81,11 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <textarea id="descripcion" name="decripcion"></textarea>
+                            <textarea id="descripcion" name="decripcion" class="form-control"></textarea>
                           
                             @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <br />
                     <div class="form-group">
 
                         <div class="col-md-10 ">
