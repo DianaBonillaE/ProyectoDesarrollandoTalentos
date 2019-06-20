@@ -16,25 +16,25 @@
     <div class="panel-body">
         <br />
         <table class="table">
-            <tr>
+            <tr class="text-center">
                 <th>
-                    Nombre
+                    <p class="text-muted">Nombre</p>
                 </th>
                 <th>
-                    Apellidos
+                    <p class="text-muted">Apellidos</p>
                 </th>
                 <th>
-                    Estado
+                    <p class="text-muted">Estado</p>
                 </th>
                 <th>
-                    Teléfono
+                    <p class="text-muted">Teléfono</p>
                 </th>
                 <th></th>
             </tr>
 
             @foreach (var item in Model)
             {
-                <tr>
+                <tr class="text-center">
                     <td>
                         @Html.DisplayFor(modelItem => item.name)
                     </td>
@@ -89,7 +89,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {
