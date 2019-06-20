@@ -57,7 +57,7 @@ namespace ProyectoIngenieria.Controllers
 
                 var Album = new DB.Album();
                 Album.name = albumName;
-                Album.descripcion = news.description;
+                Album.description = news.description;
                 Album.creation_date = news.date;
 
                 db.Album.Add(Album);
@@ -102,7 +102,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 Album album = db.Album.Find(news.album_id);
                 album.name = albumName;
-                album.descripcion = news.description;
+                album.description = news.description;
                 album.creation_date = news.date;
 
                 db.Entry(album).State = EntityState.Modified;

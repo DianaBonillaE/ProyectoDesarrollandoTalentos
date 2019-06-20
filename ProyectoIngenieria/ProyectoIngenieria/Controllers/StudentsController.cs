@@ -123,9 +123,9 @@ namespace ProyectoIngenieria.Controllers
         {
             Student student = db.Student.Find(id);
 
-            Curse_Student curse_Student = db.Curse_Student.Include(a => a.Student).ToList().Find(c => c.student_identification == id);
+            Course_Student curse_Student = db.Course_Student.Include(a => a.Student).ToList().Find(c => c.student_identification == id);
             if (curse_Student != null) {
-                db.Curse_Student.Remove(curse_Student);
+                db.Course_Student.Remove(curse_Student);
             }
 
            

@@ -4,12 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2ff33f5a84f04364830cb2e590058025" Name="Diagram1">
+      <Diagram DiagramId="2ff33f5a84f04364830cb2e590058025" Name="Diagram1" ZoomLevel="83">
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Activity" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Album" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Comments" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Curse" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Curse_Student" Width="1.5" PointX="10.25" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.News" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Photo" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Responsable" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
@@ -21,18 +19,22 @@
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Voluntary" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
         <AssociationConnector Association="ProyectoIngenieriaModel.FK_Activity_Photo" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.FK__News__album_id__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoIngenieriaModel.FK__Curse_Stu__curse__1AD3FDA4" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoIngenieriaModel.FK__Curse_Stu__stude__1BC821DD" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.FK__Sponsor__photo_i__04E4BC85" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.FK__Teacher__photo_i__7B5B524B" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.FK__Voluntary__photo__5441852A" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.FK__Student__respons__17F790F9" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoIngenieriaModel.Activity_Sponsor" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.Activity_User" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.Album_Photo" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoIngenieriaModel.Curse_Teacher" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoIngenieriaModel.Room_Curse" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Course_Teacher" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.Voluntary_Activity" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK_User_Photo1" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Activity_Sponsor1" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Course" Width="1.5" PointX="10.375" PointY="6" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Course_Student" PointX="13.625" PointY="3.75" Width="2.625" />
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.sysdiagrams" Width="1.5" PointX="12.375" PointY="6.75" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK__Curse_Stu__curse__1AD3FDA41" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK__Curse_Stu__stude__1BC821DD1" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Room_Curse1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

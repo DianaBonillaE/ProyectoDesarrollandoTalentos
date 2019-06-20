@@ -11,8 +11,7 @@ namespace ProyectoIngenieria.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Photo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,12 +22,10 @@ namespace ProyectoIngenieria.DB
             this.Teacher = new HashSet<Teacher>();
             this.Voluntary = new HashSet<Voluntary>();
             this.Album = new HashSet<Album>();
+            this.User = new HashSet<User>();
         }
     
         public int id { get; set; }
-        [Required]
-        [StringLength(50)]
-        [Display(Name = "Nombre")]
         public string name { get; set; }
         public string image { get; set; }
     
@@ -42,5 +39,7 @@ namespace ProyectoIngenieria.DB
         public virtual ICollection<Voluntary> Voluntary { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Album> Album { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User> User { get; set; }
     }
 }

@@ -11,9 +11,9 @@
     <Property Name="end_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="photo_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Photo" Relationship="Self.FK_Activity_Photo" FromRole="Activity" ToRole="Photo" />
-    <NavigationProperty Name="Sponsor" Relationship="Self.Activity_Sponsor" FromRole="Activity" ToRole="Sponsor" />
     <NavigationProperty Name="User" Relationship="Self.Activity_User" FromRole="Activity" ToRole="User" />
     <NavigationProperty Name="Voluntary" Relationship="Self.Voluntary_Activity" FromRole="Activity" ToRole="Voluntary" />
+    <NavigationProperty Name="Sponsor" Relationship="ProyectoIngenieriaModel.Activity_Sponsor1" FromRole="Activity" ToRole="Sponsor" />
   </EntityType>
   <EntityType Name="Album">
     <Key>
@@ -21,10 +21,10 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="creation_date" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="News" Relationship="Self.FK__News__album_id__412EB0B6" FromRole="Album" ToRole="News" />
     <NavigationProperty Name="Photo" Relationship="Self.Album_Photo" FromRole="Album" ToRole="Photo" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Comments">
     <Key>
@@ -32,32 +32,8 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="state" Type="Boolean" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Curse">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="end_date" Type="DateTime" Nullable="false" Precision="0" />
-    <NavigationProperty Name="Curse_Student" Relationship="Self.FK__Curse_Stu__curse__1AD3FDA4" FromRole="Curse" ToRole="Curse_Student" />
-    <NavigationProperty Name="Teacher" Relationship="Self.Curse_Teacher" FromRole="Curse" ToRole="Teacher" />
-    <NavigationProperty Name="Room" Relationship="Self.Room_Curse" FromRole="Curse" ToRole="Room" />
-  </EntityType>
-  <EntityType Name="Curse_Student">
-    <Key>
-      <PropertyRef Name="curse_id" />
-      <PropertyRef Name="student_identification" />
-    </Key>
-    <Property Name="curse_id" Type="Int32" Nullable="false" />
-    <Property Name="student_identification" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="Curse" Relationship="Self.FK__Curse_Stu__curse__1AD3FDA4" FromRole="Curse_Student" ToRole="Curse" />
-    <NavigationProperty Name="Student" Relationship="Self.FK__Curse_Stu__stude__1BC821DD" FromRole="Curse_Student" ToRole="Student" />
   </EntityType>
   <EntityType Name="News">
     <Key>
@@ -65,7 +41,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="album_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Album" Relationship="Self.FK__News__album_id__412EB0B6" FromRole="News" ToRole="Album" />
   </EntityType>
@@ -81,6 +57,7 @@
     <NavigationProperty Name="Teacher" Relationship="Self.FK__Teacher__photo_i__7B5B524B" FromRole="Photo" ToRole="Teacher" />
     <NavigationProperty Name="Voluntary" Relationship="Self.FK__Voluntary__photo__5441852A" FromRole="Photo" ToRole="Voluntary" />
     <NavigationProperty Name="Album" Relationship="Self.Album_Photo" FromRole="Photo" ToRole="Album" />
+    <NavigationProperty Name="User" Relationship="ProyectoIngenieriaModel.FK_User_Photo1" FromRole="Photo" ToRole="User" />
   </EntityType>
   <EntityType Name="Responsable">
     <Key>
@@ -103,13 +80,12 @@
     <Property Name="room_number" Type="Int32" Nullable="false" />
     <Property Name="location" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="capacity" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Curse" Relationship="Self.Room_Curse" FromRole="Room" ToRole="Curse" />
+    <NavigationProperty Name="Course1" Relationship="ProyectoIngenieriaModel.Room_Curse1" FromRole="Room" ToRole="Course1" />
   </EntityType>
   <EntityType Name="Sponsor">
     <Key>
-      <PropertyRef Name="identificacion" />
+      <PropertyRef Name="identification" />
     </Key>
-    <Property Name="identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -117,7 +93,8 @@
     <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="photo_id" Type="Int32" />
     <NavigationProperty Name="Photo" Relationship="Self.FK__Sponsor__photo_i__04E4BC85" FromRole="Sponsor" ToRole="Photo" />
-    <NavigationProperty Name="Activity" Relationship="Self.Activity_Sponsor" FromRole="Sponsor" ToRole="Activity" />
+    <Property Name="identification" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Activity" Relationship="ProyectoIngenieriaModel.Activity_Sponsor1" FromRole="Sponsor" ToRole="Activity" />
   </EntityType>
   <EntityType Name="Student">
     <Key>
@@ -128,8 +105,8 @@
     <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="responsable_identification" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Curse_Student" Relationship="Self.FK__Curse_Stu__stude__1BC821DD" FromRole="Student" ToRole="Curse_Student" />
     <NavigationProperty Name="Responsable" Relationship="Self.FK__Student__respons__17F790F9" FromRole="Student" ToRole="Responsable" />
+    <NavigationProperty Name="Course_Student" Relationship="ProyectoIngenieriaModel.FK__Curse_Stu__stude__1BC821DD1" FromRole="Student" ToRole="Course_Student1" />
   </EntityType>
   <EntityType Name="Teacher">
     <Key>
@@ -140,12 +117,13 @@
     <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="state" Type="Boolean" Nullable="false" />
-    <Property Name="description" Type="String" MaxLength="800" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="phone_number" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="photo_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Photo" Relationship="Self.FK__Teacher__photo_i__7B5B524B" FromRole="Teacher" ToRole="Photo" />
-    <NavigationProperty Name="Curse" Relationship="Self.Curse_Teacher" FromRole="Teacher" ToRole="Curse" />
+    <Property Name="link" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Course" Relationship="ProyectoIngenieriaModel.Course_Teacher" FromRole="Teacher" ToRole="Course1" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -161,6 +139,9 @@
     <Property Name="address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Activity" Relationship="Self.Activity_User" FromRole="User" ToRole="Activity" />
+    <Property Name="photo_id" Type="Int32" Nullable="false" />
+    <Property Name="link" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Photo" Relationship="ProyectoIngenieriaModel.FK_User_Photo1" FromRole="User" ToRole="Photo" />
   </EntityType>
   <EntityType Name="Voluntary">
     <Key>
@@ -170,13 +151,14 @@
     <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="state" Type="Boolean" Nullable="false" />
     <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="photo_id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Photo" Relationship="Self.FK__Voluntary__photo__5441852A" FromRole="Voluntary" ToRole="Photo" />
     <NavigationProperty Name="Activity" Relationship="Self.Voluntary_Activity" FromRole="Voluntary" ToRole="Activity" />
     <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="phone_number" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="description" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="link" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Activity_Photo">
     <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
@@ -199,30 +181,6 @@
       </Principal>
       <Dependent Role="News">
         <PropertyRef Name="album_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Curse_Stu__curse__1AD3FDA4">
-    <End Role="Curse" Type="Self.Curse" Multiplicity="1" />
-    <End Role="Curse_Student" Type="Self.Curse_Student" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Curse">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Curse_Student">
-        <PropertyRef Name="curse_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Curse_Stu__stude__1BC821DD">
-    <End Role="Student" Type="Self.Student" Multiplicity="1" />
-    <End Role="Curse_Student" Type="Self.Curse_Student" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Student">
-        <PropertyRef Name="identification" />
-      </Principal>
-      <Dependent Role="Curse_Student">
-        <PropertyRef Name="student_identification" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -274,10 +232,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Activity_Sponsor">
-    <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
-    <End Role="Sponsor" Type="Self.Sponsor" Multiplicity="*" />
-  </Association>
   <Association Name="Activity_User">
     <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
     <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -285,14 +239,6 @@
   <Association Name="Album_Photo">
     <End Role="Album" Type="Self.Album" Multiplicity="*" />
     <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
-  </Association>
-  <Association Name="Curse_Teacher">
-    <End Role="Curse" Type="Self.Curse" Multiplicity="*" />
-    <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
-  </Association>
-  <Association Name="Room_Curse">
-    <End Role="Curse" Type="Self.Curse" Multiplicity="*" />
-    <End Role="Room" Type="Self.Room" Multiplicity="*" />
   </Association>
   <Association Name="Voluntary_Activity">
     <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
@@ -302,8 +248,6 @@
     <EntitySet Name="Activity" EntityType="Self.Activity" />
     <EntitySet Name="Album" EntityType="Self.Album" />
     <EntitySet Name="Comments" EntityType="Self.Comments" />
-    <EntitySet Name="Curse" EntityType="Self.Curse" />
-    <EntitySet Name="Curse_Student" EntityType="Self.Curse_Student" />
     <EntitySet Name="News" EntityType="Self.News" />
     <EntitySet Name="Photo" EntityType="Self.Photo" />
     <EntitySet Name="Responsable" EntityType="Self.Responsable" />
@@ -321,14 +265,6 @@
       <End Role="Album" EntitySet="Album" />
       <End Role="News" EntitySet="News" />
     </AssociationSet>
-    <AssociationSet Name="FK__Curse_Stu__curse__1AD3FDA4" Association="Self.FK__Curse_Stu__curse__1AD3FDA4">
-      <End Role="Curse" EntitySet="Curse" />
-      <End Role="Curse_Student" EntitySet="Curse_Student" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Curse_Stu__stude__1BC821DD" Association="Self.FK__Curse_Stu__stude__1BC821DD">
-      <End Role="Student" EntitySet="Student" />
-      <End Role="Curse_Student" EntitySet="Curse_Student" />
-    </AssociationSet>
     <AssociationSet Name="FK__Sponsor__photo_i__04E4BC85" Association="Self.FK__Sponsor__photo_i__04E4BC85">
       <End Role="Photo" EntitySet="Photo" />
       <End Role="Sponsor" EntitySet="Sponsor" />
@@ -345,10 +281,6 @@
       <End Role="Responsable" EntitySet="Responsable" />
       <End Role="Student" EntitySet="Student" />
     </AssociationSet>
-    <AssociationSet Name="Activity_Sponsor" Association="Self.Activity_Sponsor">
-      <End Role="Activity" EntitySet="Activity" />
-      <End Role="Sponsor" EntitySet="Sponsor" />
-    </AssociationSet>
     <AssociationSet Name="Activity_User" Association="Self.Activity_User">
       <End Role="Activity" EntitySet="Activity" />
       <End Role="User" EntitySet="User" />
@@ -357,17 +289,118 @@
       <End Role="Album" EntitySet="Album" />
       <End Role="Photo" EntitySet="Photo" />
     </AssociationSet>
-    <AssociationSet Name="Curse_Teacher" Association="Self.Curse_Teacher">
-      <End Role="Curse" EntitySet="Curse" />
-      <End Role="Teacher" EntitySet="Teacher" />
-    </AssociationSet>
-    <AssociationSet Name="Room_Curse" Association="Self.Room_Curse">
-      <End Role="Curse" EntitySet="Curse" />
-      <End Role="Room" EntitySet="Room" />
-    </AssociationSet>
     <AssociationSet Name="Voluntary_Activity" Association="Self.Voluntary_Activity">
       <End Role="Activity" EntitySet="Activity" />
       <End Role="Voluntary" EntitySet="Voluntary" />
     </AssociationSet>
+    <AssociationSet Name="FK_User_Photo1" Association="ProyectoIngenieriaModel.FK_User_Photo1">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="Activity_Sponsor1" Association="ProyectoIngenieriaModel.Activity_Sponsor1">
+      <End Role="Activity" EntitySet="Activity" />
+      <End Role="Sponsor" EntitySet="Sponsor" />
+    </AssociationSet>
+    <EntitySet Name="CourseSet" EntityType="ProyectoIngenieriaModel.Course" />
+    <EntitySet Name="Course_StudentSet" EntityType="ProyectoIngenieriaModel.Course_Student" />
+    <EntitySet Name="sysdiagrams" EntityType="ProyectoIngenieriaModel.sysdiagrams" />
+    <AssociationSet Name="FK__Curse_Stu__curse__1AD3FDA41" Association="ProyectoIngenieriaModel.FK__Curse_Stu__curse__1AD3FDA41">
+      <End EntitySet="CourseSet" Role="Course1" />
+      <End EntitySet="Course_StudentSet" Role="Course_Student1" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Curse_Stu__stude__1BC821DD1" Association="ProyectoIngenieriaModel.FK__Curse_Stu__stude__1BC821DD1">
+      <End EntitySet="Student" Role="Student" />
+      <End EntitySet="Course_StudentSet" Role="Course_Student1" />
+    </AssociationSet>
+    <AssociationSet Name="Course_Teacher" Association="ProyectoIngenieriaModel.Course_Teacher">
+      <End Role="Course1" EntitySet="CourseSet" />
+      <End Role="Teacher" EntitySet="Teacher" />
+    </AssociationSet>
+    <AssociationSet Name="Room_Curse1" Association="ProyectoIngenieriaModel.Room_Curse1">
+      <End Role="Course1" EntitySet="CourseSet" />
+      <End Role="Room" EntitySet="Room" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_User_Photo1">
+    <End Type="ProyectoIngenieriaModel.Photo" Role="Photo" Multiplicity="1" />
+    <End Type="ProyectoIngenieriaModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="photo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Activity_Sponsor1">
+    <End Type="ProyectoIngenieriaModel.Activity" Role="Activity" Multiplicity="*" />
+    <End Type="ProyectoIngenieriaModel.Sponsor" Role="Sponsor" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="end_date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Course_Student" Relationship="ProyectoIngenieriaModel.FK__Curse_Stu__curse__1AD3FDA41" FromRole="Course1" ToRole="Course_Student1" />
+    <NavigationProperty Name="Teacher" Relationship="ProyectoIngenieriaModel.Course_Teacher" FromRole="Course1" ToRole="Teacher" />
+    <NavigationProperty Name="Room" Relationship="ProyectoIngenieriaModel.Room_Curse1" FromRole="Course1" ToRole="Room" />
+  </EntityType>
+  <EntityType Name="Course_Student">
+    <Key>
+      <PropertyRef Name="curse_id" />
+      <PropertyRef Name="student_identification" />
+    </Key>
+    <Property Name="curse_id" Nullable="false" Type="Int32" />
+    <Property Name="student_identification" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <NavigationProperty Name="Course" Relationship="ProyectoIngenieriaModel.FK__Curse_Stu__curse__1AD3FDA41" FromRole="Course_Student1" ToRole="Course1" />
+    <NavigationProperty Name="Student" Relationship="ProyectoIngenieriaModel.FK__Curse_Stu__stude__1BC821DD1" FromRole="Course_Student1" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__Curse_Stu__curse__1AD3FDA41">
+    <End Type="ProyectoIngenieriaModel.Course" Multiplicity="1" Role="Course1" />
+    <End Type="ProyectoIngenieriaModel.Course_Student" Multiplicity="*" Role="Course_Student1" />
+    <ReferentialConstraint>
+      <Principal Role="Course1">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Course_Student1">
+        <PropertyRef Name="curse_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Curse_Stu__stude__1BC821DD1">
+    <End Type="ProyectoIngenieriaModel.Student" Multiplicity="1" Role="Student" />
+    <End Type="ProyectoIngenieriaModel.Course_Student" Multiplicity="*" Role="Course_Student1" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="identification" />
+      </Principal>
+      <Dependent Role="Course_Student1">
+        <PropertyRef Name="student_identification" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Course_Teacher">
+    <End Type="ProyectoIngenieriaModel.Course" Role="Course1" Multiplicity="*" />
+    <End Type="ProyectoIngenieriaModel.Teacher" Role="Teacher" Multiplicity="*" />
+  </Association>
+  <Association Name="Room_Curse1">
+    <End Type="ProyectoIngenieriaModel.Course" Role="Course1" Multiplicity="*" />
+    <End Type="ProyectoIngenieriaModel.Room" Role="Room" Multiplicity="*" />
+  </Association>
 </Schema>

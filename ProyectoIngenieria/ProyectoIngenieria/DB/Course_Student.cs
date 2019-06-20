@@ -12,20 +12,13 @@ namespace ProyectoIngenieria.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class Room
+    public partial class Course_Student
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Room()
-        {
-            this.Course1 = new HashSet<Course>();
-        }
-    
+        public int curse_id { get; set; }
+        public string student_identification { get; set; }
         public int id { get; set; }
-        public int room_number { get; set; }
-        public string location { get; set; }
-        public int capacity { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Course> Course1 { get; set; }
+        public virtual Course Course { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

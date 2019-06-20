@@ -28,8 +28,6 @@ namespace ProyectoIngenieria.DB
         public virtual DbSet<Activity> Activity { get; set; }
         public virtual DbSet<Album> Album { get; set; }
         public virtual DbSet<Comments> Comments { get; set; }
-        public virtual DbSet<Curse> Curse { get; set; }
-        public virtual DbSet<Curse_Student> Curse_Student { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Photo> Photo { get; set; }
         public virtual DbSet<Responsable> Responsable { get; set; }
@@ -39,5 +37,8 @@ namespace ProyectoIngenieria.DB
         public virtual DbSet<Teacher> Teacher { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Voluntary> Voluntary { get; set; }
+        public virtual DbSet<Course> Course { get; set; }
+        public virtual DbSet<Course_Student> Course_Student { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

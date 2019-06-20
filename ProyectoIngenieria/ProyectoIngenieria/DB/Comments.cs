@@ -11,21 +11,12 @@ namespace ProyectoIngenieria.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Comments
     {
         public int id { get; set; }
-        [Required]
-        [StringLength(50)]
-        [Display(Name = "Nombre")]
         public string name { get; set; }
-        [Required]
-        [StringLength(150)]
-        [Display(Name = "Descripción")]
         public string description { get; set; }
-        [Required]
-        [Display(Name = "Estado")]
         public bool state { get; set; }
     }
 }

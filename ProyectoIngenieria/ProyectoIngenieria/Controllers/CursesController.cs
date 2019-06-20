@@ -18,8 +18,8 @@ namespace ProyectoIngenieria.Controllers
         // GET: Curses
         public ActionResult Index(int page = 1, int pageSize = 4)
         {
-            List<Curse> curseList = db.Curse.ToList();
-            PagedList<Curse> model = new PagedList<Curse>(curseList, page, pageSize);
+            List<Course> curseList = db.Course.ToList();
+            PagedList<Course> model = new PagedList<Course>(curseList, page, pageSize);
             return View(model);
         }
 
@@ -30,7 +30,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Curse curse = db.Curse.Find(id);
+            Course curse = db.Course.Find(id);
             if (curse == null)
             {
                 return HttpNotFound();
@@ -50,11 +50,11 @@ namespace ProyectoIngenieria.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,description,name,start_date,end_date")] Curse curse)
+        public ActionResult Create([Bind(Include = "id,description,name,start_date,end_date")] Course curse)
         {
             if (ModelState.IsValid)
             {
-                db.Curse.Add(curse);
+                db.Course.Add(curse);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -70,7 +70,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Curse curse = db.Curse.Find(id);
+            Course curse = db.Course.Find(id);
             if (curse == null)
             {
                 return HttpNotFound();
@@ -84,7 +84,7 @@ namespace ProyectoIngenieria.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,description,name,start_date,end_date")] Curse curse)
+        public ActionResult Edit([Bind(Include = "id,description,name,start_date,end_date")] Course curse)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +103,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Curse curse = db.Curse.Find(id);
+            Course curse = db.Course.Find(id);
             if (curse == null)
             {
                 return HttpNotFound();
@@ -116,8 +116,8 @@ namespace ProyectoIngenieria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Curse curse = db.Curse.Find(id);
-            db.Curse.Remove(curse);
+            Course curse = db.Course.Find(id);
+            db.Course.Remove(curse);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

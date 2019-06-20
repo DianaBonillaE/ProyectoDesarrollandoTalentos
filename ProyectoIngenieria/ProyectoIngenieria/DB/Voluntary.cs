@@ -11,8 +11,7 @@ namespace ProyectoIngenieria.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Voluntary
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,45 +19,17 @@ namespace ProyectoIngenieria.DB
         {
             this.Activity = new HashSet<Activity>();
         }
-
-
-        [Required]
-        [Display(Name = "Identificación")]
+    
         public string identification { get; set; }
-
-        [Required]
-        [Display(Name = "Nombre")]
         public string name { get; set; }
-
-        [Required]
-        [Display(Name = "Estado")]
         public bool state { get; set; }
-
-        [Required]
-        [Display(Name = "Apellidos")]
         public string last_name { get; set; }
-
-        [Required]
-        [Display(Name = "Descripción")]
-        public string descripcion { get; set; }
-
-        [Required]
-        [Display(Name = "Identificación de fotos")]
         public int photo_id { get; set; }
-
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
         public string email { get; set; }
-
-        [Required]
-        [Display(Name = "Dirección")]
         public string address { get; set; }
-
-        [Required]
-        [Phone]
-        [Display(Name = "Número de teléfono")]
         public string phone_number { get; set; }
+        public string description { get; set; }
+        public string link { get; set; }
     
         public virtual Photo Photo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

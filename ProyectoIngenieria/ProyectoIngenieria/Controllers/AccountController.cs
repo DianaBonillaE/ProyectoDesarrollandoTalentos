@@ -68,9 +68,8 @@ namespace ProyectoIngenieria.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model)
         {
-
 
             User user = db.User.Find(model.Identification);
 

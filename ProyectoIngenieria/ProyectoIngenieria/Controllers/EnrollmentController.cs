@@ -15,19 +15,19 @@ namespace ProyectoIngenieria.Controllers
         // GET: Curses
         public ActionResult IndexEnrollment(int page = 1, int pageSize = 4)
         {
-            List<Curse> curseList = db.Curse.ToList();
-            PagedList<Curse> model = new PagedList<Curse>(curseList, page, pageSize);
+            List<Course> curseList = db.Course.ToList();
+            PagedList<Course> model = new PagedList<Course>(curseList, page, pageSize);
             return View(model);
         }
 
         // GET: Curses/Enrollment
         public ActionResult ViewEnrollment(int? id, int page = 1, int pageSize = 4)
         {
-            Curse course = db.Curse.Find(id);
+            Course course = db.Course.Find(id);
             ViewBag.name = course.name;
             ViewBag.id = course.id;
 
-            List<Curse_Student> courseStudentList = db.Curse_Student.ToList();
+            List<Course_Student> courseStudentList = db.Course_Student.ToList();
             List<Student> mostrarCourseStudentList = new List<Student>();
 
             PagedList<Student> model = new PagedList<Student>(mostrarCourseStudentList, page, pageSize);
@@ -51,12 +51,12 @@ namespace ProyectoIngenieria.Controllers
 
         public ActionResult CreateEnrollment(int? id, int page = 1, int pageSize = 4)
         {
-            Curse course = db.Curse.Find(id);
+            Course course = db.Course.Find(id);
             ViewBag.name = course.name;
             ViewBag.id = course.id;
             ViewBag.fechaFinalizacion = course.end_date;
 
-            List<Curse_Student> courseStudentList = db.Curse_Student.ToList();
+            List<Course_Student> courseStudentList = db.Course_Student.ToList();
             List<Student> enrollmentCourseStudentList = new List<Student>();
             List<Student> noEnrollmentCourseStudentList = new List<Student>();
             List<Student> students = db.Student.ToList();
@@ -92,16 +92,16 @@ namespace ProyectoIngenieria.Controllers
 
         public ActionResult ConfirmEnrollment(string idStudent, int idCourse)
         {
-            Curse_Student enrollment = new Curse_Student();
+            Course_Student enrollment = new Course_Student();
             enrollment.curse_id = idCourse;
             enrollment.student_identification = idStudent;
 
-            db.Curse_Student.Add(enrollment);
+            db.Course_Student.Add(enrollment);
 
             Student student = db.Student.Find(idStudent);
-            student.Curse_Student.Add(enrollment);
+            student.Course_Student.Add(enrollment);
 
-            Curse course = db.Curse.Find(idCourse);
+            Course course = db.Course.Find(idCourse);
 
             db.SaveChanges();
 
@@ -117,7 +117,7 @@ namespace ProyectoIngenieria.Controllers
         {
 
             Student student = db.Student.Find(idStudent);
-            Curse course = db.Curse.Find(idCourse);
+            Course course = db.Course.Find(idCourse);
 
             ViewBag.studentId = student.identification;
             ViewBag.studentName = student.name;
@@ -125,9 +125,9 @@ namespace ProyectoIngenieria.Controllers
 
             ViewBag.curseName = course.name;
 
-            List<Curse_Student> courseStudentList = db.Curse_Student.ToList();
+            List<Course_Student> courseStudentList = db.Course_Student.ToList();
 
-            Curse_Student curse_student = new Curse_Student();
+            Course_Student curse_student = new Course_Student();
 
             for (int i = 0; i < courseStudentList.Count; i++)
             {
@@ -141,7 +141,7 @@ namespace ProyectoIngenieria.Controllers
             }
             
 
-            db.Curse_Student.Remove(curse_student);
+            db.Course_Student.Remove(curse_student);
             db.SaveChanges();
 
             return View();

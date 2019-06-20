@@ -12,13 +12,12 @@ namespace ProyectoIngenieria.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class Curse_Student
+    public partial class sysdiagrams
     {
-        public int curse_id { get; set; }
-        public string student_identification { get; set; }
-        public int id { get; set; }
-    
-        public virtual Curse Curse { get; set; }
-        public virtual Student Student { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
