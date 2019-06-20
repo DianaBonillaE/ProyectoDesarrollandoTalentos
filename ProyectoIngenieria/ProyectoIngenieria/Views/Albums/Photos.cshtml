@@ -33,27 +33,33 @@
                         Nombre
                     </th>
                     <th>
-                        Apellido
+                        Nombre del Archivo
                     </th>
                     <th></th>
                 </tr>
 
                 @foreach (var item in Model)
                 {
-                    <tr class="text-center">
+            <tr class="text-center">
 
-                        <td>
-                            @Html.DisplayFor(modelItem => item.id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.image)
-                        </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.image)
+                </td>
+                <td>
+                   
 
+                    @Html.ActionLink("Eliminar", "DeletePhoto", new { id = item.id })
+                    
 
-                    </tr>
+                </td>
+
+            </tr>
                 }
 
             </table>

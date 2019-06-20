@@ -16,6 +16,8 @@ namespace ProyectoIngenieria.Controllers
     {
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
+        private static int idAlbum;
+
         // GET: Albums
         public ActionResult Index(int page = 1, int pageSize = 5)
         {
@@ -119,13 +121,23 @@ namespace ProyectoIngenieria.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             }
-            Album album = db.Album.Find(id);
+
+            Album album = db.Album.Include(a => a.Photo).ToList().Find(c => c.id == id);
+
+            List<Photo> photos = album.Photo.ToList();
+            ViewBag.photos = photos;
+
+
+            
             if (album == null)
             {
                 return HttpNotFound();
             }
-            return View(album);
+            if (photos.Count > 0)
+            { return RedirectToAction("/DeleteWarning/" + id); }
+            else { return View(album); }
         }
 
         // POST: Albums/Delete/5
@@ -206,11 +218,57 @@ namespace ProyectoIngenieria.Controllers
 
             List<Photo> phototList = album.Photo.ToList();
 
+            idAlbum = id;
 
             PagedList<Photo> model = new PagedList<Photo>(phototList, page, pageSize);
             return View(model);
         }
 
+        public ActionResult DeleteWarning(int id, int page = 1, int pageSize = 5)
+        {
+            Album album = db.Album.Include(a => a.Photo).ToList().Find(c => c.id == id);
+
+            List<Photo> phototList = album.Photo.ToList();
+
+
+            PagedList<Photo> model = new PagedList<Photo>(phototList, page, pageSize);
+            return View(model);
+        }
+
+        // GET: Photos/Delete/5
+        public ActionResult DeletePhoto(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Photo photo = db.Photo.Find(id);
+            if (photo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(photo);
+        }
+
+        // POST: Photos/Delete/5
+        [HttpPost, ActionName("DeletePhoto")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePhotoConfirmed(int id)
+        {
+            
+
+            Photo photo = db.Photo.Find(id);
+            Album album;
+
+
+            album = photo.Album.ToList().Find(c => c.id == idAlbum);
+
+            album.Photo.Remove(photo);
+            db.Photo.Remove(photo);
+            
+            db.SaveChanges();
+            return RedirectToAction("/Photos/"+idAlbum);
+        }
 
     }
 }
