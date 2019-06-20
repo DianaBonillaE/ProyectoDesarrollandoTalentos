@@ -1,75 +1,104 @@
-﻿@model IEnumerable<ProyectoIngenieria.DB.Voluntary>
+﻿@model PagedList.IPagedList<ProyectoIngenieria.DB.Voluntary>
+@using PagedList.Mvc;
 
-@{
-    ViewBag.Title = "Index";
-}
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
-<h2>Index</h2>
+<div class="container md-3">
+    <br />
+    <h1 class="text-center">Voluntarios</h1>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-9"></div>
+        <div class="col-sm-3 ">
+            <a href="~/Voluntaries/Create" class="btn btn-primary btn-md text-uppercase">Añadir Nuevo</a>
+        </div>
+    </div>
+    <div class="panel-body">
+        <br />
+        <table class="table">
+            <tr>
+                <th class="text-center">
+                    Nombre
+                </th>
+                <th class="text-center">
+                    Apellidos
+                </th>
+                <th class="text-center">
+                    Estado
+                </th>
+                <th class="text-center">
+                    Teléfono
+                </th>
+                <th>
+                </th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.state)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.last_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.phone_number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Photo.name)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.last_name)
+                    </td>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.state)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.last_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phone_number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Photo.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.identification }) |
-            @Html.ActionLink("Details", "Details", new { id=item.identification }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.identification })
-        </td>
-    </tr>
-}
+                    <td class="text-center">
+                        @if (item.state == true)
+                        {
+                            <a>Activo</a>
+                        }
+                        else
+                        {
+                            <a>No activo</a>
+                        }
 
-</table>
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.phone_number)
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink("Editar", "Edit", new { id = item.identification }) |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.identification }) |
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.identification })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <br />
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-6 ">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+            </div>
+        </div>
+
+
+    </div>
+    <br />
+    <br />
+</div>
+<hr />
+
+<style>
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 80%;
+        margin-top: 10%;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+</style>
+
+

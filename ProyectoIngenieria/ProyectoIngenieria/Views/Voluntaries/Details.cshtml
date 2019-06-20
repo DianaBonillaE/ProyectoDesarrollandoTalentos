@@ -4,79 +4,120 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Voluntary</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+    <div class="container md-3">
+        <br />
+        <h1 class="text-center">Voluntario</h1>
+        <br />
+        <br />
+        <div class="panel-body ">
+            <div class="row">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.state)
-        </dt>
+                <div class="col-sm-6 ">
 
-        <dd>
-            @Html.DisplayFor(model => model.state)
-        </dd>
+                    <dl class="dl-horizontal margen">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.name)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.last_name)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.last_name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.last_name)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.last_name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.descripcion)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.descripcion)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.descripcion)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.email)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.address)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.email)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.address)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.address)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.phone_number)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.address)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.phone_number)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.phone_number)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Photo.name)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.phone_number)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Photo.name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.state)
+                        </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.identification }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                        <dd>
+                            @Html.DisplayFor(model => model.state)
+                        </dd>
+
+                    </dl>
+                </div>
+                <div class="col-sm-6">
+                    <img src="@(ViewBag.image)" width="65%;" height="60%;" class="img" />
+                </div>
+            </div>
+        </div>
+        <br />
+   
+        <a href="~/Voluntaries/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
+
+        <br />
+        <br />
+    </div>
+<hr />
+
+<style>
+    .img{
+        margin-top: -1%;
+        margin-left:15%;
+    }
+
+    .margen{
+        margin-left:22%;
+    }
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 60%;
+        margin-top: 10%;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+</style>
+
+
+
+
+
