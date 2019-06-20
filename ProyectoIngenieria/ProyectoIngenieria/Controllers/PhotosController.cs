@@ -182,6 +182,7 @@ namespace ProyectoIngenieria.Controllers
         {
             Photo photo = db.Photo.Find(id);
             db.Photo.Remove(photo);
+            
             db.SaveChanges();
             return RedirectToAction("Index");
         }
