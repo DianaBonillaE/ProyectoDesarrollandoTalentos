@@ -55,6 +55,8 @@ namespace ProyectoIngenieria.Controllers
         {
             if (ModelState.IsValid)
             {
+                db.Teacher.FindAsync(teacher.identification);
+                
                 teacher.state = state;
 
                 if (File == null)

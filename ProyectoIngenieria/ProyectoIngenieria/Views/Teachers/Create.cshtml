@@ -51,15 +51,13 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.state, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <div class="col-md-10">
-                                <select style="width:100%" ; id="state" name="state">
-                                    <option value="true">Activo</option>
-                                    <option value="false">No activo</option>
-
-                                </select>
-                                @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
-                            </div>
+                            <select class="form-control" ; id="state" name="state">
+                                <option value="true">Activo</option>
+                                <option value="false">No activo</option>
+                            </select>
+                            @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
                         </div>
+
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -109,7 +107,7 @@
                         <div class="col-md-10">
                             Nombre de la imagen
                             <br />
-                            <input type="text" name="nameFile" id="nameFile" />
+                            <input type="text" name="nameFile" id="nameFile" class="form-control" />
 
                         </div>
                         @if (ViewBag.MessagePhotoName != null)
@@ -123,6 +121,7 @@
                     </div>
                 </div>
             </div>
+            <br />
             <div class="row">
                 <div class="col-md-4">
                 </div>
@@ -153,7 +152,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {
