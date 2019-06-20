@@ -56,26 +56,7 @@ namespace ProyectoIngenieria.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (File == null)
-                {
-                    ViewBag.MessagePhoto = "Debe ingresar una imagen";
-                    ViewBag.MessageList = "Debe seleccionar datos";
-                    return View();
-                }
-                else
-                {
-                    var extension = Path.GetExtension(File.FileName);
-                    var path = Path.Combine(Server.MapPath("/Static/"), photo.name + extension);
-
-
-                    photo.name = photo.name;
-                    photo.image = photo.name + extension;
-                    File.SaveAs(path);
-                }
-
-                db.Photo.Add(photo);
-
-                album.Photo.Add(photo);
+                
                 db.Album.Add(album);
                 db.SaveChanges();
                 return RedirectToAction("Index");
