@@ -1,9 +1,8 @@
 ﻿@model ProyectoIngenieria.DB.Activity
 
-@{
-    ViewBag.Title = "Editar";
-}
+
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
+
 @using (Html.BeginForm("Edit", "Activities", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -11,7 +10,7 @@
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.id)
-
+    @Html.HiddenFor(model => model.photo_id)
     <div class="container md-3">
         <br />
         <h1 class="text-center">Actualizar actividad</h1>
@@ -24,7 +23,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                             @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -59,13 +58,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-
-                        <div class="col-md-10">
-                            <a>Identificador de la foto</a>
-                            @Html.EditorFor(model => model.photo_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @placeholder = "prueba" } })
-                        </div>
-                    </div>
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
@@ -76,21 +68,21 @@
                             <input type="file" name="File" id="File" />
                         </div>
                     </div>
-                    <br />
+                    
                     <div class="form-group">
 
                         <div class="col-md-10">
                             <a>Nombre de la imagen</a>
                             <br />
-                            <input type="text" name="nameFile" id="nameFile" value="@(ViewBag.name)" />
+                            <input type="text" name="nameFile" id="nameFile" value="@(ViewBag.name)" class="form-control" />
                         </div>
                     </div>
-                    <br />
+                  
                     <div class="form-group">
 
                         <div class="col-md-10">
                             <a>Patrocinadores</a>
-                            <select multiple="multiple" style="width:100%;" id="sponsors" name="sponsors">
+                            <select multiple="multiple" style="width:100%;" id="sponsors" name="sponsors" class="form-control">
                                 @foreach (var item in ViewBag.sponsors)
                                 {
                                     var sel = (Model.Sponsor.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
@@ -102,12 +94,12 @@
                             </select>
                         </div>
                     </div>
-                    <br />
+               
                     <div class="form-group">
 
                         <div class="col-md-10">
                             <a>Usuarios</a>
-                            <select multiple="multiple" style="width:100%;" id="users" name="users">
+                            <select multiple="multiple" style="width:100%;" id="users" name="users" class="form-control">
                                 @foreach (var item in ViewBag.users)
                                 {
                                     var sel = (Model.User.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
@@ -119,13 +111,13 @@
 
                         </div>
                     </div>
-                    <br />
+                    
                     <div class="form-group">
 
                         <div class="col-md-10">
                             <a>Voluntarios</a>
 
-                            <select multiple="multiple" style="width:100%;" id="voluntaries" name="voluntaries">
+                            <select multiple="multiple" style="width:100%;" id="voluntaries" name="voluntaries" class="form-control">
                                 @foreach (var item in ViewBag.voluntaries)
                                 {
                                     var sel = (Model.Voluntary.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
@@ -172,7 +164,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {

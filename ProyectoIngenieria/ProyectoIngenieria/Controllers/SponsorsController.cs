@@ -58,92 +58,109 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "identificacion,name,last_name,email,phone_number,description,photo_id")] Sponsor sponsor, HttpPostedFileBase File, string nameFile)
+        public ActionResult Create([Bind(Include = "identification,name,last_name,email,phone_number,description,photo_id")] Sponsor sponsor, HttpPostedFileBase File, string nameFile)
         {
             if (ModelState.IsValid)
             {
-
-                if (File == null)
+                var query = (from r in db.Sponsor where r.identification == sponsor.identification select r).Count();
+                if (query == 1)
                 {
-                    ViewBag.Photo = "Debe ingresar una imagen";
+                    ViewBag.exists = "El patrocinador con la identificación " + sponsor.identification + " ya se encuentra registrado";
                     return View();
                 }
                 else
                 {
-                    if (nameFile == "")
+                    if (File == null)
                     {
-                        ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
+                        ViewBag.Photo = "Debe ingresar una imagen";
                         return View();
                     }
                     else
                     {
-                        var extension = Path.GetExtension(File.FileName);
-                        var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
+                        if (nameFile == "")
+                        {
+                            ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
+                            ViewBag.Photo = "Debe ingresar una imagen";
+                            return View();
+                        }
+                        else
+                        {
+                            var extension = Path.GetExtension(File.FileName);
+                            var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
 
-                        var Photo = new DB.Photo();
-                        Photo.name = nameFile;
-                        Photo.image = nameFile + extension;
-                        File.SaveAs(path);
+                            var Photo = new DB.Photo();
+                            Photo.name = nameFile;
+                            Photo.image = nameFile + extension;
+                            File.SaveAs(path);
 
-                        db.Photo.Add(Photo);
-                        db.SaveChanges();
+                            db.Photo.Add(Photo);
+                            db.SaveChanges();
 
-                        sponsor.photo_id = Photo.id;
+                            sponsor.photo_id = Photo.id;
 
-                        db.Sponsor.Add(sponsor);
-                        db.SaveChanges();
+                            db.Sponsor.Add(sponsor);
+                            db.SaveChanges();
+                        }
                     }
-                }
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
             }
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateSponsorEnterprise([Bind(Include = "identificacion,name,last_name,email,phone_number,description")] Sponsor sponsor, HttpPostedFileBase File, string nameFile)
+        public ActionResult CreateSponsorEnterprise([Bind(Include = "identification,name,last_name,email,phone_number,description")] Sponsor sponsor, HttpPostedFileBase File, string nameFile)
         {
             if (ModelState.IsValid)
             {
-
-                if (File == null)
+                var query = (from r in db.Sponsor where r.identification == sponsor.identification select r).Count();
+                if (query == 1)
                 {
-                    ViewBag.Photo = "Debe ingresar una imagen";
+                    ViewBag.exists = "El patrocinador con la identificación " + sponsor.identification + " ya se encuentra registrado";
                     return View();
                 }
                 else
                 {
-                    if (nameFile == "")
+                    if (File == null)
                     {
-                        ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
+                        ViewBag.Photo = "Debe ingresar una imagen";
                         return View();
                     }
                     else
                     {
-                        var extension = Path.GetExtension(File.FileName);
-                        var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
+                        if (nameFile == "")
+                        {
+                            ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
+                            return View();
+                        }
+                        else
+                        {
+                            var extension = Path.GetExtension(File.FileName);
+                            var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
 
-                        var Photo = new DB.Photo();
-                        Photo.name = nameFile;
-                        Photo.image = nameFile + extension;
-                        File.SaveAs(path);
+                            var Photo = new DB.Photo();
+                            Photo.name = nameFile;
+                            Photo.image = nameFile + extension;
+                            File.SaveAs(path);
 
-                        db.Photo.Add(Photo);
-                        db.SaveChanges();
+                            db.Photo.Add(Photo);
+                            db.SaveChanges();
 
-                        sponsor.photo_id = Photo.id;
+                            sponsor.photo_id = Photo.id;
 
-                        db.Sponsor.Add(sponsor);
-                        db.SaveChanges();
+                            db.Sponsor.Add(sponsor);
+                            db.SaveChanges();
+                        }
                     }
-                }
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
             }
             return View();
         }
-        
+
 
         // GET: Sponsors/Edit/5
         public ActionResult Edit(string id)
@@ -157,8 +174,8 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
-           
-            if(sponsor.last_name== "Empresa")
+
+            if (sponsor.last_name == "Empresa")
             {
                 ViewBag.enterprise = "Empresa";
             }
@@ -171,13 +188,14 @@ namespace ProyectoIngenieria.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "identificacion,name,last_name,email,phone_number,description,photo_id")] Sponsor sponsor, HttpPostedFileBase File, string nameFile)
+        public ActionResult Edit([Bind(Include = "identification,name,last_name,email,phone_number,description,photo_id")] Sponsor sponsor, HttpPostedFileBase File, string nameFile)
         {
+
             if (ModelState.IsValid)
             {
                 db.Entry(sponsor).State = EntityState.Modified;
 
-                if (File != null )
+                if (File != null)
                 {
                     if (nameFile != "")
                     {
@@ -205,11 +223,12 @@ namespace ProyectoIngenieria.Controllers
                     db.SaveChanges();
                 }
 
-                    db.SaveChanges();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.photo_id = new SelectList(db.Photo, "id", "name", sponsor.photo_id);
+
             return View(sponsor);
+
         }
 
         // GET: Sponsors/Delete/5

@@ -14,38 +14,38 @@
     <br />
     <div class="row">
         <div class="col-sm-4"></div>
-       
-            <a href="/Sponsors/CreateSponsorEnterprise" class="btn btn-primary btn-md text-uppercase">Añadir Empresa</a>
-            
-            <a href="/Sponsors/Create" class="btn btn-primary btn-md text-uppercase" style="margin-left:2%;">Añadir Persona</a>
-        
+
+        <a href="/Sponsors/CreateSponsorEnterprise" class="btn btn-primary btn-md text-uppercase">Añadir Empresa</a>
+
+        <a href="/Sponsors/Create" class="btn btn-primary btn-md text-uppercase" style="margin-left:2%;">Añadir Persona</a>
+
     </div>
 
     <div class="panel-body">
         <br />
         <table class="table">
-            <tr>
+            <tr class="text-center">
                 <th>
-                    Nombre
+                    <p class="text-muted">Nombre</p>
                 </th>
                 <th>
-                    Apellido o Tipo
+                    <p class="text-muted">Apellido o Tipo</p>
                 </th>
                 <th>
-                    Correo
+                    <p class="text-muted">Correo</p>
                 </th>
                 <th>
-                    Teléfono
+                    <p class="text-muted">Teléfono</p>
                 </th>
                 <th>
-                    Descripción
+                    <p class="text-muted">Descripción</p>
                 </th>
                 <th></th>
             </tr>
 
             @foreach (var item in Model)
             {
-                <tr>
+                <tr class="text-center">
                     <td>
                         @Html.DisplayFor(modelItem => item.name)
                     </td>
@@ -93,7 +93,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {

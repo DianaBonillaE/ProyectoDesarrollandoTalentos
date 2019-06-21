@@ -1,9 +1,5 @@
 ﻿@model ProyectoIngenieria.DB.Comments
 
-@{
-    ViewBag.Title = "Create";
-}
-
 @Html.Partial("~/Views/Home/UserMenu.cshtml")
 
 @using (Html.BeginForm())
@@ -13,12 +9,20 @@
     <div class="container md-3">
         <br />
         <h2 class="text-center">Contáctenos</h2>
-        <h3 class="text-center">
-            Envía comentarios sobre nuestras actividades o cualquier consulta que tengas
-        </h3>
         <br />
+        <h6 class="text-center">
+            Envía comentarios sobre nuestras actividades o cualquier consulta que tengas
+        </h6>
         <br />
         <div class="panel-body">
+            @if (ViewBag.success != null)
+            {
+                <div class="alert alert-success text-center alert-dismissible">
+                    <h4 class="alert-heading"><i class="icon fa fa-check"></i> ¡Correcto!</h4>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <h6>@ViewBag.success</h6>
+                </div>
+            }
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-8">
@@ -26,7 +30,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                            <input id="name" name="name" class="form-control" />
                             @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -34,7 +38,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <textarea id="description" name="description" rows="4" cols="63" style="max-width: 100%;"></textarea>
+                            <textarea id="description" name="description" rows="4" cols="63" style="resize:none;" class="form-control"></textarea>
                             @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -45,7 +49,7 @@
 
                         <div class="form-group">
                             <div class="col-md-2">
-                                <input type="submit" value="Guardar" class="btn btn-primary btn-md text-uppercase" />
+                                <input type="submit" value="Guardar" class="btn btn-primary btn-md text-uppercase" onclick="clean()"  id="but"/>
                             </div>
                         </div>
                     </div>
@@ -66,7 +70,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {
@@ -79,7 +83,14 @@
         align-content: center;
     }
 </style>
-
+<script >
+    function clean() {
+        alert("prueba")
+        $('#but').on('click', function () {
+            $('#name').val("");
+        });
+    }
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

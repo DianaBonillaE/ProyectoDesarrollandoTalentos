@@ -55,7 +55,8 @@ namespace ProyectoIngenieria.Controllers
                 comments.state = false;
                 db.Comments.Add(comments);
                 db.SaveChanges();
-                return RedirectToAction("Create");
+                ViewBag.success = "Su comentario ha sido enviado con éxito";
+                return View();
             }
 
             return View();

@@ -1,6 +1,11 @@
-﻿@model ProyectoIngenieria.DB.Course
+﻿@model ProyectoIngenieria.DB.Curse
 
-@Html.Partial("~/Views/Home/AdminMenu.cshtml")
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
 
 @using (Html.BeginForm())
 {
@@ -78,7 +83,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 8%;
+        margin-top: 10%;
     }
 
     .panel {

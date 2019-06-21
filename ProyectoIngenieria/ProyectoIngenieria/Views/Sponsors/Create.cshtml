@@ -1,8 +1,6 @@
 ﻿@model ProyectoIngenieria.DB.Sponsor
 
-@{
-    ViewBag.Title = "Create";
-}
+
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
 @using (Html.BeginForm("Create", "Sponsors", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -15,6 +13,14 @@
         <h1 class="text-center">Ingresar un Patrocinador Persona</h1>
         <br />
         <br />
+        @if (ViewBag.exists != null)
+        {
+            <div class="alert alert-danger text-center alert-dismissible">
+                <h4 class="alert-heading"><i class="icon fa fa-check"></i> ¡Error!</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                <h6>@ViewBag.exists</h6>
+            </div>
+        }
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-3"></div>
@@ -133,7 +139,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {

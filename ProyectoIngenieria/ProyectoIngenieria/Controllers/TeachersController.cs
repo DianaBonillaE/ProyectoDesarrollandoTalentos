@@ -51,42 +51,50 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "identification,name,last_name,address,state,description,email,phone_number,photo_id")] Teacher teacher, Boolean state, HttpPostedFileBase File, string nameFile)
+        public ActionResult Create([Bind(Include = "identification,name,last_name,address,state,description,email,phone_number,photo_id,link")] Teacher teacher, Boolean state, HttpPostedFileBase File, string nameFile)
         {
             if (ModelState.IsValid)
             {
-                db.Teacher.FindAsync(teacher.identification);
-                
-                teacher.state = state;
-
-                if (File == null)
+                var query = (from r in db.Teacher where r.identification == teacher.identification select r).Count();
+                if (query == 1)
                 {
-                    ViewBag.MessagePhoto = "Debe ingresar una imagen";
+                    ViewBag.exists = "El profesor con la identificación "+teacher.identification+" ya se encuentra registrado";
                     return View();
                 }
                 else
                 {
 
-                    if (nameFile == "")
+                    teacher.state = state;
+
+                    if (File == null)
                     {
-                        ViewBag.MessagePhotoName = "Debe ingresar un nombre";
                         ViewBag.MessagePhoto = "Debe ingresar una imagen";
                         return View();
                     }
                     else
                     {
-                        var extension = Path.GetExtension(File.FileName);
-                        var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
 
-                        var Photo = new DB.Photo();
-                        Photo.name = nameFile;
-                        Photo.image = nameFile + extension;
-                        File.SaveAs(path);
+                        if (nameFile == "")
+                        {
+                            ViewBag.MessagePhotoName = "Debe ingresar un nombre";
+                            ViewBag.MessagePhoto = "Debe ingresar una imagen";
+                            return View();
+                        }
+                        else
+                        {
+                            var extension = Path.GetExtension(File.FileName);
+                            var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
 
-                        db.Photo.Add(Photo);
+                            var Photo = new DB.Photo();
+                            Photo.name = nameFile;
+                            Photo.image = nameFile + extension;
+                            File.SaveAs(path);
 
-                        db.Teacher.Add(teacher);
-                        db.SaveChanges();
+                            db.Photo.Add(Photo);
+
+                            db.Teacher.Add(teacher);
+                            db.SaveChanges();
+                        }
                     }
                 }
 
@@ -109,13 +117,14 @@ namespace ProyectoIngenieria.Controllers
             }
             ViewBag.image = Path.Combine("/Static/", teacher.Photo.image);
             ViewBag.name = teacher.Photo.name;
+            ViewBag.description = teacher.description;
             return View(teacher);
         }
 
         // POST: Teachers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "identification,name,last_name,address,state,description,email,phone_number,photo_id")] Teacher teacher, Boolean state, HttpPostedFileBase File, string nameFile)
+        public ActionResult Edit([Bind(Include = "identification,name,last_name,address,state,description,email,phone_number,photo_id,link")] Teacher teacher, Boolean state, HttpPostedFileBase File, string nameFile)
         {
             if (ModelState.IsValid)
             {
@@ -153,7 +162,7 @@ namespace ProyectoIngenieria.Controllers
 
                 return RedirectToAction("Index");
             }
-            
+
             return View(teacher);
         }
 
@@ -181,17 +190,17 @@ namespace ProyectoIngenieria.Controllers
 
             Teacher teacher = db.Teacher.Find(id);
             Photo Photo = db.Photo.Find(teacher.photo_id);
-           
-                //eliminar imagen
-                var locationStatic = Path.Combine(Server.MapPath("/Static/"));
-                System.IO.File.Delete(locationStatic + Photo.image);
 
-                db.Photo.Remove(Photo);
-                db.Teacher.Remove(teacher);
+            //eliminar imagen
+            var locationStatic = Path.Combine(Server.MapPath("/Static/"));
+            System.IO.File.Delete(locationStatic + Photo.image);
 
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            
+            db.Photo.Remove(Photo);
+            db.Teacher.Remove(teacher);
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
         }
 
         protected override void Dispose(bool disposing)
