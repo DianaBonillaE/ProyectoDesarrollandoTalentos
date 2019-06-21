@@ -68,14 +68,22 @@
           <Property Name="start_date" Type="date" Nullable="false" />
           <Property Name="end_date" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="Course_Room">
+          <Key>
+            <PropertyRef Name="id_room" />
+            <PropertyRef Name="id_course" />
+          </Key>
+          <Property Name="id_room" Type="int" Nullable="false" />
+          <Property Name="id_course" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Course_Student">
           <Key>
             <PropertyRef Name="curse_id" />
             <PropertyRef Name="student_identification" />
           </Key>
-          <Property Name="curse_id" Nullable="false" Type="int" />
-          <Property Name="student_identification" Nullable="false" MaxLength="20" Type="varchar" />
-          <Property Name="id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="curse_id" Type="int" Nullable="false" />
+          <Property Name="student_identification" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Course_Teacher">
           <Key>
@@ -122,14 +130,6 @@
           <Property Name="room_number" Type="int" Nullable="false" />
           <Property Name="location" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="capacity" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Room_Curse">
-          <Key>
-            <PropertyRef Name="room_id" />
-            <PropertyRef Name="curse_id" />
-          </Key>
-          <Property Name="room_id" Type="int" Nullable="false" />
-          <Property Name="curse_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Sponsor">
           <Key>
@@ -290,8 +290,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Curse_Stu__curse__1AD3FDA4">
-          <End Type="Self.Course" Multiplicity="1" Role="Course" />
-          <End Type="Self.Course_Student" Multiplicity="*" Role="Course_Student" />
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Course_Student" Type="Self.Course_Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Course">
               <PropertyRef Name="id" />
@@ -302,8 +302,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Curse_Stu__stude__1BC821DD">
-          <End Type="Self.Student" Multiplicity="1" Role="Student" />
-          <End Type="Self.Course_Student" Multiplicity="*" Role="Course_Student" />
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Course_Student" Type="Self.Course_Student" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Student">
               <PropertyRef Name="identification" />
@@ -346,30 +346,6 @@
             </Principal>
             <Dependent Role="News">
               <PropertyRef Name="album_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Room_Curs__curse__4F7CD00D">
-          <End Role="Course" Type="Self.Course" Multiplicity="1" />
-          <End Role="Room_Curse" Type="Self.Room_Curse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Room_Curse">
-              <PropertyRef Name="curse_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Room_Curs__room___4E88ABD4">
-          <End Role="Room" Type="Self.Room" Multiplicity="1" />
-          <End Role="Room_Curse" Type="Self.Room_Curse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Room">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Room_Curse">
-              <PropertyRef Name="room_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -457,6 +433,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Course_Room_Course_Curse">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Course_Room" Type="Self.Course_Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Course_Room">
+              <PropertyRef Name="id_course" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Room_Room_Room">
+          <End Role="Room" Type="Self.Room" Multiplicity="1" />
+          <End Role="Course_Room" Type="Self.Course_Room" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Room">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Course_Room">
+              <PropertyRef Name="id_room" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Photo">
           <End Role="Photo" Type="Self.Photo" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -477,13 +477,13 @@
           <EntitySet Name="Album_Photo" EntityType="Self.Album_Photo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Course_Room" EntityType="Self.Course_Room" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Course_Student" EntityType="Self.Course_Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Course_Teacher" EntityType="Self.Course_Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Responsable" EntityType="Self.Responsable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Room_Curse" EntityType="Self.Room_Curse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sponsor" EntityType="Self.Sponsor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -516,12 +516,12 @@
             <End Role="Album_Photo" EntitySet="Album_Photo" />
           </AssociationSet>
           <AssociationSet Name="FK__Curse_Stu__curse__1AD3FDA4" Association="Self.FK__Curse_Stu__curse__1AD3FDA4">
-            <End EntitySet="Course" Role="Course" />
-            <End EntitySet="Course_Student" Role="Course_Student" />
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Course_Student" EntitySet="Course_Student" />
           </AssociationSet>
           <AssociationSet Name="FK__Curse_Stu__stude__1BC821DD" Association="Self.FK__Curse_Stu__stude__1BC821DD">
-            <End EntitySet="Student" Role="Student" />
-            <End EntitySet="Course_Student" Role="Course_Student" />
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Course_Student" EntitySet="Course_Student" />
           </AssociationSet>
           <AssociationSet Name="FK__Curse_Tea__curse__7E37BEF6" Association="Self.FK__Curse_Tea__curse__7E37BEF6">
             <End Role="Course" EntitySet="Course" />
@@ -534,14 +534,6 @@
           <AssociationSet Name="FK__News__album_id__412EB0B6" Association="Self.FK__News__album_id__412EB0B6">
             <End Role="Album" EntitySet="Album" />
             <End Role="News" EntitySet="News" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Room_Curs__curse__4F7CD00D" Association="Self.FK__Room_Curs__curse__4F7CD00D">
-            <End Role="Course" EntitySet="Course" />
-            <End Role="Room_Curse" EntitySet="Room_Curse" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Room_Curs__room___4E88ABD4" Association="Self.FK__Room_Curs__room___4E88ABD4">
-            <End Role="Room" EntitySet="Room" />
-            <End Role="Room_Curse" EntitySet="Room_Curse" />
           </AssociationSet>
           <AssociationSet Name="FK__Sponsor__photo_i__04E4BC85" Association="Self.FK__Sponsor__photo_i__04E4BC85">
             <End Role="Photo" EntitySet="Photo" />
@@ -570,6 +562,14 @@
           <AssociationSet Name="FK_Activity_Photo" Association="Self.FK_Activity_Photo">
             <End Role="Photo" EntitySet="Photo" />
             <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Room_Course_Curse" Association="Self.FK_Course_Room_Course_Curse">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Course_Room" EntitySet="Course_Room" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Room_Room_Room" Association="Self.FK_Course_Room_Room_Room">
+            <End Role="Room" EntitySet="Room" />
+            <End Role="Course_Room" EntitySet="Course_Room" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Photo" Association="Self.FK_User_Photo">
             <End Role="Photo" EntitySet="Photo" />
@@ -651,16 +651,6 @@
           <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Student" Relationship="Self.FK__Student__respons__17F790F9" FromRole="Responsable" ToRole="Student" />
-        </EntityType>
-        <EntityType Name="Room">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="room_number" Type="Int32" Nullable="false" />
-          <Property Name="location" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="capacity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Course1" Relationship="ProyectoIngenieriaModel.Room_Curse1" FromRole="Room" ToRole="Course1" />
         </EntityType>
         <EntityType Name="Sponsor">
           <Key>
@@ -831,7 +821,6 @@
           <EntitySet Name="News" EntityType="Self.News" />
           <EntitySet Name="Photo" EntityType="Self.Photo" />
           <EntitySet Name="Responsable" EntityType="Self.Responsable" />
-          <EntitySet Name="Room" EntityType="Self.Room" />
           <EntitySet Name="Sponsor" EntityType="Self.Sponsor" />
           <EntitySet Name="Student" EntityType="Self.Student" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" />
@@ -896,8 +885,9 @@
             <End Role="Course1" EntitySet="CourseSet" />
             <End Role="Teacher" EntitySet="Teacher" />
           </AssociationSet>
-          <AssociationSet Name="Room_Curse1" Association="ProyectoIngenieriaModel.Room_Curse1">
-            <End Role="Course1" EntitySet="CourseSet" />
+          <EntitySet Name="Room" EntityType="ProyectoIngenieriaModel.Room" />
+          <AssociationSet Name="Course_Room" Association="ProyectoIngenieriaModel.Course_Room">
+            <End Role="Course" EntitySet="CourseSet" />
             <End Role="Room" EntitySet="Room" />
           </AssociationSet>
           </EntityContainer>
@@ -928,7 +918,7 @@
           <Property Name="end_date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Course_Student" Relationship="ProyectoIngenieriaModel.FK__Curse_Stu__curse__1AD3FDA41" FromRole="Course1" ToRole="Course_Student1" />
           <NavigationProperty Name="Teacher" Relationship="ProyectoIngenieriaModel.Course_Teacher" FromRole="Course1" ToRole="Teacher" />
-          <NavigationProperty Name="Room" Relationship="ProyectoIngenieriaModel.Room_Curse1" FromRole="Course1" ToRole="Room" />
+          <NavigationProperty Name="Room" Relationship="ProyectoIngenieriaModel.Course_Room" FromRole="Course" ToRole="Room" />
         </EntityType>
         <EntityType Name="Course_Student">
           <Key>
@@ -979,8 +969,18 @@
           <End Type="ProyectoIngenieriaModel.Course" Role="Course1" Multiplicity="*" />
           <End Type="ProyectoIngenieriaModel.Teacher" Role="Teacher" Multiplicity="*" />
         </Association>
-        <Association Name="Room_Curse1">
-          <End Type="ProyectoIngenieriaModel.Course" Role="Course1" Multiplicity="*" />
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="room_number" Type="Int32" Nullable="false" />
+          <Property Name="location" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="capacity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="ProyectoIngenieriaModel.Course_Room" FromRole="Room" ToRole="Course" />
+        </EntityType>
+        <Association Name="Course_Room">
+          <End Type="ProyectoIngenieriaModel.Course" Role="Course" Multiplicity="*" />
           <End Type="ProyectoIngenieriaModel.Room" Role="Room" Multiplicity="*" />
         </Association>
         </Schema>
@@ -1050,16 +1050,6 @@
                 <ScalarProperty Name="phone_number" ColumnName="phone_number" />
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="email" ColumnName="email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Room">
-            <EntityTypeMapping TypeName="ProyectoIngenieriaModel.Room">
-              <MappingFragment StoreEntitySet="Room">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="room_number" ColumnName="room_number" />
-                <ScalarProperty Name="location" ColumnName="location" />
-                <ScalarProperty Name="capacity" ColumnName="capacity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1207,12 +1197,22 @@
               <ScalarProperty Name="id" ColumnName="curse_id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="Room_Curse1" TypeName="ProyectoIngenieriaModel.Room_Curse1" StoreEntitySet="Room_Curse">
+          <EntitySetMapping Name="Room">
+            <EntityTypeMapping TypeName="ProyectoIngenieriaModel.Room">
+              <MappingFragment StoreEntitySet="Room">
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="room_number" ColumnName="room_number" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Course_Room" TypeName="ProyectoIngenieriaModel.Course_Room" StoreEntitySet="Course_Room">
             <EndProperty Name="Room">
-              <ScalarProperty Name="id" ColumnName="room_id" />
+              <ScalarProperty Name="id" ColumnName="id_room" />
             </EndProperty>
-            <EndProperty Name="Course1">
-              <ScalarProperty Name="id" ColumnName="curse_id" />
+            <EndProperty Name="Course">
+              <ScalarProperty Name="id" ColumnName="id_course" />
             </EndProperty>
           </AssociationSetMapping>
           </EntityContainerMapping>

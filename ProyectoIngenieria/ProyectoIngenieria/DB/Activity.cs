@@ -11,8 +11,7 @@ namespace ProyectoIngenieria.DB
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Activity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,23 +23,9 @@ namespace ProyectoIngenieria.DB
         }
     
         public int id { get; set; }
-        [Required]
-        [StringLength(50)]
-        [Display(Name = "Nombre")]
         public string name { get; set; }
-        [Required]
-        [StringLength(50)]
-        [Display(Name = "Descripción")]
         public string descripcion { get; set; }
-        [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Inicio")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime start_date { get; set; }
-        [Required]
-        [DataType(DataType.Date)]
-        [Display(Name = "Finalización")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime end_date { get; set; }
         public int photo_id { get; set; }
     

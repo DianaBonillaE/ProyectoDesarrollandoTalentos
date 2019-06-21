@@ -31,7 +31,6 @@ namespace ProyectoIngenieria.DB
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Photo> Photo { get; set; }
         public virtual DbSet<Responsable> Responsable { get; set; }
-        public virtual DbSet<Room> Room { get; set; }
         public virtual DbSet<Sponsor> Sponsor { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
@@ -40,5 +39,6 @@ namespace ProyectoIngenieria.DB
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<Course_Student> Course_Student { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Room> Room { get; set; }
     }
 }
