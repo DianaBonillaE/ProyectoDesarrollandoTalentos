@@ -11,6 +11,14 @@
         <h1 class="text-center">Ingresar un Voluntario</h1>
         <br />
         <br />
+        @if (ViewBag.menssage != null)
+        {
+            <div class="alert alert-danger text-center alert-dismissible">
+                <h3 class="alert-heading"><i class="icon fa fa-check"></i> ¡Error!</h3>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                <h6>@ViewBag.menssage</h6>
+            </div>
+        }
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-1"></div>
@@ -57,11 +65,8 @@
                             </select>
                             @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
                         </div>
-
                     </div>
-                </div>
 
-                <div class="col-md-5">
                     <div class="form-group">
                         @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -69,6 +74,9 @@
                             @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                </div>
+
+                <div class="col-md-5">
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.phone_number, htmlAttributes: new { @class = "control-label col-md-6" })
@@ -79,11 +87,11 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <textarea id="descripcion" name="decripcion" class="form-control"></textarea>
-                          
-                            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+                            <textarea id="descriptionVoluntary" name="descriptionVoluntary" class="form-control" rows="6" cols="63" style="resize:none;"></textarea>
+
+                            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group">
@@ -121,6 +129,14 @@
                                 </div>
                             </div>
                         }
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.link, htmlAttributes: new { @class = "control-label col-md-6" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.link, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.link, "", new { @class = "text-danger" })
+                        </div>
                     </div>
                 </div>
             </div>

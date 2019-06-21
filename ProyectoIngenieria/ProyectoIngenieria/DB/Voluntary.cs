@@ -11,7 +11,8 @@ namespace ProyectoIngenieria.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Voluntary
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,16 +20,54 @@ namespace ProyectoIngenieria.DB
         {
             this.Activity = new HashSet<Activity>();
         }
-    
+
+        [Required]
+        [Display(Name = "Identificación")]
+        [StringLength(20)]
         public string identification { get; set; }
+
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Nombre")]
         public string name { get; set; }
+
+        [Required]
+        [Display(Name = "Estado")]
         public bool state { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Apellidos")]
         public string last_name { get; set; }
-        public int photo_id { get; set; }
-        public string email { get; set; }
-        public string address { get; set; }
-        public string phone_number { get; set; }
+
+        
+        [Display(Name = "Descripción")]
         public string description { get; set; }
+
+        [Required]
+        [Display(Name = "Identificación de fotos")]
+        public int photo_id { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string email { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        [Display(Name = "Dirección")]
+        public string address { get; set; }
+
+        [Required]
+        [Phone]
+        [StringLength(10)]
+        [Display(Name = "Número de teléfono")]
+        public string phone_number { get; set; }
+
+        [Display(Name = "Link a red social")]
+        [StringLength(800)]
         public string link { get; set; }
     
         public virtual Photo Photo { get; set; }

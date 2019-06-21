@@ -27,14 +27,14 @@
         <AssociationConnector Association="ProyectoIngenieriaModel.Album_Photo" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.Course_Teacher" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.Voluntary_Activity" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoIngenieriaModel.FK_User_Photo1" />
-        <AssociationConnector Association="ProyectoIngenieriaModel.Activity_Sponsor1" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK_User_Photo" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Activity_Sponsor" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Course" Width="1.5" PointX="10.375" PointY="6" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Course_Student" PointX="13.625" PointY="3.75" Width="2.625" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.sysdiagrams" Width="1.5" PointX="12.375" PointY="6.75" />
         <AssociationConnector Association="ProyectoIngenieriaModel.FK__Curse_Stu__curse__1AD3FDA41" />
         <AssociationConnector Association="ProyectoIngenieriaModel.FK__Curse_Stu__stude__1BC821DD1" />
-        <AssociationConnector Association="ProyectoIngenieriaModel.Room_Curse1" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Room_Curse" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

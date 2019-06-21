@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ProyectoIngenieria.DB;
 using PagedList;
-using System.IO;
-
+using ProyectoIngenieria.DB;
 namespace ProyectoIngenieria.Controllers
 {
     public class VoluntariesController : Controller
@@ -17,10 +16,17 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Voluntaries
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        public ActionResult Index(string mensaje, int page = 1, int pageSize = 4)
         {
             List<Voluntary> volutaryList = db.Voluntary.ToList();
             PagedList<Voluntary> model = new PagedList<Voluntary>(volutaryList, page, pageSize);
+
+            //Mensaje de exito para eliminar o editar
+            if (mensaje != null)
+            {
+                ViewBag.menssage = mensaje;
+            }
+
             return View(model);
         }
 
@@ -37,14 +43,22 @@ namespace ProyectoIngenieria.Controllers
                 return HttpNotFound();
             }
             ViewBag.image = Path.Combine("/Static/", voluntary.Photo.image);
-        
+            ViewBag.name = voluntary.name + " " + voluntary.last_name;
+
             return View(voluntary);
         }
 
         // GET: Voluntaries/Create
-        public ActionResult Create()
+        public ActionResult Create(string mensaje)
         {
             ViewBag.photo_id = new SelectList(db.Photo, "id", "name");
+
+            //Mensaje de id repetido
+            if (mensaje != null)
+            {
+                ViewBag.menssage = mensaje;
+            }
+
             return View();
         }
 
@@ -53,46 +67,55 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "identification,name,state,last_name,descripcion,photo_id,email,address,phone_number")] Voluntary voluntary, Boolean state, HttpPostedFileBase File, string nameFile)
+        public ActionResult Create([Bind(Include = "identification,name,last_name,state,photo_id,email,address,phone_number,link")] Voluntary voluntary, Boolean state, HttpPostedFileBase File, string nameFile, string descriptionVoluntary)
         {
-            if (ModelState.IsValid)
+            var query = (from r in db.Voluntary where r.identification == voluntary.identification select r).Count();
+            if (query == 1)
             {
-                voluntary.state = state;
-
-                if (File == null)
+                return RedirectToAction("Create", new { mensaje = "El voluntario con la identificación " + voluntary.identification + " ya se encuentra registrado en el sistema" });
+            }
+            else
+            {
+                if (ModelState.IsValid)
                 {
-                    ViewBag.MessagePhoto = "Debe ingresar una imagen";
-                    return View();
-                }
-                else
-                {
+                    voluntary.state = state;
 
-                    if (nameFile == "")
+                    if (File == null)
                     {
-                        ViewBag.MessagePhotoName = "Debe ingresar un nombre";
                         ViewBag.MessagePhoto = "Debe ingresar una imagen";
                         return View();
                     }
                     else
                     {
-                        var extension = Path.GetExtension(File.FileName);
-                        var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
 
-                        var Photo = new DB.Photo();
-                        Photo.name = nameFile;
-                        Photo.image = nameFile + extension;
-                        File.SaveAs(path);
+                        if (nameFile == "")
+                        {
+                            ViewBag.MessagePhotoName = "Debe ingresar un nombre";
+                            ViewBag.MessagePhoto = "Debe ingresar una imagen";
+                            return View();
+                        }
+                        else
+                        {
+                            var extension = Path.GetExtension(File.FileName);
+                            var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
 
-                        db.Photo.Add(Photo);
+                            var Photo = new DB.Photo();
+                            Photo.name = nameFile;
+                            Photo.image = nameFile + extension;
+                            File.SaveAs(path);
 
-                        db.Voluntary.Add(voluntary);
-                        db.SaveChanges();
+                            db.Photo.Add(Photo);
+
+                            voluntary.description = descriptionVoluntary;
+                            db.Voluntary.Add(voluntary);
+                            db.SaveChanges();
+                        }
                     }
-                }
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { mensaje = "El voluntario " + voluntary.name + " " + voluntary.last_name + " ha sido ingresado exitosamente" });
+                }
             }
-           
+
             return View(voluntary);
         }
 
@@ -110,6 +133,8 @@ namespace ProyectoIngenieria.Controllers
             }
             ViewBag.image = Path.Combine("/Static/", voluntary.Photo.image);
             ViewBag.name = voluntary.Photo.name;
+
+            ViewBag.description = voluntary.description;
             return View(voluntary);
         }
 
@@ -118,7 +143,7 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "identification,name,last_name,address,state,descripcion,email,phone_number,photo_id")] Voluntary voluntary, Boolean state, HttpPostedFileBase File, string nameFile)
+        public ActionResult Edit([Bind(Include = "identification,name,last_name,description,state,photo_id,email,address,phone_number,link")] Voluntary voluntary, Boolean state, HttpPostedFileBase File, string nameFile)
         {
             if (ModelState.IsValid)
             {
@@ -152,9 +177,11 @@ namespace ProyectoIngenieria.Controllers
                     db.SaveChanges();
                 }
 
+
+
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { mensaje = "El voluntario " + voluntary.name + " " + voluntary.last_name + " ha sido actualizado exitosamente" });
             }
             return View(voluntary);
         }
@@ -166,11 +193,17 @@ namespace ProyectoIngenieria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Voluntary voluntary = db.Voluntary.Find(id);
+
             if (voluntary == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.image = Path.Combine("/Static/", voluntary.Photo.image);
+            ViewBag.name = voluntary.name + " " + voluntary.last_name;
+
             return View(voluntary);
         }
 
@@ -179,8 +212,24 @@ namespace ProyectoIngenieria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+
             Voluntary voluntary = db.Voluntary.Find(id);
             Photo Photo = db.Photo.Find(voluntary.photo_id);
+
+            //Valida si ya existe un voluntario asociado a una actividad
+
+            if (voluntary.Activity.Count() >0)
+            {
+                List<Activity> activities = voluntary.Activity.ToList();
+
+                for (int i=0; i > activities.Count(); i++)
+                {
+                 
+                    voluntary.Activity.Remove(activities[i]);
+                }
+
+              
+            }
 
             //eliminar imagen
             var locationStatic = Path.Combine(Server.MapPath("/Static/"));
@@ -190,7 +239,8 @@ namespace ProyectoIngenieria.Controllers
             db.Voluntary.Remove(voluntary);
 
             db.SaveChanges();
-            return View(voluntary);
+            return RedirectToAction("Index", new { mensaje = "El voluntario " + voluntary.name + " " + voluntary.last_name + " ha sido eliminado exitosamente" });
+
         }
 
         protected override void Dispose(bool disposing)
