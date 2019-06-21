@@ -17,8 +17,13 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Sponsors
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        public ActionResult Index(string message, int page = 1, int pageSize = 4)
         {
+
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
             List<Sponsor> sponsorList = db.Sponsor.ToList();
             PagedList<Sponsor> model = new PagedList<Sponsor>(sponsorList, page, pageSize);
             return View(model);
@@ -40,16 +45,22 @@ namespace ProyectoIngenieria.Controllers
         }
 
         // GET: Sponsors/Create
-        public ActionResult Create()
+        public ActionResult Create(string message)
         {
-            ViewBag.photo_id = new SelectList(db.Photo, "id", "name");
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
             return View();
         }
 
         // GET: Sponsors/CreateEnterprise
-        public ActionResult CreateSponsorEnterprise()
+        public ActionResult CreateSponsorEnterprise(string message)
         {
-            ViewBag.photo_id = new SelectList(db.Photo, "id", "name");
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
             return View();
         }
 
@@ -65,23 +76,21 @@ namespace ProyectoIngenieria.Controllers
                 var query = (from r in db.Sponsor where r.identification == sponsor.identification select r).Count();
                 if (query == 1)
                 {
-                    ViewBag.exists = "El patrocinador con la identificación " + sponsor.identification + " ya se encuentra registrado";
-                    return View();
+                    return RedirectToAction("Create", new { message = "El patrocinador con la identificación " + sponsor.identification + " ya se encuentra registrado" });
                 }
                 else
                 {
                     if (File == null)
                     {
-                        ViewBag.Photo = "Debe ingresar una imagen";
-                        return View();
+                        ViewBag.message = "Debe ingresar una imagen";
+                        return View(sponsor);
                     }
                     else
                     {
                         if (nameFile == "")
                         {
-                            ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
-                            ViewBag.Photo = "Debe ingresar una imagen";
-                            return View();
+                            ViewBag.message = "Debe ingresar un nombre para la imagen";
+                            return View(sponsor);
                         }
                         else
                         {
@@ -103,7 +112,7 @@ namespace ProyectoIngenieria.Controllers
                         }
                     }
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { message = "El patrocinador ha sido registrado exitosamente" });
                 }
             }
             return View();
@@ -118,22 +127,22 @@ namespace ProyectoIngenieria.Controllers
                 var query = (from r in db.Sponsor where r.identification == sponsor.identification select r).Count();
                 if (query == 1)
                 {
-                    ViewBag.exists = "El patrocinador con la identificación " + sponsor.identification + " ya se encuentra registrado";
-                    return View();
+                    return RedirectToAction("CreateSponsorEnterprise", new { message = "El patrocinador con la identificación " + sponsor.identification + " ya se encuentra registrado" });
+
                 }
                 else
                 {
                     if (File == null)
                     {
-                        ViewBag.Photo = "Debe ingresar una imagen";
-                        return View();
+                        ViewBag.message = "Debe ingresar una imagen";
+                        return View(sponsor);
                     }
                     else
                     {
                         if (nameFile == "")
                         {
-                            ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
-                            return View();
+                            ViewBag.message = "Debe ingresar un nombre para la imagen";
+                            return View(sponsor);
                         }
                         else
                         {
@@ -155,7 +164,8 @@ namespace ProyectoIngenieria.Controllers
                         }
                     }
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { message = "El patrocinador ha sido registrado exitosamente" });
+
                 }
             }
             return View();
@@ -224,7 +234,8 @@ namespace ProyectoIngenieria.Controllers
                 }
 
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "El patrocinador ha sido actualizado exitosamente" });
+
             }
 
             return View(sponsor);
@@ -258,12 +269,14 @@ namespace ProyectoIngenieria.Controllers
             //eliminar imagen
             var locationStatic = Path.Combine(Server.MapPath("/Static/"));
             System.IO.File.Delete(locationStatic + Photo.image);
-
+            sponsor.Activity.Clear();
             db.Photo.Remove(Photo);
             db.Sponsor.Remove(sponsor);
+            
 
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { message = "El patrocinador ha sido eliminado exitosamente" });
+
         }
 
         protected override void Dispose(bool disposing)
