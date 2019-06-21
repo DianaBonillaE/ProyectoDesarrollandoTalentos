@@ -74,7 +74,7 @@ namespace ProyectoIngenieria.Controllers
             User user = db.User.Find(model.Identification);
 
             /*/ Este user.password deberia venir encriptado/*/
-            if (Proteccion.DesEncriptar(user.password) == model.Password)
+            if (Protection.Decrypt(user.password) == model.Password)
             {   return RedirectToAction("../Home/AdminView");
                 }
             else{
