@@ -30,7 +30,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                <textarea id="description" name="description" rows="4" cols="63" style="max-width: 100%;" >@(ViewBag.description)</textarea>
+                                <textarea id="description" name="description" rows="4" cols="63" style="resize:none;" >@(ViewBag.description)</textarea>
                                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
                             </div>
                         </div>
