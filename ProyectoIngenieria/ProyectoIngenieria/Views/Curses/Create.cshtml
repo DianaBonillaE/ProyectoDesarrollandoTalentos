@@ -10,8 +10,17 @@
         <br />
         <h1 class="text-center">Ingresar un Curso</h1>
         <br />
-        <br />
+       
         <div class="panel-body">
+            @if (ViewBag.message != null)
+            {
+                <div class="alert alert-danger text-center alert-dismissible">
+                    <h4 class="alert-heading"><i class="icon fa fa-times"></i> ¡Error!</h4>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <h6>@ViewBag.message</h6>
+                </div>
+            }
+            <br />
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-8">
@@ -47,6 +56,51 @@
                             @Html.ValidationMessageFor(model => model.end_date, "", new { @class = "text-danger" })
                         </div>
                     </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-10">
+                            Aulas
+                            <select multiple="multiple" style="width:100%" ; id="rooms" name="rooms" class="form-control">
+
+                                @foreach (var item in ViewBag.rooms)
+                                {
+                                    if (ViewBag.message == null)
+                                    {
+                                        <option value="@item.id">Número aula: @item.room_number | Capacidad: @item.capacity</option>
+                                    }
+                                    else
+                                    {
+                                        var sel = (Model.Room.Where(ca => ca.id == item.id).Count() > 0) ? "selected" : "";
+
+                                        <option value="@item.id" @sel>Número aula: @item.room_number | Capacidad: @item.capacity</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-10">
+                            Profesor
+                            <select multiple="multiple" style="width:100%" ; id="teacher" name="teacher" class="form-control">
+                                @foreach (var item in ViewBag.teachers)
+                                {
+                                    if (ViewBag.message == null)
+                                    {
+                                        <option value=@item.identification>@item.name @item.last_name</option>
+                                    }
+                                    else
+                                    {
+                                        var sel = (Model.Teacher.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
+                                        <option value=@item.identification @sel>@item.name @item.last_name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-2">
                         </div>
