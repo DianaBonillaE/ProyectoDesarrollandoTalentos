@@ -5,10 +5,10 @@ using System.Web;
 
 namespace ProyectoIngenieria.Controllers
 {
-    public static class Proteccion
+    public static class Protection
     {
         /// Esta función encripta la contraseña
-        public static string Encriptar(this string password)
+        public static string Encrypt(this string password)
         {
             string result = string.Empty;
             byte[] encryted = System.Text.Encoding.Unicode.GetBytes(password);
@@ -17,7 +17,7 @@ namespace ProyectoIngenieria.Controllers
         }
 
         /// Esta función desencripta la contraseña
-        public static string DesEncriptar(this string password)
+        public static string Decrypt(this string password)
         {
             string result = string.Empty;
             byte[] decryted = Convert.FromBase64String(password);
