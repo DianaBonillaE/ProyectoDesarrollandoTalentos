@@ -7,97 +7,93 @@
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
-    <div class="container md-3">
-        <br />
-        <h1 class="text-center">Voluntario</h1>
-        <br />
-        <br />
-        <div class="panel-body ">
-            <div class="row">
+<div class="container md-3">
+    <br />
+    <h1 class="text-center">Voluntario</h1>
+    <br />
+    <br />
+    <div class="panel-body ">
+        <div class="row">
 
-                <div class="col-sm-6 ">
+            <div class="col-sm-6 ">
 
-                    <dl class="dl-horizontal margen">
-                        <dt>
-                            @Html.DisplayNameFor(model => model.name)
-                        </dt>
+                <dl class="dl-horizontal margen">
 
-                        <dd>
-                            @Html.DisplayFor(model => model.name)
-                        </dd>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.name)</p>
+                    </dt>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.last_name)
-                        </dt>
+                    <dd>
+                        <p >@(ViewBag.name)</p> 
+                    </dd>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.last_name)
-                        </dd>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.description)</p>
+                    </dt>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.descripcion)
-                        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.description)
+                    </dd>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.descripcion)
-                        </dd>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.email)</p>
+                    </dt>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.email)
-                        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.email)
+                    </dd>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.email)
-                        </dd>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.address)</p>
+                        
+                    </dt>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.address)
-                        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.address)
+                    </dd>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.address)
-                        </dd>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.phone_number)</p>
+                        
+                    </dt>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.phone_number)
-                        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.phone_number)
+                    </dd>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.phone_number)
-                        </dd>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.state)</p>
+                        
+                    </dt>
 
-                        <dt>
-                            @Html.DisplayNameFor(model => model.state)
-                        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.state)
+                    </dd>
 
-                        <dd>
-                            @Html.DisplayFor(model => model.state)
-                        </dd>
-
-                    </dl>
-                </div>
-                <div class="col-sm-6">
-                    <img src="@(ViewBag.image)" width="65%;" height="60%;" class="img" />
-                </div>
+                </dl>
+            </div>
+            <div class="col-sm-6">
+                <img src="@(ViewBag.image)" width="65%;" height="65%;" class="img rounded-circle"/>
             </div>
         </div>
-        <br />
-   
-        <a href="~/Voluntaries/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
-
-        <br />
-        <br />
     </div>
+    <br />
+
+    <a href="~/Voluntaries/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
+
+    <br />
+    <br />
+</div>
 <hr />
 
 <style>
-    .img{
+    .img {
         margin-top: -1%;
-        margin-left:15%;
+        margin-left: 15%;
     }
 
-    .margen{
-        margin-left:22%;
+    .margen {
+        margin-left: 22%;
     }
 
     #mainNav {
@@ -107,7 +103,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 60%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {
@@ -116,8 +112,5 @@
         width: 55%;
     }
 </style>
-
-
-
 
 

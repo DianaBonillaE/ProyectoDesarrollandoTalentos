@@ -2102,15 +2102,15 @@
     <Content Include="Views\Responsables\DeleteWarning.cshtml" />
     <Content Include="Views\Enrollment\DeleteEnrollment.cshtml" />
     <Content Include="Views\Enrollment\Delete.cshtml" />
+    <Content Include="Views\Albums\Photos.cshtml" />
+    <Content Include="Views\Albums\AddPhoto.cshtml" />
+    <Content Include="Views\Albums\DeleteWarning.cshtml" />
+    <Content Include="Views\Albums\DeletePhoto.cshtml" />
     <Content Include="Views\Voluntaries\Create.cshtml" />
     <Content Include="Views\Voluntaries\Delete.cshtml" />
     <Content Include="Views\Voluntaries\Details.cshtml" />
     <Content Include="Views\Voluntaries\Edit.cshtml" />
     <Content Include="Views\Voluntaries\Index.cshtml" />
-    <Content Include="Views\Albums\Photos.cshtml" />
-    <Content Include="Views\Albums\AddPhoto.cshtml" />
-    <Content Include="Views\Albums\DeleteWarning.cshtml" />
-    <Content Include="Views\Albums\DeletePhoto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.News" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Photo" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Responsable" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Room" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Sponsor" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Student" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Teacher" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
@@ -27,15 +26,16 @@
         <AssociationConnector Association="ProyectoIngenieriaModel.Album_Photo" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.Course_Teacher" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoIngenieriaModel.Voluntary_Activity" ManuallyRouted="false" />
-        <AssociationConnector Association="ProyectoIngenieriaModel.FK_User_Photo1" />
-        <AssociationConnector Association="ProyectoIngenieriaModel.Activity_Sponsor1" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.FK_User_Photo" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Activity_Sponsor" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Course" Width="1.5" PointX="10.375" PointY="6" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.Course_Student" PointX="13.625" PointY="3.75" Width="2.625" />
         <EntityTypeShape EntityType="ProyectoIngenieriaModel.sysdiagrams" Width="1.5" PointX="12.375" PointY="6.75" />
         <AssociationConnector Association="ProyectoIngenieriaModel.FK__Curse_Stu__curse__1AD3FDA41" />
         <AssociationConnector Association="ProyectoIngenieriaModel.FK__Curse_Stu__stude__1BC821DD1" />
-        <AssociationConnector Association="ProyectoIngenieriaModel.Room_Curse1" />
-      </Diagram>
+        <EntityTypeShape EntityType="ProyectoIngenieriaModel.Room" Width="1.5" PointX="12.625" PointY="0.75" />
+        <AssociationConnector Association="ProyectoIngenieriaModel.Course_Room" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

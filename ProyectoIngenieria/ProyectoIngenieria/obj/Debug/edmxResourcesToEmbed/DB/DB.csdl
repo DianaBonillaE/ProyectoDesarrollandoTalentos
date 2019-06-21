@@ -72,16 +72,6 @@
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Student" Relationship="Self.FK__Student__respons__17F790F9" FromRole="Responsable" ToRole="Student" />
   </EntityType>
-  <EntityType Name="Room">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="room_number" Type="Int32" Nullable="false" />
-    <Property Name="location" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="capacity" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Course1" Relationship="ProyectoIngenieriaModel.Room_Curse1" FromRole="Room" ToRole="Course1" />
-  </EntityType>
   <EntityType Name="Sponsor">
     <Key>
       <PropertyRef Name="identification" />
@@ -251,7 +241,6 @@
     <EntitySet Name="News" EntityType="Self.News" />
     <EntitySet Name="Photo" EntityType="Self.Photo" />
     <EntitySet Name="Responsable" EntityType="Self.Responsable" />
-    <EntitySet Name="Room" EntityType="Self.Room" />
     <EntitySet Name="Sponsor" EntityType="Self.Sponsor" />
     <EntitySet Name="Student" EntityType="Self.Student" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" />
@@ -316,8 +305,9 @@
       <End Role="Course1" EntitySet="CourseSet" />
       <End Role="Teacher" EntitySet="Teacher" />
     </AssociationSet>
-    <AssociationSet Name="Room_Curse1" Association="ProyectoIngenieriaModel.Room_Curse1">
-      <End Role="Course1" EntitySet="CourseSet" />
+    <EntitySet Name="Room" EntityType="ProyectoIngenieriaModel.Room" />
+    <AssociationSet Name="Course_Room" Association="ProyectoIngenieriaModel.Course_Room">
+      <End Role="Course" EntitySet="CourseSet" />
       <End Role="Room" EntitySet="Room" />
     </AssociationSet>
   </EntityContainer>
@@ -348,7 +338,7 @@
     <Property Name="end_date" Type="DateTime" Nullable="false" Precision="0" />
     <NavigationProperty Name="Course_Student" Relationship="ProyectoIngenieriaModel.FK__Curse_Stu__curse__1AD3FDA41" FromRole="Course1" ToRole="Course_Student1" />
     <NavigationProperty Name="Teacher" Relationship="ProyectoIngenieriaModel.Course_Teacher" FromRole="Course1" ToRole="Teacher" />
-    <NavigationProperty Name="Room" Relationship="ProyectoIngenieriaModel.Room_Curse1" FromRole="Course1" ToRole="Room" />
+    <NavigationProperty Name="Room" Relationship="ProyectoIngenieriaModel.Course_Room" FromRole="Course" ToRole="Room" />
   </EntityType>
   <EntityType Name="Course_Student">
     <Key>
@@ -399,8 +389,18 @@
     <End Type="ProyectoIngenieriaModel.Course" Role="Course1" Multiplicity="*" />
     <End Type="ProyectoIngenieriaModel.Teacher" Role="Teacher" Multiplicity="*" />
   </Association>
-  <Association Name="Room_Curse1">
-    <End Type="ProyectoIngenieriaModel.Course" Role="Course1" Multiplicity="*" />
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="room_number" Type="Int32" Nullable="false" />
+    <Property Name="location" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="capacity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Course" Relationship="ProyectoIngenieriaModel.Course_Room" FromRole="Room" ToRole="Course" />
+  </EntityType>
+  <Association Name="Course_Room">
+    <End Type="ProyectoIngenieriaModel.Course" Role="Course" Multiplicity="*" />
     <End Type="ProyectoIngenieriaModel.Room" Role="Room" Multiplicity="*" />
   </Association>
 </Schema>

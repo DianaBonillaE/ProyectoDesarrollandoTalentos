@@ -29,14 +29,6 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         @Html.LabelFor(model => model.start_date, htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.start_date, new { htmlAttributes = new { @class = "form-control" } })
@@ -52,10 +44,7 @@
                         </div>
                     </div>
 
-
-
                     <div class="form-group">
-
                         <div class="col-md-10">
                             Seleccione una foto
                             <br />
@@ -76,7 +65,7 @@
                         <div class="col-md-10">
                             Nombre de la imagen
                             <br />
-                            <input type="text" name="nameFile" id="nameFile" />
+                            <input type="text" name="nameFile" id="nameFile" class="form-control" />
 
                         </div>
                         @if (ViewBag.MessagePhotoName != null)
@@ -87,6 +76,14 @@
                                 </div>
                             </div>
                         }
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <textarea id="descripcion" name="descripcion" rows="4" cols="63" style="resize:none;" class="form-control"></textarea>
+                            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+                        </div>
                     </div>
 
                 </div>
@@ -106,10 +103,10 @@
 
                         @Html.LabelFor(model => model.Sponsor, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <select multiple="multiple" style="width:100%" ; id="sponsors" name="sponsors">
+                            <select multiple="multiple" style="width:100%" ; id="sponsors" name="sponsors" class="form-control">
                                 @foreach (var item in ViewBag.sponsors)
                                 {
-                                    <option value="@item.identificacion">@item.name @item.last_name</option>
+                                    <option value="@item.identification">@item.name @item.last_name</option>
                                 }
                                 <option value="0">Ninguno</option>
                             </select>
@@ -119,7 +116,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.User, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <select multiple="multiple" style="width:100%" ; id="users" name="users">
+                            <select multiple="multiple" style="width:100%" ; id="users" name="users" class="form-control">
                                 @foreach (var item in ViewBag.users)
                                 {
                                     <option value="@item.identification">@item.name @item.last_name</option>
@@ -139,7 +136,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Voluntary, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <select multiple="multiple" style="width:100%" ; id="voluntaries" name="voluntaries">
+                            <select multiple="multiple" style="width:100%" ; id="voluntaries" name="voluntaries" class="form-control">
                                 @foreach (var item in ViewBag.voluntaries)
                                 {
                                     <option value="@item.identification">@item.name @item.last_name</option>
@@ -151,6 +148,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-4">
                 </div>
@@ -165,6 +163,7 @@
                     </div>
                 </div>
             </div>
+
             <br />
         </div>
     </div>
@@ -180,7 +179,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {

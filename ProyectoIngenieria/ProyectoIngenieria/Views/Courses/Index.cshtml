@@ -1,38 +1,43 @@
-﻿@model PagedList.IPagedList<ProyectoIngenieria.DB.Activity>
+﻿@model PagedList.IPagedList<ProyectoIngenieria.DB.Course>
 @using PagedList.Mvc;
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
-
 <div class="container md-3">
     <br />
-    <h1 class="text-center">Actividades</h1>
+    <h1 class="text-center">Cursos</h1>
     <br />
     <br />
     <div class="row">
         <div class="col-sm-9"></div>
         <div class="col-sm-3 ">
-            <a href="~/Activities/Create" class="btn btn-primary btn-md text-uppercase">Añadir Nuevo</a>
+            <a href="~/Courses/Create" class="btn btn-primary btn-md text-uppercase">Añadir Nuevo</a>
         </div>
     </div>
     <div class="panel-body">
         <br />
-        <table class="table ">
+        <table class="table">
             <tr class="text-center">
+                <th>
+                    Descripcion
+                </th>
                 <th>
                     Nombre
                 </th>
                 <th>
-                    Fecha inicio
+                    Fecha de inicio
                 </th>
                 <th>
                     Fecha Final
                 </th>
                 <th></th>
             </tr>
+
             @foreach (var item in Model)
             {
                 <tr class="text-center">
-
+                    <td>
+                        @Html.DisplayFor(modelItem => item.description)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.name)
                     </td>
@@ -44,13 +49,11 @@
                     </td>
                     <td>
                         @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
-
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.id })|
-                        @Html.ActionLink("Detalles", "Details", new { id = item.id })
-
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.id })
                     </td>
                 </tr>
             }
+
         </table>
         <br />
         <div class="row">
@@ -59,6 +62,8 @@
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
             </div>
         </div>
+
+
     </div>
     <br />
     <br />
@@ -74,7 +79,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 8%;
+        margin-top: 10%;
     }
 
     .panel {
@@ -83,4 +88,3 @@
         width: 55%;
     }
 </style>
-

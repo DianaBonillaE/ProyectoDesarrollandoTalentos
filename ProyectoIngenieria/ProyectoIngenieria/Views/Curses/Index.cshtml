@@ -1,9 +1,7 @@
-﻿@model PagedList.IPagedList<ProyectoIngenieria.DB.Curse>
+﻿@model PagedList.IPagedList<ProyectoIngenieria.DB.Course>
 @using PagedList.Mvc;
 
-@{
-    ViewBag.Title = "Index";
-}
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
 <div class="container md-3">
     <br />
     <h1 class="text-center">Cursos</h1>
@@ -20,16 +18,16 @@
         <table class="table">
             <tr class="text-center">
                 <th>
-                    Descripcion
+                    <p class="text-muted">Descripción</p>
                 </th>
                 <th>
-                    Nombre
+                    <p class="text-muted">Nombre</p>
                 </th>
                 <th>
-                    Fecha de inicio
+                    <p class="text-muted">Fecha de inicio</p>
                 </th>
                 <th>
-                    Fecha Final
+                    <p class="text-muted">Fecha Final</p>
                 </th>
                 <th></th>
             </tr>
@@ -81,7 +79,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {

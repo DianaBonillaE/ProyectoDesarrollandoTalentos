@@ -1,11 +1,6 @@
-﻿@model ProyectoIngenieria.DB.Curse
+﻿@model ProyectoIngenieria.DB.Course
 
-@{
-    ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
-
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
 @using (Html.BeginForm())
 {
@@ -19,7 +14,7 @@
 
         <div class="container md-3">
             <br />
-            <h1 class="text-center">Actualizar un aula</h1>
+            <h1 class="text-center">Actualizar un curso</h1>
             <br />
             <br />
             <div class="panel-body">
@@ -63,7 +58,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <a href="~/Activities/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
+                                    <a href="~/Curses/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -92,7 +87,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {

@@ -65,16 +65,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Room">
-      <EntityTypeMapping TypeName="ProyectoIngenieriaModel.Room">
-        <MappingFragment StoreEntitySet="Room">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="room_number" ColumnName="room_number" />
-          <ScalarProperty Name="location" ColumnName="location" />
-          <ScalarProperty Name="capacity" ColumnName="capacity" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Sponsor">
       <EntityTypeMapping TypeName="ProyectoIngenieriaModel.Sponsor">
         <MappingFragment StoreEntitySet="Sponsor">
@@ -219,12 +209,22 @@
         <ScalarProperty Name="id" ColumnName="curse_id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="Room_Curse1" TypeName="ProyectoIngenieriaModel.Room_Curse1" StoreEntitySet="Room_Curse">
+    <EntitySetMapping Name="Room">
+      <EntityTypeMapping TypeName="ProyectoIngenieriaModel.Room">
+        <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="capacity" ColumnName="capacity" />
+          <ScalarProperty Name="location" ColumnName="location" />
+          <ScalarProperty Name="room_number" ColumnName="room_number" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Course_Room" TypeName="ProyectoIngenieriaModel.Course_Room" StoreEntitySet="Course_Room">
       <EndProperty Name="Room">
-        <ScalarProperty Name="id" ColumnName="room_id" />
+        <ScalarProperty Name="id" ColumnName="id_room" />
       </EndProperty>
-      <EndProperty Name="Course1">
-        <ScalarProperty Name="id" ColumnName="curse_id" />
+      <EndProperty Name="Course">
+        <ScalarProperty Name="id" ColumnName="id_course" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

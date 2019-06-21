@@ -1,8 +1,6 @@
 ﻿@model ProyectoIngenieria.DB.Activity
 
-@{
-    ViewBag.Title = "Delete";
-}
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
 <div class="container md-3">
     <br />
@@ -37,9 +35,9 @@
                 @foreach (var item in ViewBag.sponsors)
                 {
 
-                    var sel = (Model.Sponsor.Where(ca => ca.identificacion == item.identificacion).Count() > 0) ? "selected" : "ninguno";
+                    var sel = (Model.Sponsor.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "ninguno";
 
-                    <option value="@item.identificacion" @sel>•  @item.name</option>
+                    <option value="@item.identification" @sel>•  @item.name</option>
 
                 }
             </div>

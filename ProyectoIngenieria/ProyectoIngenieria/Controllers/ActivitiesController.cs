@@ -66,8 +66,9 @@ namespace ProyectoIngenieria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,name,descripcion,start_date,end_date")]
-            Activity activity, List<int> sponsors, List<int> users, List<int> voluntaries, HttpPostedFileBase File, string nameFile)
+            Activity activity, List<string> sponsors, List<string> users, List<string> voluntaries, HttpPostedFileBase File, string nameFile)
         {
+
             List<Sponsor> sponsorReturn = db.Sponsor.ToList();
             List<User> userReturn = db.User.ToList();
             List<Voluntary> voluntaryReturn = db.Voluntary.ToList();
@@ -155,6 +156,7 @@ namespace ProyectoIngenieria.Controllers
 
                         db.Activity.Add(activity);
                         db.SaveChanges();
+                       
                     }
                 }
                 return RedirectToAction("/Index");
@@ -193,7 +195,7 @@ namespace ProyectoIngenieria.Controllers
         // POST: Activities/Edit/
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,descripcion,start_date,end_date,photo_id")] Activity activity, List<int> sponsors, List<int> voluntaries, List<int> users, HttpPostedFileBase File, string nameFile)
+        public ActionResult Edit([Bind(Include = "id,name,descripcion,start_date,end_date,photo_id")] Activity activity, List<string> sponsors, List<string> voluntaries, List<string> users, HttpPostedFileBase File, string nameFile)
         {
             List<Sponsor> sponsorReturn = db.Sponsor.ToList();
             List<User> userReturn = db.User.ToList();
