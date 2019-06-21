@@ -16,8 +16,12 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Comments
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        public ActionResult Index(string message, int page = 1, int pageSize = 4)
         {
+            if(message != null)
+            {
+                ViewBag.message = message;
+            }
             List<Comments> commentList = db.Comments.ToList();
             PagedList<Comments> model = new PagedList<Comments>(commentList, page, pageSize);
             return View(model);
@@ -55,7 +59,7 @@ namespace ProyectoIngenieria.Controllers
                 comments.state = false;
                 db.Comments.Add(comments);
                 db.SaveChanges();
-                ViewBag.success = "Su comentario ha sido enviado con éxito";
+                ViewBag.success = "Su comentario ha sido enviado exitosamente";
                 return View();
             }
 
@@ -88,7 +92,7 @@ namespace ProyectoIngenieria.Controllers
                 db.Entry(comments).State = EntityState.Modified;
                 comments.state = state;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "El comentario se editó exitosamente" });
             }
             return View(comments);
         }
@@ -116,7 +120,7 @@ namespace ProyectoIngenieria.Controllers
             Comments comments = db.Comments.Find(id);
             db.Comments.Remove(comments);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { message = "El comentario se eliminó exitosamente" });
         }
 
         protected override void Dispose(bool disposing)

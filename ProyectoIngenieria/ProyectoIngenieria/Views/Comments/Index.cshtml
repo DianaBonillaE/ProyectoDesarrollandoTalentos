@@ -11,6 +11,14 @@
 
 
     <div class="panel-body">
+        @if (ViewBag.message != null)
+        {
+            <div class="alert alert-success text-center alert-dismissible">
+                <h4 class="alert-heading"><i class="icon fa fa-check"></i> ¡Correcto!</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                <h6>@ViewBag.message</h6>
+            </div>
+        }
         <br />
         <table class="table">
             <tr>
