@@ -17,8 +17,12 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Activities
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        public ActionResult Index(string message, int page = 1, int pageSize = 4)
         {
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
             List<Activity> activityList = db.Activity.ToList();
             PagedList<Activity> model = new PagedList<Activity>(activityList, page, pageSize);
             return View(model);
@@ -51,14 +55,11 @@ namespace ProyectoIngenieria.Controllers
         // GET: Activities/Create
         public ActionResult Create()
         {
-            List<Sponsor> sponsors = db.Sponsor.ToList();
-            ViewBag.sponsors = sponsors;
+            ViewBag.sponsors = db.Sponsor.ToList();
 
-            List<User> users = db.User.ToList();
-            ViewBag.users = users;
+            ViewBag.users = db.User.ToList();
 
-            List<Voluntary> voluntaries = db.Voluntary.ToList();
-            ViewBag.voluntaries = voluntaries;
+            ViewBag.voluntaries = db.Voluntary.ToList();
             return View();
         }
 
@@ -69,12 +70,15 @@ namespace ProyectoIngenieria.Controllers
             Activity activity, List<string> sponsors, List<string> users, List<string> voluntaries, HttpPostedFileBase File, string nameFile)
         {
 
+            //refill the lists
             List<Sponsor> sponsorReturn = db.Sponsor.ToList();
             List<User> userReturn = db.User.ToList();
             List<Voluntary> voluntaryReturn = db.Voluntary.ToList();
 
             if (ModelState.IsValid)
             {
+
+                //if the sponsors list are fill
                 if (sponsors != null)
                 {
                     if (sponsors.Count > 0)
@@ -88,14 +92,49 @@ namespace ProyectoIngenieria.Controllers
                         }
                     }
                 }
+
+                //if the users list are empty
                 if (users == null)
                 {
-                    ViewBag.MessageUsers = "Debe seleccionar al menos un usuario";
+                    //if the sponsors list are fill so fill the viewbag
+                    if (sponsors != null)
+                    {
+                        System.Collections.IList listSponsors = sponsors;
+                        for (int i = 0; i < listSponsors.Count; i++)
+                        {
+                            string id = "" + listSponsors[i];
+                            Sponsor sponsor = db.Sponsor.Find(id);
+                            activity.Sponsor.Add(sponsor);
+                        }
+                    }
+                    //if the voluntaries list are fill so fill the viewbag
+                    if (voluntaries != null)
+                    {
+                        System.Collections.IList listVoluntaries = voluntaries;
+                        for (int i = 0; i < listVoluntaries.Count; i++)
+                        {
+                            string id = "" + listVoluntaries[i];
+                            Voluntary voluntary = db.Voluntary.Find(id);
+                            activity.Voluntary.Add(voluntary);
+                        }
+                    }
+                    //if the nameFile is different of null so fill the viewbag
+                    if (nameFile != "")
+                    {
+                        ViewBag.name = nameFile;
+                    }
+
+
+                    //refill the lists
                     ViewBag.sponsors = sponsorReturn;
                     ViewBag.users = userReturn;
                     ViewBag.voluntaries = voluntaryReturn;
-                    return View();
+
+                    ViewBag.message = "Debe seleccionar al menos un usuario";
+                    return View(activity);
                 }
+
+                //if the user list are fill
                 else
                 {
                     System.Collections.IList listUsers = users;
@@ -106,7 +145,9 @@ namespace ProyectoIngenieria.Controllers
                         activity.User.Add(user);
                     }
                 }
-                if (sponsors != null)
+
+                //if the voluntaries are fill 
+                if (voluntaries != null)
                 {
                     if (voluntaries.Count > 0)
                     {
@@ -121,29 +162,42 @@ namespace ProyectoIngenieria.Controllers
                     }
                 }
 
+                //if the photo file is empty
                 if (File == null)
                 {
-                    ViewBag.MessagePhoto = "Debe ingresar una imagen";
-                    ViewBag.MessageList = "Debe seleccionar datos";
+                    //if the name file is different of null fill the viewbag
+                    if (nameFile != "")
+                    {
+                        ViewBag.name = nameFile;
+                    }
+                    
+                    //refill the lists
                     ViewBag.sponsors = sponsorReturn;
                     ViewBag.users = userReturn;
                     ViewBag.voluntaries = voluntaryReturn;
-                    return View();
+                    ViewBag.message = "Debe ingresar una imagen";
+                    return View(activity);
                 }
+
+                //if the File is fill
                 else
                 {
-
+                    //but the name file is empty
                     if (nameFile == "")
                     {
-                        ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
-                        ViewBag.MessageList = "Debe seleccionar datos";
+                        //refill the lists
                         ViewBag.sponsors = sponsorReturn;
                         ViewBag.users = userReturn;
                         ViewBag.voluntaries = voluntaryReturn;
-                        return View();
+                        ViewBag.message = "Debe ingresar un nombre de imagen";
+                        return View(activity);
                     }
+
+                    //if the file is fill and name too
                     else
                     {
+
+                        //add the image in the folder, in the activity and database
                         var extension = Path.GetExtension(File.FileName);
                         var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
 
@@ -156,10 +210,10 @@ namespace ProyectoIngenieria.Controllers
 
                         db.Activity.Add(activity);
                         db.SaveChanges();
-                       
+
                     }
                 }
-                return RedirectToAction("/Index");
+                return RedirectToAction("Index", new { message = "La actividad se ingresó exitosamente" });
             }
 
 
@@ -167,8 +221,13 @@ namespace ProyectoIngenieria.Controllers
         }
 
         // GET: Activities/Edit/
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string message,int? id)
         {
+
+            if(message != null)
+            {
+                ViewBag.message = message;
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -197,10 +256,6 @@ namespace ProyectoIngenieria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name,descripcion,start_date,end_date,photo_id")] Activity activity, List<string> sponsors, List<string> voluntaries, List<string> users, HttpPostedFileBase File, string nameFile)
         {
-            List<Sponsor> sponsorReturn = db.Sponsor.ToList();
-            List<User> userReturn = db.User.ToList();
-            List<Voluntary> voluntaryReturn = db.Voluntary.ToList();
-
             if (ModelState.IsValid)
             {
 
@@ -209,6 +264,7 @@ namespace ProyectoIngenieria.Controllers
                 Activity act = db.Activity.Include(a => a.Sponsor)
                     .Include(a => a.Voluntary).Include(a => a.User).ToList().Find(ca => ca.id == activity.id);
                 var imageAct = db.Photo.Find(act.photo_id);
+
                 //se ejecuta si hubo un cambio de imagen
                 if (File != null)
                 {
@@ -228,6 +284,7 @@ namespace ProyectoIngenieria.Controllers
 
                     db.SaveChanges();
                 }
+
                 if (nameFile != imageAct.name)
                 {
                     var Photo = db.Photo.Find(act.photo_id);
@@ -238,7 +295,6 @@ namespace ProyectoIngenieria.Controllers
 
                 act.Sponsor.Clear();
                 act.Voluntary.Clear();
-                act.User.Clear();
 
                 if (sponsors != null)
                 {
@@ -266,22 +322,29 @@ namespace ProyectoIngenieria.Controllers
                         }
                     }
                 }
-
-                if (users.Count > 0)
+                if (users == null)
                 {
-                    System.Collections.IList listUsers = users;
-                    for (int i = 0; i < listUsers.Count; i++)
+                    return RedirectToAction("Edit/" + activity.id, new { message = "Debe seleccionar almenos un usuario" });
+                }
+                else
+                {
+                    if (users.Count > 0)
                     {
-                        string id = "" + listUsers[i];
-                        User s = db.User.Find(id);
-                        act.User.Add(s);
+                        act.User.Clear();
+                        System.Collections.IList listUsers = users;
+                        for (int i = 0; i < listUsers.Count; i++)
+                        {
+                            string id = "" + listUsers[i];
+                            User s = db.User.Find(id);
+                            act.User.Add(s);
+                        }
                     }
                 }
 
 
                 db.SaveChanges();
 
-                return RedirectToAction("/Index");
+                return RedirectToAction("Index", new { message = "Se actualizó la actividad exitosamente" });
 
             }
 
@@ -333,7 +396,7 @@ namespace ProyectoIngenieria.Controllers
             db.Activity.Remove(act);
             db.SaveChanges();
 
-            return RedirectToAction("/Index");
+            return RedirectToAction("Index",new { message = "La actividad se eliminó exitosamente" });
         }
 
         protected override void Dispose(bool disposing)

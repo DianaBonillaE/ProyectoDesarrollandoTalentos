@@ -14,8 +14,17 @@
         <br />
         <h1 class="text-center">Ingresar una Actividad</h1>
         <br />
-        <br />
+
         <div class="panel-body">
+            @if (ViewBag.message != null)
+            {
+                <div class="alert alert-danger text-center alert-dismissible">
+                    <h4 class="alert-heading"><i class="icon fa fa-times"></i> ¡Error!</h4>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <h6>@ViewBag.message</h6>
+                </div>
+            }
+            <br />
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-5">
@@ -50,14 +59,6 @@
                             <br />
                             <input type="file" name="File" id="File" />
                         </div>
-                        @if (ViewBag.MessagePhoto != null)
-                        {
-                            <div class="col-md-10">
-                                <div class="alert alert-danger">
-                                    @ViewBag.MessagePhoto
-                                </div>
-                            </div>
-                        }
                     </div>
 
                     <div class="form-group">
@@ -65,23 +66,23 @@
                         <div class="col-md-10">
                             Nombre de la imagen
                             <br />
-                            <input type="text" name="nameFile" id="nameFile" class="form-control" />
+                            @if (ViewBag.message == null)
+                            {
+                                <input type="text" name="nameFile" id="nameFile" class="form-control" />
+                            }
+                            else
+                            {
+                                <input type="text" name="nameFile" id="nameFile" class="form-control" value="@(ViewBag.name)"/>
+                            }
 
                         </div>
-                        @if (ViewBag.MessagePhotoName != null)
-                        {
-                            <div class="col-md-10">
-                                <div class="alert alert-danger">
-                                    @ViewBag.MessagePhotoName
-                                </div>
-                            </div>
-                        }
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            <textarea id="descripcion" name="descripcion" rows="4" cols="63" style="resize:none;" class="form-control"></textarea>
+
+                            @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -89,24 +90,22 @@
                 </div>
                 <div class="col-md-5">
                     <div class="form-group">
-                        @if (ViewBag.MessagePhotoName != null || ViewBag.MessagePhoto != null)
-                        {
-                            <div class="row">
-                                <div class="col-md-3"></div>
-                                <div class="col-md-10">
-                                    <div class="alert alert-danger align-content-center">
-                                        @ViewBag.MessageList
-                                    </div>
-                                </div>
-                            </div>
-                        }
 
-                        @Html.LabelFor(model => model.Sponsor, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
+                            Patrocinadores
                             <select multiple="multiple" style="width:100%" ; id="sponsors" name="sponsors" class="form-control">
                                 @foreach (var item in ViewBag.sponsors)
                                 {
-                                    <option value="@item.identification">@item.name @item.last_name</option>
+                                    if (ViewBag.message == null)
+                                    {
+                                        <option value="@item.identification">@item.name @item.last_name</option>
+                                    }
+                                    else
+                                    {
+                                        var sel = (Model.Sponsor.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
+
+                                        <option value="@item.identification" @sel>@item.name</option>
+                                    }
                                 }
                                 <option value="0">Ninguno</option>
                             </select>
@@ -114,32 +113,44 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(model => model.User, htmlAttributes: new { @class = "control-label col-md-2" })
+
                         <div class="col-md-10">
+                            Usuarios
                             <select multiple="multiple" style="width:100%" ; id="users" name="users" class="form-control">
                                 @foreach (var item in ViewBag.users)
                                 {
-                                    <option value="@item.identification">@item.name @item.last_name</option>
+                                    if (ViewBag.message == null)
+                                    {
+                                        <option value="@item.identification">@item.name @item.last_name</option>
+                                    }
+                                    else
+                                    {
+                                        var sel = (Model.User.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
+
+                                        <option value="@item.identification" @sel>@item.name</option>
+                                    }
                                 }
                             </select>
-                            @if (ViewBag.MessageUsers != null)
-                            {
-
-                                <div class="alert alert-danger">
-                                    @ViewBag.MessageUsers
-                                </div>
-
-                            }
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Voluntary, htmlAttributes: new { @class = "control-label col-md-2" })
+
                         <div class="col-md-10">
+                            Voluntarios
                             <select multiple="multiple" style="width:100%" ; id="voluntaries" name="voluntaries" class="form-control">
                                 @foreach (var item in ViewBag.voluntaries)
                                 {
-                                    <option value="@item.identification">@item.name @item.last_name</option>
+                                    if (ViewBag.message == null)
+                                    {
+                                        <option value="@item.identification">@item.name @item.last_name</option>
+                                    }
+                                    else
+                                    {
+                                        var sel = (Model.Voluntary.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
+
+                                        <option value="@item.identification" @sel>@item.name</option>
+                                    }
                                 }
                                 <option value="0">Ninguno</option>
                             </select>
