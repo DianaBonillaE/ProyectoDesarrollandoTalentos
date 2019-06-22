@@ -41,6 +41,8 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.image = Path.Combine("/Static/", sponsor.Photo.image);
             return View(sponsor);
         }
 
@@ -254,6 +256,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.image = Path.Combine("/Static/", sponsor.Photo.image);
             return View(sponsor);
         }
 

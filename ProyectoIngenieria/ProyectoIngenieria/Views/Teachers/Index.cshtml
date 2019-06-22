@@ -6,6 +6,14 @@
     <br />
     <h1 class="text-center">Profesores</h1>
     <br />
+    @if (ViewBag.message != null)
+    {
+        <div class="alert alert-success text-center alert-dismissible">
+            <h4 class="alert-heading"><i class="icon fa fa-check"></i> ¡Correcto!</h4>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+            <h6>@ViewBag.message</h6>
+        </div>
+    }
     <br />
     <div class="row">
         <div class="col-sm-9"></div>
@@ -13,8 +21,8 @@
             <a href="~/Teachers/Create" class="btn btn-primary btn-md text-uppercase">Añadir Nuevo</a>
         </div>
     </div>
+    <br />
     <div class="panel-body">
-        <br />
         <table class="table">
             <tr class="text-center">
                 <th>

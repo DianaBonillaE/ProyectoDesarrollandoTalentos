@@ -4,89 +4,126 @@
 
 <div class="container md-3">
     <br />
-    <h1 class="text-center">¿Está seguro de eliminar la actividad?</h1>
+    <h3 class="text-center">¿Está seguro que desea el eliminar la actividad?</h3>
+    <br />
+    <br />
+    <div class="panel-body ">
+        <div class="row">
+
+            <div class="col-sm-6 ">
+
+                <dl class="dl-horizontal margen">
+
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.name)</p>
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.name)
+                    </dd>
+
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.descripcion)</p>
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.descripcion)
+                    </dd>
 
 
-    <div class="panel-body">
-        <br />
+                    <dt>
+                        <p class="text-muted">Patrocinadores</p>
+                    </dt>
+                    <dd>
+                        @if (ViewBag.sponsors.Count == 0)
+                        {
+                            <p>Esta actividad no cuenta con patrocinadores</p>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.sponsors)
+                            {
+                                <p>@item.name</p>
+                            }
+                        }
 
-        <div class="row" style="text-align: center;">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-2">
+                    </dd>
 
-                @Html.DisplayNameFor(model => model.name)
-                <br />
-                •  @Html.DisplayFor(model => model.name)
+                    <dt>
+                        <p class="text-muted">Usuarios</p>
+                    </dt>
+                    <dd>
+                        @if (ViewBag.users.Count == 0)
+                        {
+                            <p>Esta actividad no cuenta con patrocinadores</p>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.users)
+                            {
+                                <p>@item.name @item.last_name</p>
+                            }
+                        }
+                        </dd>
+
+                    <dt>
+                        <p class="text-muted">Voluntarios</p>
+                    </dt>
+                    <dd>
+                        @if (ViewBag.voluntaries.Count == 0)
+                        {
+                            <p>Esta actividad no cuenta con patrocinadores</p>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.voluntaries)
+                            {
+                                <p>@item.name @item.last_name</p>
+                            }
+                        }
+                        </dd>
+
+                </dl>
             </div>
-
-
-            <div class="col-sm-2">
-                @Html.DisplayNameFor(model => model.descripcion)
-                <br />
-                •  @Html.DisplayFor(model => model.descripcion)
-            </div>
-        </div>
-        <div class="row" style="margin-top: 5%; text-align: center;">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Sponsor)
-
-                <br />
-                @foreach (var item in ViewBag.sponsors)
-                {
-
-                    var sel = (Model.Sponsor.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "ninguno";
-
-                    <option value="@item.identification" @sel>•  @item.name</option>
-
-                }
-            </div>
-            <div class="col-sm-2">
-                @Html.DisplayNameFor(model => model.User)
-
-                <br />
-                @foreach (var item in ViewBag.users)
-                {
-                    var sel = (Model.User.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "Ninguno";
-
-                    <option value="@item.identification" @sel>•  @item.name @item.last_name</option>
-                }
-            </div>
-            <div class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Voluntary)
-
-                <br />
-                @foreach (var item in ViewBag.voluntaries)
-                {
-                    var sel = (Model.Voluntary.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "Ninguno";
-
-                    <option value="@item.identification" @sel>•  @item.name @item.last_name</option>
-                }
-            </div>
-        </div>
-
-        <div class="row" style="margin-top:2%;">
-            <div class="col-md-4">
-            </div>
-            <div class="form-group">
-                <div class="col-md-2">
-                    <a href="/Activities/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-2">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-
-                        <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
-                    }
-                </div>
+            <div class="col-sm-6">
+                <img src="@(ViewBag.image)" width="65%;" height="65%;" class="img rounded-circle" />
             </div>
         </div>
     </div>
+    <br />
+
+    <div class="row" style="margin-top:2%;">
+        <div class="col-md-4">
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <a href="/Activities/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
+                }
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
 </div>
+<hr />
+
 <style>
+    .img {
+        margin-top: -1%;
+        margin-left: 15%;
+    }
+
+    .margen {
+        margin-left: 22%;
+    }
 
     #mainNav {
         background-color: rgb(46,49,146);
@@ -94,8 +131,8 @@
 
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-        width: 97%;
-        margin-top: 10%;
+        width: 60%;
+        margin-top: 8%;
     }
 
     .panel {
@@ -103,8 +140,5 @@
         transition: box-shadow 0.5s;
         width: 55%;
     }
-
-    .form-group {
-        align-content: center;
-    }
 </style>
+

@@ -9,8 +9,16 @@
         <br />
         <h1 class="text-center">Editar un Profesor</h1>
         <br />
-        <br />
         <div class="panel-body">
+            @if (ViewBag.message != null)
+            {
+                <div class="alert alert-danger text-center alert-dismissible">
+                    <h4 class="alert-heading"><i class="icon fa fa-times"></i> ¡Error!</h4>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <h6>@ViewBag.message</h6>
+                </div>
+            }
+            <br />
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-5">

@@ -27,20 +27,6 @@ namespace ProyectoIngenieria.Controllers
             return View(model);
         }
 
-        // GET: Comments/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Comments comments = db.Comments.Find(id);
-            if (comments == null)
-            {
-                return HttpNotFound();
-            }
-            return View(comments);
-        }
 
         // GET: Comments/Create
         public ActionResult Create()

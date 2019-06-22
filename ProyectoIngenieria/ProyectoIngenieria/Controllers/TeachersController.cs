@@ -17,8 +17,13 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Teachers
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        public ActionResult Index(string message,int page = 1, int pageSize = 4)
         {
+
+            if(message!= null)
+            {
+                ViewBag.message = message;
+            }
             List<Teacher> teacherList = db.Teacher.ToList();
             PagedList<Teacher> model = new PagedList<Teacher>(teacherList, page, pageSize);
             return View(model);
@@ -36,19 +41,21 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.image = Path.Combine("/Static/", teacher.Photo.image);
             return View(teacher);
         }
 
         // GET: Teachers/Create
-        public ActionResult Create()
+        public ActionResult Create(string message)
         {
-            ViewBag.photo_id = new SelectList(db.Photo, "id", "name");
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
             return View();
         }
 
         // POST: Teachers/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "identification,name,last_name,address,state,description,email,phone_number,photo_id,link")] Teacher teacher, Boolean state, HttpPostedFileBase File, string nameFile)
@@ -58,27 +65,24 @@ namespace ProyectoIngenieria.Controllers
                 var query = (from r in db.Teacher where r.identification == teacher.identification select r).Count();
                 if (query == 1)
                 {
-                    ViewBag.exists = "El profesor con la identificación "+teacher.identification+" ya se encuentra registrado";
-                    return View();
+                    return RedirectToAction("Create", new { message = "El profesor con la identificación " + teacher.identification + " ya se encuentra registrado" });
                 }
                 else
                 {
-
                     teacher.state = state;
 
                     if (File == null)
                     {
-                        ViewBag.MessagePhoto = "Debe ingresar una imagen";
-                        return View();
+                        ViewBag.message = "Debe ingresar una imagen";
+                        return View(teacher);
                     }
                     else
                     {
 
                         if (nameFile == "")
                         {
-                            ViewBag.MessagePhotoName = "Debe ingresar un nombre";
-                            ViewBag.MessagePhoto = "Debe ingresar una imagen";
-                            return View();
+                            ViewBag.message = "Debe ingresar un nombre para la imagen";
+                            return View(teacher);
                         }
                         else
                         {
@@ -98,7 +102,7 @@ namespace ProyectoIngenieria.Controllers
                     }
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "El profesor ha sido registrado exitosamente" });
             }
             return View(teacher);
         }
@@ -160,7 +164,8 @@ namespace ProyectoIngenieria.Controllers
 
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "El profesor ha sido actualizado exitosamente" });
+
             }
 
             return View(teacher);
@@ -179,6 +184,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.image = Path.Combine("/Static/", teacher.Photo.image);
             return View(teacher);
         }
 
@@ -194,12 +200,12 @@ namespace ProyectoIngenieria.Controllers
             //eliminar imagen
             var locationStatic = Path.Combine(Server.MapPath("/Static/"));
             System.IO.File.Delete(locationStatic + Photo.image);
-
+            teacher.Course.Clear();
             db.Photo.Remove(Photo);
             db.Teacher.Remove(teacher);
 
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { message = "El profesor ha sido eliminado exitosamente" });
 
         }
 

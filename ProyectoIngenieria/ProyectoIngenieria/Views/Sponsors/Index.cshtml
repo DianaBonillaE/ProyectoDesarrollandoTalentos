@@ -40,13 +40,7 @@
                     <p class="text-muted">Apellido o Tipo</p>
                 </th>
                 <th>
-                    <p class="text-muted">Correo</p>
-                </th>
-                <th>
                     <p class="text-muted">Teléfono</p>
-                </th>
-                <th>
-                    <p class="text-muted">Descripción</p>
                 </th>
                 <th></th>
             </tr>
@@ -61,16 +55,11 @@
                         @Html.DisplayFor(modelItem => item.last_name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.email)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.phone_number)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.description)
-                    </td>
-                    <td>
                         @Html.ActionLink("Editar", "Edit", new { id = item.identification }) |
+                        @Html.ActionLink("Detalles", "Details", new { id = item.identification }) |
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.identification })
                     </td>
                 </tr>

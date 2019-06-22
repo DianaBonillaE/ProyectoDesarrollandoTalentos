@@ -41,6 +41,7 @@ namespace ProyectoIngenieria.Controllers
             List<Voluntary> voluntaries = activity.Voluntary.ToList();
             List<User> users = activity.User.ToList();
 
+            ViewBag.image = Path.Combine("/Static/", activity.Photo.image);
             ViewBag.sponsors = sponsors;
             ViewBag.voluntaries = voluntaries;
             ViewBag.users = users;
@@ -358,12 +359,13 @@ namespace ProyectoIngenieria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Activity activity = db.Activity.Include(a => a.Sponsor).Include(a => a.Voluntary).Include(a => a.User).ToList().Find(c => c.id == id);
+            Activity activity = db.Activity.Include(a => a.Sponsor).Include(a => a.Voluntary).Include(a => a.User).Include(a => a.Photo).ToList().Find(c => c.id == id);
 
             List<Sponsor> sponsors = activity.Sponsor.ToList();
             List<Voluntary> voluntaries = activity.Voluntary.ToList();
             List<User> users = activity.User.ToList();
 
+            ViewBag.image = Path.Combine("/Static/", activity.Photo.image);
             ViewBag.sponsors = sponsors;
             ViewBag.voluntaries = voluntaries;
             ViewBag.users = users;

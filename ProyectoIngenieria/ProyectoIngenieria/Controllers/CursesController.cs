@@ -39,6 +39,9 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.teachers = curse.Teacher.ToList();
+            ViewBag.rooms = curse.Room.ToList();
             return View(curse);
         }
 

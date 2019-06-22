@@ -4,70 +4,82 @@
 
 <div class="container md-3">
     <br />
-    <h1 class="text-center">¿Esta seguro que desea eliminar este comentario?</h1>
+    <h3 class="text-center">¿Está seguro que desea el eliminar el comentario?</h3>
     <br />
     <br />
-    <div class="panel-body">
-        <div class="row" style="text-align: center;">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-2">
+    <div class="panel-body ">
+        <div class="row">
 
-                @Html.DisplayNameFor(model => model.name)
-                <br />
-                • @Html.DisplayFor(model => model.name)
-            </div>
+            <dl class="dl-horizontal margen">
 
-            <div class="col-sm-2">
-                @Html.DisplayNameFor(model => model.description)
-                <br />
-                •@Html.DisplayFor(model => model.description)
-            </div>
+                <dt>
+                    <p class="text-muted">@Html.DisplayNameFor(model => model.name)</p>
+                </dt>
 
-            <div class="col-sm-2">
+                <dd>
+                    @Html.DisplayFor(model => model.name)
+                </dd>
 
-                @Html.DisplayNameFor(model => model.state)
-                <br />
-                @if (Model.state == true)
-                {
-                    <a> • Mostrado</a>
-                }
-                else
-                {
-                    <a>• No mostrado</a>
-                }
+                <dt>
+                    <p class="text-muted">@Html.DisplayNameFor(model => model.description)</p>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.description)
+                </dd>
+                <dt>
+                    <p class="text-muted">@Html.DisplayNameFor(model => model.state)</p>
+                </dt>
+                <dd>
+                    @if (Model.state == true)
+                    {
+                        <a>Mostrado</a>
+                    }
+                    else
+                    {
+                        <a>No mostrado</a>
+                    }
+                </dd>
+            </dl>
+
+        </div>
+    </div>
+    <br />
+
+    <div class="row" style="margin-top:2%;">
+        <div class="col-md-4">
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <a href="/Comments/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-        <div class="row" style="margin-top:2%;">
-            <div class="col-md-4">
-            </div>
-            <div class="form-group">
-                <div class="col-md-2">
-                    <a href="/Comments/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-2">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-
-                        <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
-                    }
-                </div>
+                    <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
+                }
             </div>
         </div>
     </div>
 
+    <br />
+    <br />
 </div>
-
-
-<br />
-
-}
 <hr />
 
 <style>
+    .img {
+        margin-top: -1%;
+        margin-left: 15%;
+    }
+
+    .margen {
+        margin-left: 12%;
+        margin-right: 5%;
+    }
 
     #mainNav {
         background-color: rgb(46,49,146);
@@ -75,8 +87,8 @@
 
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-        width: 97%;
-        margin-top: 10%;
+        width: 60%;
+        margin-top: 8%;
     }
 
     .panel {
@@ -84,8 +96,6 @@
         transition: box-shadow 0.5s;
         width: 55%;
     }
-
-    .form-group {
-        align-content: center;
-    }
 </style>
+
+

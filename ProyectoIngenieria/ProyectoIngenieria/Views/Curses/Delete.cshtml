@@ -1,119 +1,142 @@
 ﻿@model ProyectoIngenieria.DB.Course
-
-@{
-    ViewBag.Title = "Delete";
-}
-
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
 <div class="container md-3">
     <br />
-    <h1 class="text-center">¿Está seguro de eliminar el Curso?</h1>
+    <h3 class="text-center">¿Está seguro que desea eliminar el curso?</h3>
+    <br />
+    <br />
+    <div class="panel-body ">
+        <div class="row">
 
+            <div class="col-sm-6">
 
-    <div class="panel-body">
-        <br />
+                <dl class="dl-horizontal margen">
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.description)</p>
+                    </dt>
 
-        <div class="row" style="text-align: center;">
-            <div class="col-sm-1"></div>
+                    <dd>
+                        @Html.DisplayFor(model => model.description)
+                    </dd>
 
-                <div class="col-sm-3">
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.name)</p>
+                    </dt>
 
-                    @Html.DisplayNameFor(model => model.description)
-                    <br />
-                    •  @Html.DisplayFor(model => model.description)
-                </div>
+                    <dd>
+                        @Html.DisplayFor(model => model.name)
+                    </dd>
 
-                <div class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.name)
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.start_date)</p>
+                    </dt>
 
-                    <br />
-                    • @Html.DisplayFor(model => model.name)
-                </div>
+                    <dd>
+                        @Html.DisplayFor(model => model.start_date)
+                    </dd>
 
-                <div class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.start_date)
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.end_date)</p>
+                    </dt>
 
-                    <br />
-                    • @Html.DisplayFor(model => model.start_date)
-                </div>
-
-                <div class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.end_date)
-                    <br />
-                    • @Html.DisplayFor(model => model.end_date)
-                </div>
-
+                    <dd>
+                        @Html.DisplayFor(model => model.end_date)
+                    </dd>
+                </dl>
             </div>
-        <div class="row" style="margin-top:2%;">
-            <div class="col-md-4">
-            </div>
-            <div class="form-group">
-                <div class="col-md-2">
-                    <a href="~/Curses/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-2">
-                    @using (Html.BeginForm())
-                    {
-                        @Html.AntiForgeryToken()
-
-                        <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
-                    }
-                </div>
-            </div>
-
-            <div class="form-group">
-
-                <div class="col-md-10">
-                    Aulas
-                   
-                        @foreach (var item in ViewBag.rooms)
+            <div class="col-sm-6">
+                <dl class="dl-horizontal margen">
+                    <dt>
+                        <p class="text-muted">Profesores</p>
+                    </dt>
+                    <dd>
+                        @if (ViewBag.teachers.Count == 0)
                         {
-                            var sel = (Model.Room.Where(ca => ca.id == item.id).Count() > 0) ? "selected" : "";
-
-                            <option value="@item.id" @sel>Número aula: @item.room_number | Capacidad: @item.capacity</option>
-
+                            <p>Este curso no cuenta con profesores</p>
                         }
-                  
-                </div>
-            </div>
-
-            <div class="form-group">
-
-                <div class="col-md-10">
-                    Profesor
-                   
-                        @foreach (var item in ViewBag.teachers)
+                        else
                         {
-                            var sel = (Model.Teacher.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "";
-                            <option value=@item.identification @sel>@item.name @item.last_name</option>
+                            foreach (var item in ViewBag.teachers)
+                            {
+                                <p>@item.name @item.last_name</p>
+                            }
                         }
-                   
-                </div>
+                    </dd>
+                    <dt>
+                        <p class="text-muted">Aulas</p>
+                    </dt>
+                    <dd>
+                        @if (ViewBag.rooms.Count == 0)
+                        {
+                            <p>Este curso no cuenta con aulas</p>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.rooms)
+                            {
+                                <p>Número aula: @item.room_number | Capacidad: @item.capacity</p>
+                            }
+                        }
+                    </dd>
+
+
+                </dl>
             </div>
-        </div>
+
         </div>
     </div>
-  
-    <style>
+    <br />
 
-        #mainNav {
-            background-color: rgb(46,49,146);
-        }
+    <div class="row" style="margin-top:2%;">
+        <div class="col-md-4">
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <a href="/Curses/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-        .md-3 {
-            box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-            width: 97%;
-            margin-top: 10%;
-        }
+                    <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
+                }
+            </div>
+        </div>
+    </div>
 
-        .panel {
-            border-radius: 0 !important;
-            transition: box-shadow 0.5s;
-            width: 55%;
-        }
+    <br />
+    <br />
+</div>
+<hr />
 
-        .form-group {
-            align-content: center;
-        }
-    </style>
+<style>
+    .img {
+        margin-top: -1%;
+        margin-left: 15%;
+    }
+
+    .margen {
+        margin-left: 22%;
+    }
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 60%;
+        margin-top: 8%;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+</style>
+
+

@@ -1,66 +1,123 @@
 ﻿@model ProyectoIngenieria.DB.Course
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
+<div class="container md-3">
+    <br />
+    <h3 class="text-center">Curso: @Html.DisplayFor(model => model.name)</h3>
+    <br />
+    <br />
+    <div class="panel-body ">
+        <div class="row">
 
-@{
-    ViewBag.Title = "Details";
-}
+            <div class="col-sm-6">
 
-<h2>Details</h2>
+                <dl class="dl-horizontal margen">
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.description)</p>
+                    </dt>
 
-<div>
-    <h4>Curse</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.description)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.name)</p>
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.name)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.start_date)</p>
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.start_date)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.start_date)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.start_date)
-        </dd>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.end_date)</p>
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.end_date)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.end_date)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-sm-6">
+                <dl class="dl-horizontal margen">
+                    <dt>
+                        <p class="text-muted">Profesores</p>
+                    </dt>
+                    <dd>
+                        @if (ViewBag.teachers.Count == 0)
+                        {
+                            <p>Este curso no cuenta con profesores</p>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.teachers)
+                            {
+                                <p>@item.name @item.last_name</p>
+                            }
+                        }
+                    </dd>
+                    <dt>
+                        <p class="text-muted">Aulas</p>
+                    </dt>
+                    <dd>
+                        @if (ViewBag.rooms.Count == 0)
+                        {
+                            <p>Este curso no cuenta con aulas</p>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.rooms)
+                            {
+                                <p>Número aula: @item.room_number | Capacidad: @item.capacity</p>
+                            }
+                        }
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.end_date)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Curse1.description)
-        </dt>
+                </dl>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Curse1.description)
-        </dd>
+        </div>
+    </div>
+    <br />
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Curse2.description)
-        </dt>
+    <a href="~/Curses/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
 
-        <dd>
-            @Html.DisplayFor(model => model.Curse2.description)
-        </dd>
-
-    </dl>
+    <br />
+    <br />
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<hr />
+
+<style>
+    .img {
+        margin-top: -1%;
+        margin-left: 15%;
+    }
+
+    .margen {
+        margin-left: 22%;
+    }
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 60%;
+        margin-top: 8%;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+</style>
+

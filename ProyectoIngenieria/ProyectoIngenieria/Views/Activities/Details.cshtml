@@ -1,85 +1,111 @@
 ﻿@model ProyectoIngenieria.DB.Activity
 
-@{
-    ViewBag.Title = "Details";
-}
-
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
 <div class="container md-3">
     <br />
-    <h1 class="text-center">Detalles de la Actividad</h1>
+    <h3 class="text-center">Actividad: @Html.DisplayFor(model => model.name)</h3>
     <br />
     <br />
-    <div class="panel-body">
+    <div class="panel-body ">
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-8">
-                <div class="row" style="text-align: center;">
-                    <div class="col-sm-2">
 
-                        @Html.DisplayNameFor(model => model.name)
-                        <br />
-                        •  @Html.DisplayFor(model => model.name)
-                    </div>
+            <div class="col-sm-6 ">
+
+                <dl class="dl-horizontal margen">
+
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.name)</p>
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.name)
+                    </dd>
+
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.descripcion)</p>
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.descripcion)
+                    </dd>
 
 
-                    <div class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.descripcion)
-                        <br />
-                        •  @Html.DisplayFor(model => model.descripcion)
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 5%; text-align: center;">
-                    <div class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Sponsor)
-
-                        <br />
-                        @foreach (var item in ViewBag.sponsors)
+                    <dt>
+                        <p class="text-muted">Patrocinadores</p>
+                    </dt>
+                    <dd>
+                        @if (ViewBag.sponsors.Count == 0)
                         {
-
-                            var sel = (Model.Sponsor.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "ninguno";
-
-                            <option value="@item.identification" @sel>•  @item.name</option>
-
+                            <p>Esta actividad no cuenta con patrocinadores</p>
                         }
-                    </div>
-                    <div class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.User)
-
-                        <br />
-                        @foreach (var item in ViewBag.users)
+                        else
                         {
-                            var sel = (Model.User.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "Ninguno";
-
-                            <option value="@item.identification" @sel>•  @item.name @item.last_name</option>
+                            foreach (var item in ViewBag.sponsors)
+                            {
+                                <p>@item.name</p>
+                            }
                         }
-                    </div>
-                    <div class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.Voluntary)
 
-                        <br />
-                        @foreach (var item in ViewBag.voluntaries)
+                    </dd>
+
+                    <dt>
+                        <p class="text-muted">Usuarios</p>
+                    </dt>
+                    <dd>
+                        @if (ViewBag.users.Count == 0)
                         {
-                            var sel = (Model.Voluntary.Where(ca => ca.identification == item.identification).Count() > 0) ? "selected" : "Ninguno";
-
-                            <option value="@item.identification" @sel>•  @item.name @item.last_name</option>
+                            <p>Esta actividad no cuenta con patrocinadores</p>
                         }
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <a href="~/Activities/Index" class="btn btn-primary btn-md text-uppercase">Volver</a>
-                        </div>
-                    </div>
-                </div>
+                        else
+                        {
+                            foreach (var item in ViewBag.users)
+                            {
+                                <p>@item.name @item.last_name</p>
+                            }
+                        }
+                    </dd>
+
+                    <dt>
+                        <p class="text-muted">Voluntarios</p>
+                    </dt>
+                    <dd>
+                        @if (ViewBag.voluntaries.Count == 0)
+                        {
+                            <p>Esta actividad no cuenta con patrocinadores</p>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.voluntaries)
+                            {
+                                <p>@item.name @item.last_name</p>
+                            }
+                        }
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="col-sm-6">
+                <img src="@(ViewBag.image)" width="65%;" height="65%;" class="img rounded-circle" />
             </div>
         </div>
     </div>
+    <br />
+
+    <a href="~/Activities/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
+
+    <br />
+    <br />
 </div>
+<hr />
+
 <style>
+    .img {
+        margin-top: -1%;
+        margin-left: 15%;
+    }
+
+    .margen {
+        margin-left: 22%;
+    }
 
     #mainNav {
         background-color: rgb(46,49,146);
@@ -87,18 +113,14 @@
 
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-        width: 97%;
-        margin-top: 10%;
+        width: 60%;
+        margin-top: 8%;
     }
 
     .panel {
         border-radius: 0 !important;
         transition: box-shadow 0.5s;
         width: 55%;
-    }
-
-    .form-group {
-        align-content: center;
     }
 </style>
 

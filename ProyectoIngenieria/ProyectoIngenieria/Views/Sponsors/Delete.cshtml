@@ -4,69 +4,118 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Sponsor</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
+<div class="container md-3">
+    <br />
+    <h3 class="text-center">¿Está seguro que desea eliminar el patrocinador?</h3>
+    <br />
+    <br />
+    <div class="panel-body ">
+        <div class="row">
 
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
+            <div class="col-sm-6 ">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.last_name)
-        </dt>
+                <dl class="dl-horizontal margen">
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.name)</p>
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.last_name)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.name)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
+                    <dt>
+                        <p class="text-muted"> @Html.DisplayNameFor(model => model.last_name)</p>
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.last_name)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.phone_number)
-        </dt>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.email)</p>
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.phone_number)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.email)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.phone_number)</p>
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.phone_number)
+                    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Photo.name)
-        </dt>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.description)</p>
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Photo.name)
-        </dd>
+                    <dd>
+                        @Html.DisplayFor(model => model.description)
+                    </dd>
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                </dl>
+            </div>
+            <div class="col-sm-6">
+                <img src="@(ViewBag.image)" width="65%;" height="65%;" class="img rounded-circle" />
+            </div>
         </div>
-    }
+    </div>
+    <br />
+
+    <div class="row" style="margin-top:2%;">
+        <div class="col-md-4">
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <a href="/Sponsors/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
+                }
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
 </div>
+<hr />
+
+<style>
+    .img {
+        margin-top: -1%;
+        margin-left: 15%;
+    }
+
+    .margen {
+        margin-left: 22%;
+    }
+
+    #mainNav {
+        background-color: rgb(46,49,146);
+    }
+
+    .md-3 {
+        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+        width: 60%;
+        margin-top: 8%;
+    }
+
+    .panel {
+        border-radius: 0 !important;
+        transition: box-shadow 0.5s;
+        width: 55%;
+    }
+</style>
+
+
