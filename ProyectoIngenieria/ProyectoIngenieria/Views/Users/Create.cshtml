@@ -15,11 +15,11 @@
         <br />
         <h1 class="text-center">Ingresar un Usuarios</h1>
         <br />
-        <br />
+      
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-8">
+                <div class="col-md-1"></div>
+                <div class="col-md-5">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         @Html.LabelFor(model => model.identification, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -54,20 +54,24 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.phone_number, htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.LabelFor(model => model.phone_number, htmlAttributes: new { @class = "control-label col-md-5" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.phone_number, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
+
                     <div class="form-group">
-                        @Html.LabelFor(model => model.user_name, htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.LabelFor(model => model.user_name, htmlAttributes: new { @class = "control-label col-md-5" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.user_name, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.user_name, "", new { @class = "text-danger" })
                         </div>
                     </div>
+                </div>
+
+                <div class="col-md-5">
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -76,6 +80,8 @@
                             @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
                         </div>
                     </div>
+
+
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -88,14 +94,14 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.TextAreaFor(model => model.description, 5, 32, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.link, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.link, htmlAttributes: new { @class = "control-label col-md-5" })
                         <div class="col-md-10">
                             @Html.EditorFor(model => model.link, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.link, "", new { @class = "text-danger" })
@@ -136,9 +142,10 @@
                             </div>
                         }
                     </div>
-
+                </div>
+            </div>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                         </div>
                         <div class="form-group">
                             <div class="col-md-2">
@@ -151,8 +158,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+               
+           
             <br />
         </div>
     </div>
@@ -168,7 +175,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 6%;
     }
 
     .panel {
@@ -181,6 +188,10 @@
         align-content: center;
     }
 </style>
+
+
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -8,52 +8,100 @@
 
 <div class="container md-3">
     <br />
-    <h1 class="text-center">Detalles del Usuario</h1>
+    <h1 class="text-center">Usuario</h1>
     <br />
     <br />
-    <div class="panel-body">
+    <div class="panel-body ">
         <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-8">
-                <div class="row" style="text-align: center;">
 
+            <div class="col-sm-6 ">
 
+                <dl class="dl-horizontal margen">
 
-                    <div class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.phone_number)
-                        <br />
-                        @Html.DisplayFor(model => model.phone_number)
-                    </div>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.name)</p>
+                    </dt>
 
-                    <div class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.address)
-                        <br />
-                        @Html.DisplayFor(model => model.address)
-                    </div>
+                    <dd>
+                        @Html.DisplayFor(model => model.name)
+                    </dd>
 
-                    <div class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.description)
-                        <br />
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.description)</p>
+                    </dt>
+
+                    <dd>
                         @Html.DisplayFor(model => model.description)
-                    </div>
+                    </dd>
 
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.email)</p>
+                    </dt>
 
-                    <div class="row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <a href="~/Users/Index" class="btn btn-primary btn-md text-uppercase">Volver</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <dd>
+                        @Html.DisplayFor(model => model.email)
+                    </dd>
+
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.address)</p>
+
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.address)
+                    </dd>
+
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.phone_number)</p>
+
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.phone_number)
+                    </dd>
+
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.description)</p>
+
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.description)
+                    </dd>
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.link)</p>
+
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.link)
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="col-sm-6">
+                <img src="@(ViewBag.image)" width="65%;" height="65%;" class="img rounded-circle" />
             </div>
         </div>
     </div>
+    <br />
+
+    <a href="~/Users/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
+
+    <br />
+    <br />
 </div>
+<hr />
 
 <style>
+    .img {
+        margin-top: -1%;
+        margin-left: 15%;
+    }
+
+    .margen {
+        margin-left: 22%;
+    }
 
     #mainNav {
         background-color: rgb(46,49,146);
@@ -61,17 +109,13 @@
 
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-        width: 97%;
-        margin-top: 10%;
+        width: 60%;
+        margin-top: 8%;
     }
 
     .panel {
         border-radius: 0 !important;
         transition: box-shadow 0.5s;
         width: 55%;
-    }
-
-    .form-group {
-        align-content: center;
     }
 </style>

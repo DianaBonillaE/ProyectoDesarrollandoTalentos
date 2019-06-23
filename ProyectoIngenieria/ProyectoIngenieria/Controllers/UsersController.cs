@@ -32,12 +32,13 @@ namespace ProyectoIngenieria.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             User user = db.User.Find(id);
-         /*   ViewBag.image = Path.Combine("/Static/", user.Photo.image);
-            ViewBag.name = user.Photo.name;*/
+            
             if (user == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.image = Path.Combine("/Static/", user.Photo.image);
+            ViewBag.name = user.Photo.name;
             return View(user);
         }
 
@@ -124,7 +125,7 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "identification,name,last_name,email,phone_number,user_name,password,address,description,link,photoId")] User user, HttpPostedFileBase File, string nameFile)
+        public ActionResult Edit([Bind(Include = "identification,name,last_name,email,phone_number,user_name,password,address,description,link,photo_id")] User user, HttpPostedFileBase File, string nameFile)
         {
             if (ModelState.IsValid)
             {
@@ -132,6 +133,7 @@ namespace ProyectoIngenieria.Controllers
 
                 db.Entry(user).State = EntityState.Modified;
 
+               
                 var imageAct = db.Photo.Find(user.photo_id);
 
                 if (File != null)
