@@ -15,6 +15,8 @@ namespace ProyectoIngenieria.Controllers
     {
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
+        private bool stateCreate;
+
         // GET: Responsables
         public ActionResult Index(int page = 1, int pageSize = 5)
         {
@@ -46,7 +48,7 @@ namespace ProyectoIngenieria.Controllers
         {
             List<Student> students = db.Student.ToList();
             ViewBag.students = students;
-
+            stateCreate = true;
             return View();
         }
 
@@ -64,8 +66,10 @@ namespace ProyectoIngenieria.Controllers
                 db.Responsable.Add(responsable);
                 db.SaveChanges();
 
+                if (stateCreate) { 
                 student.responsable_identification = responsable.identification;
                 db.Student.Add(student);
+                }
                 db.SaveChanges();
 
 
@@ -76,6 +80,19 @@ namespace ProyectoIngenieria.Controllers
 
             return View(responsable);
         }
+
+        // GET: Responsables/Create
+        public ActionResult CreateResponsable()
+        {
+            stateCreate = false;
+
+            return View();
+        }
+
+        
+
+
+
 
         // GET: Responsables/Edit/5
         public ActionResult Edit(string id)
