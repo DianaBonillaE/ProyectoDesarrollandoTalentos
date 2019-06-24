@@ -67,12 +67,12 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "identification,name,last_name,state,photo_id,email,address,phone_number,link")] Voluntary voluntary, Boolean state, HttpPostedFileBase File, string nameFile, string descriptionVoluntary)
+        public ActionResult Create([Bind(Include = "identification,name,last_name,state,photo_id,email,address,phone_number,link,description")] Voluntary voluntary, Boolean state, HttpPostedFileBase File, string nameFile, string description)
         {
             var query = (from r in db.Voluntary where r.identification == voluntary.identification select r).Count();
             if (query == 1)
             {
-                return RedirectToAction("Create", new { mensaje = "El voluntario con la identificación " + voluntary.identification + " ya se encuentra registrado en el sistema" });
+                return RedirectToAction("Create/"+voluntary.identification, new { mensaje = "El voluntario con la identificación " + voluntary.identification + " ya se encuentra registrado en el sistema" });
             }
             else
             {
@@ -106,7 +106,7 @@ namespace ProyectoIngenieria.Controllers
 
                             db.Photo.Add(Photo);
 
-                            voluntary.description = descriptionVoluntary;
+                            voluntary.description = description;
                             db.Voluntary.Add(voluntary);
                             db.SaveChanges();
                         }
@@ -143,7 +143,7 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "identification,name,last_name,description,state,photo_id,email,address,phone_number,link")] Voluntary voluntary, Boolean state, HttpPostedFileBase File, string nameFile)
+        public ActionResult Edit([Bind(Include = "identification,name,last_name,description,state,photo_id,email,address,phone_number,link")] Voluntary voluntary, Boolean state, HttpPostedFileBase File, string nameFile, string description)
         {
             if (ModelState.IsValid)
             {
@@ -177,8 +177,7 @@ namespace ProyectoIngenieria.Controllers
                     db.SaveChanges();
                 }
 
-
-
+                voluntary.description = description;
                 db.SaveChanges();
 
                 return RedirectToAction("Index", new { mensaje = "El voluntario " + voluntary.name + " " + voluntary.last_name + " ha sido actualizado exitosamente" });
@@ -227,8 +226,6 @@ namespace ProyectoIngenieria.Controllers
                  
                     voluntary.Activity.Remove(activities[i]);
                 }
-
-              
             }
 
             //eliminar imagen

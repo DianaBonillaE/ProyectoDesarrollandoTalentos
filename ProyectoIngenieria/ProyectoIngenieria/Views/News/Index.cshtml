@@ -5,11 +5,21 @@
     ViewBag.Title = "Index";
 }
 
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
+
 <div class="container md-3">
     <br />
     <h1 class="text-center">Noticias</h1>
     <br />
     <br />
+    @if (ViewBag.menssage != null)
+    {
+        <div class="alert alert-success text-center alert-dismissible">
+            <h3 class="alert-heading"><i class="icon fa fa-check"></i> ¡Correcto!</h3>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+            <h6>@ViewBag.menssage</h6>
+        </div>
+    }
     <div class="row">
         <div class="col-sm-9"></div>
         <div class="col-sm-3 ">
@@ -19,16 +29,13 @@
 
     <div class="panel-body">
         <br />
-        <table class="table ">
+        <table class="table table-responsive-sm">
             <tr class="text-center">
                 <th>
                     <p class="text-muted">Fecha de la noticia</p>
                 </th>
                 <th>
                     <p class="text-muted">Descripción</p>
-                </th>
-                <th>
-                    <p class="text-muted">Nombre del albúm</p>
                 </th>
                 <th></th>
             </tr>
@@ -43,10 +50,7 @@
                         @Html.DisplayFor(modelItem => item.description)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Album.name)
-                    </td>
-
-                    <td>
+                        @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
                         @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.id })
                     </td>
@@ -60,8 +64,6 @@
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
             </div>
         </div>
-
-
     </div>
     <br />
     <br />
@@ -77,7 +79,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {
