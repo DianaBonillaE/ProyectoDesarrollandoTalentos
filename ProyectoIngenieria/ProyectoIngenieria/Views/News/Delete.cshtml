@@ -3,64 +3,97 @@
 @{
     ViewBag.Title = "Delete";
 }
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
-    <div class="container md-3">
-        <br />
-        <h1 class="text-center">¿Esta seguro que desea eliminar esta noticia?</h1>
-        <br />
-        <br />
-        <div class="panel-body">
-            <div class="row" style="text-align: center;">
-                <div class="col-sm-3"></div>
-                <div class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.date)
-                    <br />
-                    •  @Html.DisplayFor(model => model.date)
+<div class="container md-3">
+    <br />
+    <h3 class="text-center">¿Está seguro que desea el eliminar esta noticia?</h3>
+    <br />
+    <br />
+    <div class="panel-body ">
+        <dl class="dl-horizontal margen">
+            <div class="row">
+                <div class="col-sm-4">
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.date)</p>
+                    </dt>
                 </div>
-
-                <div class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.description)
-                    <br />
-                    •  @Html.DisplayFor(model => model.description)
+                <div class="col-sm-4">
+                    <dd>
+                        @Html.DisplayFor(model => model.date)
+                    </dd>
                 </div>
+            </div>
+            <dt>
+                <p class="text-muted">@Html.DisplayNameFor(model => model.description)</p>
 
-                <div class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Album.name)
-                    <br />
-                    •  @Html.DisplayFor(model => model.Album.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
+            <br />
+            <div class="row">
+                <div class="col-sm-5">
+                    <dt>
+                        <p class="text-muted">Nombre del albúm de fotos</p>
+                    </dt>
+                </div>
+                <div class="col-sm-4">
+                    <dd>
+                        @Html.DisplayFor(model => model.Album.name)
+                    </dd>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <dt>
+                        <p class="text-muted">Fotos almacenadas en el albúm</p>
+                    </dt>
+                </div>
+                <div class="col-sm-4">
+                    <dd>
+                        @ViewBag.photoQuantity
+                    </dd>
                 </div>
             </div>
 
-                <div class="row" style="margin-top:2%;">
-                    <div class="col-md-4">
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            <a href="/News/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-2">
-                            @using (Html.BeginForm())
-                            {
-                                @Html.AntiForgeryToken()
-
-                                <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
-                            }
-                        </div>
-                    </div>
-                </div>
-             </div>
-            
+        </dl>
+    </div>
+    <br />
+    <div class="row" style="margin-top:2%;">
+        <div class="col-md-4">
         </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                <a href="/News/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-
-<br />
-
-}
+                    <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
+                }
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+</div>
 <hr />
 
 <style>
+    .img {
+        margin-top: -1%;
+        margin-left: 15%;
+    }
+
+    .margen {
+        margin-left: 22%;
+    }
 
     #mainNav {
         background-color: rgb(46,49,146);
@@ -68,8 +101,8 @@
 
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-        width: 97%;
-        margin-top: 10%;
+        width: 60%;
+        margin-top: 8%;
     }
 
     .panel {
@@ -77,8 +110,5 @@
         transition: box-shadow 0.5s;
         width: 55%;
     }
-
-    .form-group {
-        align-content: center;
-    }
 </style>
+

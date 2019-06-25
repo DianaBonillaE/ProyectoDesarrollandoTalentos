@@ -21,13 +21,14 @@ namespace ProyectoIngenieria.DB
             this.Activity = new HashSet<Activity>();
         }
 
-
         [Required]
         [Display(Name = "Identificación")]
+        [StringLength(20)]
         public string identification { get; set; }
 
         [Required]
         [Display(Name = "Nombre")]
+        [StringLength(50)]
         public string name { get; set; }
 
         [Required]
@@ -36,6 +37,7 @@ namespace ProyectoIngenieria.DB
 
         [Required]
         [Display(Name = "Apellidos")]
+        [StringLength(50)]
         public string last_name { get; set; }
 
         [Required]
@@ -44,11 +46,13 @@ namespace ProyectoIngenieria.DB
 
         [Required]
         [EmailAddress]
+        [StringLength(50)]
         [Display(Name = "Email")]
         public string email { get; set; }
 
         [Required]
         [Display(Name = "Dirección")]
+        [StringLength(100)]
         public string address { get; set; }
 
         [Required]
@@ -58,10 +62,12 @@ namespace ProyectoIngenieria.DB
 
         [Required]
         [Display(Name = "Descripción")]
+        [StringLength(300)]
         public string description { get; set; }
 
         [Required]
         [Display(Name = "Link a red social")]
+        [StringLength(800)]
         public string link { get; set; }
     
         public virtual Photo Photo { get; set; }

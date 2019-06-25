@@ -16,10 +16,17 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: News
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        public ActionResult Index(string mensaje, int page = 1, int pageSize = 4)
         {
             List<News> newsList = db.News.ToList();
             PagedList<News> model = new PagedList<News>(newsList, page, pageSize);
+
+            //Mensaje de exito para eliminar o editar
+            if (mensaje != null)
+            {
+                ViewBag.menssage = mensaje;
+            }
+
             return View(model);
         }
 
@@ -39,9 +46,14 @@ namespace ProyectoIngenieria.Controllers
         }
 
         // GET: News/Create
-        public ActionResult Create()
+        public ActionResult Create(string mensaje)
         {
-            ViewBag.album_id = new SelectList(db.Album, "id", "name");
+            //Mensaje de id repetido
+            if (mensaje != null)
+            {
+                ViewBag.menssage = mensaje;
+            }
+
             return View();
         }
 
@@ -50,7 +62,7 @@ namespace ProyectoIngenieria.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,date,description")] News news, string albumName)
+        public ActionResult Create([Bind(Include = "id,date,description")] News news, string albumName, string description)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +77,7 @@ namespace ProyectoIngenieria.Controllers
                 db.News.Add(news);
 
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { mensaje = "La noticia ha sido ingresado exitosamente" });
             }
 
             return View(news);
@@ -81,8 +93,12 @@ namespace ProyectoIngenieria.Controllers
 
             News news = db.News.Find(id);
             Album album = db.Album.Find(news.album_id);
+
             ViewBag.albumName = album.name;
             ViewBag.albumId = news.album_id;
+
+            ViewBag.description = news.description;
+
             if (news == null)
             {
                 return HttpNotFound();
@@ -109,7 +125,7 @@ namespace ProyectoIngenieria.Controllers
                 db.Entry(news).State = EntityState.Modified;
 
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { mensaje = "La noticia ha sido editada exitosamente" });
             }
 
             return View(news);
@@ -127,6 +143,18 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
+
+            int quantity = news.Album.Photo.Count();
+
+            if (quantity ==0)
+            {
+                ViewBag.photoQuantity = "0";
+            }
+            else
+            {
+                ViewBag.photoQuantity = quantity;
+            }
+
             return View(news);
         }
 
@@ -136,9 +164,21 @@ namespace ProyectoIngenieria.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             News news = db.News.Find(id);
+            Album album = db.Album.Find(news.Album.id);
+
+            //Valida si ya existen fotos en el albúm
+
+            if (news.Album.Photo.Count() > 0)
+            {
+                news.Album.Photo.Clear();
+            }
+
+            db.Album.Remove(album);
             db.News.Remove(news);
+
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index", new { mensaje = "La noticia ha sido eliminada exitosamente" });
         }
 
         protected override void Dispose(bool disposing)

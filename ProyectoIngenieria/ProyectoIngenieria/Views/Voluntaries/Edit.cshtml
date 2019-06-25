@@ -5,6 +5,7 @@
 }
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
+
 @using (Html.BeginForm("Edit", "Voluntaries", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
