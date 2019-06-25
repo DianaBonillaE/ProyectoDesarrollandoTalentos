@@ -191,7 +191,9 @@ namespace ProyectoIngenieria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+
             User user = db.User.Find(id);
+           user.Activity.Clear();
             Photo photo = db.Photo.Find(user.photo_id);
             db.User.Remove(user);
             db.Photo.Remove(photo);

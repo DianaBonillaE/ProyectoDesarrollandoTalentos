@@ -16,8 +16,8 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         private bool stateCreate;
-        private bool delete;
-        private static int idResponsable;
+        private static bool deleteWarning;
+        private static string idResponsable;
 
         // GET: Responsables
         public ActionResult Index(int page = 1, int pageSize = 5)
@@ -148,7 +148,7 @@ namespace ProyectoIngenieria.Controllers
             return View(responsable);
         }
 
-        // GET: Responsables/Delete/5
+        // GET: Responsables/Delete
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -180,8 +180,7 @@ namespace ProyectoIngenieria.Controllers
         {
             Responsable responsable = db.Responsable.Include(a => a.Student).ToList().Find(c => c.identification == id);
 
-            responsable.Student.Clear();
-
+           
 
             db.Responsable.Remove(responsable);
             try
@@ -208,10 +207,48 @@ namespace ProyectoIngenieria.Controllers
             Responsable responsable = db.Responsable.Include(a => a.Student).ToList().Find(c => c.identification == id);
 
             List<Student> studentList = responsable.Student.ToList();
+            deleteWarning = true;
+            idResponsable = id;
 
-            
             PagedList<Student> model = new PagedList<Student>(studentList, page, pageSize);
             return View(model);
+        }
+
+        
+        [HttpPost, ActionName("DeleteWarning")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteWarning()
+        {
+
+            Responsable responsable = db.Responsable.Include(a => a.Student).ToList().Find(c => c.identification == idResponsable);
+            
+            List<Student> studentList = responsable.Student.ToList();
+            
+            
+          
+            responsable.Student.Clear();
+            db.Responsable.Remove(responsable);
+            for (int i = 0; i < studentList.Count; i++)
+            {
+
+                string idStudent = studentList[i].identification;
+                Student student = db.Student.Find(idStudent);
+                student.responsable_identification = "ninguno";
+                db.Entry(student).State = EntityState.Modified;
+               
+            }
+
+            try
+            {
+                db.SaveChanges();
+               
+                
+            }
+            catch (Exception e)
+            {
+
+            }
+            return RedirectToAction("/Index");
         }
 
     }
