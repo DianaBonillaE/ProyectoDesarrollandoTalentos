@@ -217,8 +217,16 @@ namespace ProyectoIngenieria.Controllers
             {
                 string idStudent = studentList[i].identification;
                 Student student = db.Student.Find(idStudent);
-                student.responsable_identification = "ninguno";
-                db.Entry(student).State = EntityState.Modified;
+
+                Course_Student curse_Student = db.Course_Student.Include(a => a.Student).ToList().Find(c => c.student_identification == idStudent);
+                if (curse_Student != null)
+                {
+                    db.Course_Student.Remove(curse_Student);
+                }
+
+
+                db.Student.Remove(student);
+                db.SaveChanges();
             }
             responsable.Student.Clear();
             db.Responsable.Remove(responsable);
