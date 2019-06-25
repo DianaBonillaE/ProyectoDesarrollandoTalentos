@@ -9,68 +9,76 @@
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
-<div class="container md-3">
-    <br />
-    <h1 class="text-center">No es posible borrar el Álbum</h1>
-    <h1 class="text-center">Fotos Asignadas </h1>
-    <br />
-    <br />
-    <div class="row">
-        <div class="col-sm-9"></div>
-    </div>
-    <div class="panel-body">
+    <div class="container md-3">
         <br />
-        <table class="table ">
-            <tr class="text-center">
-                <th>
-                    Identificación
-                </th>
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    Nombre del Archivo
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr class="text-center">
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.image)
-                    </td>
-
-
-                </tr>
-            }
-
-        </table>
+        <h1 class="text-center">Fotos Asignadas</h1>
+        <h3 class="text-center">Si continua con esta accion se eliminaran las Fotos en la lista</h3>
+        <h3 class="text-center">Desea de igual forma borrar el Álbum?</h3>
         <br />
-
-
-
+        <br />
         <div class="row">
-            <div class="col-sm-5"></div>
-            <div class="col-sm-6 ">
+            <div class="col-sm-9"></div>
+        </div>
+        <div class="panel-body">
+            <br />
+            <table class="table ">
+                <tr class="text-center">
+                    <th>
+                        Identificación
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Nombre del Archivo
+                    </th>
+                    <th></th>
+                </tr>
 
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center">
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.image)
+                        </td>
+
+
+                    </tr>
+                }
+
+            </table>
+            <br />
+
+
+
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-6 ">
+                    <div class="col-md-2">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <input type="submit" value="Eliminar" class="btn btn-primary btn-md text-uppercase" />
+                        }
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-3 ">
-            <a href="~/Albums/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
-        </div>
+            <div class="col-sm-3 ">
+                <a href="~/Albums/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
+            </div>
 
+        </div>
+        <br />
+        <br />
     </div>
-    <br />
-    <br />
-</div>
 <hr />
 
 <style>

@@ -126,6 +126,8 @@ namespace ProyectoIngenieria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
+
             Album album = db.Album.Find(id);
             db.Album.Remove(album);
             db.SaveChanges();
@@ -248,11 +250,40 @@ namespace ProyectoIngenieria.Controllers
 
             album = photo.Album.ToList().Find(c => c.id == idAlbum);
 
+            var locationStatic = Path.Combine(Server.MapPath("/Static/"));
+            System.IO.File.Delete(locationStatic + photo.image);
+
             album.Photo.Remove(photo);
             db.Photo.Remove(photo);
             
             db.SaveChanges();
             return RedirectToAction("/Photos/"+idAlbum);
+        }
+
+        [HttpPost, ActionName("DeleteWarning")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteWarning(int id)
+        {
+
+
+            Album album = db.Album.Find(id);
+
+            List<Photo> photoList = album.Photo.ToList();
+
+            for (int i = 0; i < photoList.Count; i++)
+            {
+                int idImage = photoList[i].id;
+                Photo photo = db.Photo.Find(idImage);
+                var locationStatic = Path.Combine(Server.MapPath("/Static/"));
+                System.IO.File.Delete(locationStatic + photo.image);
+                db.Photo.Remove(photo);
+                db.SaveChanges();
+            }
+
+
+            db.Album.Remove(album);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
     }
