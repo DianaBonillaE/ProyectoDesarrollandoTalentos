@@ -124,18 +124,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 db.Entry(responsable).State = EntityState.Modified;
 
-                Responsable responsab1e = db.Responsable.Include(a => a.Student).ToList().Find(c => c.identification == responsable.identification);
-                responsab1e.Student.Clear();
-                 if (students.Count > 0)
-                 {
-                     System.Collections.IList listStudents = students;
-                     for (int i = 0; i < listStudents.Count; i++)
-                     {
-                         string id = "" + listStudents[i];
-                         Student student = db.Student.Find(id);
-                         responsable.Student.Add(student);
-                     }
-                 }
+                
                 
 
 
@@ -143,8 +132,7 @@ namespace ProyectoIngenieria.Controllers
                 return RedirectToAction("/Index");
             }
 
-            List<Student> studentsList = db.Student.ToList();
-            ViewBag.students = studentsList;
+          
             return View(responsable);
         }
 
@@ -225,24 +213,20 @@ namespace ProyectoIngenieria.Controllers
             List<Student> studentList = responsable.Student.ToList();
             
             
-          
-            responsable.Student.Clear();
-            db.Responsable.Remove(responsable);
             for (int i = 0; i < studentList.Count; i++)
             {
-
                 string idStudent = studentList[i].identification;
                 Student student = db.Student.Find(idStudent);
                 student.responsable_identification = "ninguno";
                 db.Entry(student).State = EntityState.Modified;
-               
             }
+            responsable.Student.Clear();
+            db.Responsable.Remove(responsable);
 
+            
             try
             {
                 db.SaveChanges();
-               
-                
             }
             catch (Exception e)
             {

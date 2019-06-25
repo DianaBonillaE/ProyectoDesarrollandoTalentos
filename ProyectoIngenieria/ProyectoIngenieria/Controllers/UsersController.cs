@@ -193,7 +193,7 @@ namespace ProyectoIngenieria.Controllers
         {
 
             User user = db.User.Find(id);
-           user.Activity.Clear();
+            user.Activity.Clear();
             Photo photo = db.Photo.Find(user.photo_id);
             db.User.Remove(user);
             db.Photo.Remove(photo);
