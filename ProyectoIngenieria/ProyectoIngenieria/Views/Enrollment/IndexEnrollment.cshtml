@@ -3,7 +3,7 @@
     ViewBag.Title = "IndexEnrollment";
 }
 
-@model PagedList.IPagedList<ProyectoIngenieria.DB.Curse>
+@model PagedList.IPagedList<ProyectoIngenieria.DB.Course>
 @using PagedList.Mvc;
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
@@ -14,7 +14,7 @@
     <br />
     <div class="panel-body">
         <br />
-        <table class="table">
+        <table class="table table-responsive-sm">
             <tr class="text-center">
                 <th>
                     Nombre
@@ -65,7 +65,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {

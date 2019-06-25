@@ -16,10 +16,17 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Rooms
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        public ActionResult Index(string mensaje,int page = 1, int pageSize = 6)
         {
             List<Room> roomList = db.Room.ToList();
             PagedList<Room> model = new PagedList<Room>(roomList, page, pageSize);
+
+            //Mensaje de exito para eliminar o editar
+            if (mensaje != null)
+            {
+                ViewBag.menssage = mensaje;
+            }
+
             return View(model);
         }
 
@@ -55,7 +62,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 db.Room.Add(room);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { mensaje = "El aula " + room.room_number+ " ha sido ingresada exitosamente" });
             }
 
             return View(room);
@@ -73,6 +80,9 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.location = room.location;
+
             return View(room);
         }
 
@@ -87,7 +97,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 db.Entry(room).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { mensaje = "El aula " + room.room_number + " ha sido editada exitosamente" });
             }
             return View(room);
         }
@@ -113,9 +123,17 @@ namespace ProyectoIngenieria.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Room room = db.Room.Find(id);
+
+            //Valida si ya existe un voluntario asociado a una actividad
+
+            if (room.Course.Count() > 0)
+            {
+                room.Course.Clear();
+            }
+
             db.Room.Remove(room);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { mensaje = "El aula " + room.room_number + " ha sido eliminada exitosamente" });
         }
 
         protected override void Dispose(bool disposing)

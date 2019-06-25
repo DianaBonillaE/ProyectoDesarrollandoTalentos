@@ -4,12 +4,16 @@
     ViewBag.Title = "Edit";
 }
 
+@Html.Partial("~/Views/Home/AdminMenu.cshtml")
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.id)
+    @Html.HiddenFor(model => model.album_id)
+
     <div class="container md-3">
         <br />
         <h1 class="text-center">Actualizar una noticia</h1>
@@ -22,7 +26,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-3" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control", @min = "1" } })
+                            @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -30,21 +34,13 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                            <textarea id="description" name="description" class="form-control" rows="6" cols="63" style="resize:none;">@(ViewBag.description)</textarea>
                             @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.album_id, "Identificador del albúm",htmlAttributes: new { @class = "control-label col-md-4" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.album_id, new { htmlAttributes = new { @class = "form-control" ,@readonly="readonly"} })
-                            @Html.ValidationMessageFor(model => model.album_id, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Album.name,"Nombre del albúm", htmlAttributes: new { @class = "control-label col-md-4" })
+                        @Html.LabelFor(model => model.Album.name, "Nombre del albúm", htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-10">
                             <input id="albumName" name="albumName" value="@(ViewBag.albumName)" class="form-control" />
                             @Html.ValidationMessageFor(model => model.Album.name, "", new { @class = "text-danger" })

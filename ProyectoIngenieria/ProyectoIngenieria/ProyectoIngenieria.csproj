@@ -2099,7 +2099,6 @@
     <Content Include="Views\Enrollment\ConfirmEnrollment.cshtml" />
     <Content Include="Views\Responsables\DeleteWarning.cshtml" />
     <Content Include="Views\Enrollment\DeleteEnrollment.cshtml" />
-    <Content Include="Views\Enrollment\Delete.cshtml" />
     <Content Include="Views\Albums\Photos.cshtml" />
     <Content Include="Views\Albums\AddPhoto.cshtml" />
     <Content Include="Views\Albums\DeleteWarning.cshtml" />

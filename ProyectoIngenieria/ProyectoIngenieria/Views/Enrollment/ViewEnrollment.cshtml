@@ -10,7 +10,7 @@
 
 <div class="container md-3">
     <br />
-    <h2 class="text-center">Curso: @(ViewBag.name) </h2>
+    <h2 class="text-center">Lista de estudiantes del curso: @(ViewBag.name) </h2>
     <br />
     <div class="panel-body">
 
@@ -48,21 +48,19 @@
                         @item.phone_number
                     </td>
                     <td>
-                        @Html.ActionLink("Eliminar", "DeleteEnrollment", new { idStudent = item.identification, idCourse = ViewBag.id})
+                        @Html.ActionLink("Eliminar", "DeleteEnrollment", new { idStudent = item.identification, idCourse = ViewBag.id })
                     </td>
                 </tr>
             }
 
         </table>
-        <br />
-        <br />
-        <div class="col-sm-5"></div>
-        <div class="col-sm-6 ">
-            @Html.PagedListPager(Model, page => Url.Action("ViewEnrollment", new { page, pageSize = Model.PageSize }))
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-6 ">
+                @Html.PagedListPager(Model, page => Url.Action("ViewEnrollment", new { page, pageSize = Model.PageSize }))
+            </div>
         </div>
-        
         <a href="~/Enrollment/IndexEnrollment" class="btn btn-primary btn-md text-uppercase">Regresar</a>
-
     </div>
     <br />
     <br />
@@ -78,7 +76,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 10%;
+        margin-top: 8%;
     }
 
     .panel {
