@@ -55,7 +55,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(responsable);
         }
 
 

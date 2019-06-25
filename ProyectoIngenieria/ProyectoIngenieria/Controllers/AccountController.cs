@@ -73,6 +73,7 @@ namespace ProyectoIngenieria.Controllers
 
             User user = db.User.Find(model.Identification);
 
+            if (user != null) { 
             /*/ Este user.password deberia venir encriptado/*/
             if (Protection.Decrypt(user.password) == model.Password)
             {   return RedirectToAction("../Home/AdminView");
@@ -81,9 +82,14 @@ namespace ProyectoIngenieria.Controllers
                 ModelState.AddModelError("", "Intento de inicio de sesión no válido.");
             }
                 
-                  return View();
+                  
             }
-        
+            else { ModelState.AddModelError("", "Inicio de sesión no válido. Usuario No encontrado"); }
+
+            return View();
+
+        }
+
 
         //
         // GET: /Account/VerifyCode

@@ -16,16 +16,20 @@
         <table class="table ">
             <tr class="text-center">
                 <th>
-                    Identificación
+                    <p class="text-muted">Identificación</p>
+                    
                 </th>
                 <th>
-                    Nombre
+                    <p class="text-muted">Nombre</p>
+                    
                 </th>
                 <th>
-                    Apellido
+                    <p class="text-muted">Apellido</p>
+                    
                 </th>
                 <th>
-                    Descripción
+                    <p class="text-muted">Descripción</p>
+                    
                 </th>
                 <th></th>
             </tr>
@@ -47,7 +51,7 @@
                         @Html.DisplayFor(modelItem => item.description)
                     </td>
                     <td>
-                      @Html.ActionLink("Detalles", "DetailsResponsable", new { id = item.identification })
+                      @Html.ActionLink("Detalles", "Details", new { id = item.identification })
                     </td>
                 </tr>
             }
