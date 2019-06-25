@@ -16,7 +16,7 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Voluntaries
-        public ActionResult Index(string mensaje, int page = 1, int pageSize = 4)
+        public ActionResult Index(string mensaje, int page = 1, int pageSize = 6)
         {
             List<Voluntary> volutaryList = db.Voluntary.ToList();
             PagedList<Voluntary> model = new PagedList<Voluntary>(volutaryList, page, pageSize);

@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ml-auto">
                 <li class="nav-item">
-                    <a>@Html.ActionLink("Inicio", "Index", "Home", new { @class = "nav-link js-scroll-trigger" })</a>
+                    <a class="nav-link js-scroll-trigger" href="/Home/Index">Inicio</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown">¿Quienes somos?</a>
@@ -20,13 +20,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="/?Length=4#portfolio">Actividades</a>
-                </li>
-                <li class="nav-item">
                     <a>@Html.ActionLink("Galeria", "Galery", "Galery", new { @class = "nav-link js-scroll-trigger" })</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link js-scroll-trigger" href="#news">Noticias</a>
                 </li>
                 <li class="nav-item">
                     <a>@Html.ActionLink("¿Cómo ayudar?", "Help", "Help", new { @class = "nav-link js-scroll-trigger" })</a>
@@ -41,3 +35,4 @@
         </div>
     </div>
 </nav>
+
