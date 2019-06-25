@@ -11,7 +11,8 @@ namespace ProyectoIngenieria.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Album
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,8 +23,17 @@ namespace ProyectoIngenieria.DB
         }
     
         public int id { get; set; }
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Nombre")]
         public string name { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Fecha de Creacion")]
         public System.DateTime creation_date { get; set; }
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Descripción")]
         public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

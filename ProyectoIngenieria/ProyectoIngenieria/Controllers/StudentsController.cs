@@ -16,7 +16,7 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Students
-        public ActionResult Index(int page = 1, int pageSize = 4)
+        public ActionResult Index(int page = 1, int pageSize = 5)
         {
 
             List<Student> studentList = db.Student.ToList();
@@ -42,6 +42,22 @@ namespace ProyectoIngenieria.Controllers
             }
             return View(student);
         }
+
+        public ActionResult Responsable(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Student student = db.Student.Find(id);
+            Responsable responsable = db.Responsable.Find(student.responsable_identification);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            return View(student);
+        }
+
 
         // GET: Students/Create
         public ActionResult Create()

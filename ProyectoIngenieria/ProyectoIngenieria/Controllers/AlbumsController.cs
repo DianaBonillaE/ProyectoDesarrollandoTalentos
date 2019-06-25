@@ -52,7 +52,7 @@ namespace ProyectoIngenieria.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,descripcion,creation_date")] Album album, HttpPostedFileBase File, [Bind(Include = "id,name,image")] Photo photo)
+        public ActionResult Create([Bind(Include = "id,name,description,creation_date")] Album album, HttpPostedFileBase File, [Bind(Include = "id,name,image")] Photo photo)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace ProyectoIngenieria.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,descripcion,creation_date")] Album album)
+        public ActionResult Edit([Bind(Include = "id,name,description,creation_date")] Album album)
         {
             if (ModelState.IsValid)
             {
@@ -198,6 +198,10 @@ namespace ProyectoIngenieria.Controllers
             Album album = db.Album.Include(a => a.Photo).ToList().Find(c => c.id == id);
 
             List<Photo> phototList = album.Photo.ToList();
+
+            
+
+
 
             idAlbum = id;
 

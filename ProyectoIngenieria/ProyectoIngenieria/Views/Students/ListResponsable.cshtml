@@ -1,22 +1,15 @@
-﻿
-
-@model PagedList.PagedList<ProyectoIngenieria.DB.Student>
-
-@using PagedList.Mvc;
+﻿@model IEnumerable<ProyectoIngenieria.DB.Responsable>
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
-
 <div class="container md-3">
     <br />
-    <h1 class="text-center">Estudiante</h1>
+    <h1 class="text-center">Responsable a Cargo</h1>
     <br />
     <br />
     <div class="row">
-        <div class="col-sm-9"></div>
-        <div class="col-sm-3 ">
-            <a href="~/Students/Create" class="btn btn-primary btn-md text-uppercase">Añadir Nuevo</a>
-        </div>
+        <div class="col-sm-6"></div>
+      
     </div>
     <div class="panel-body">
         <br />
@@ -30,6 +23,9 @@
                 </th>
                 <th>
                     Apellido
+                </th>
+                <th>
+                    Descripción
                 </th>
                 <th></th>
             </tr>
@@ -48,55 +44,32 @@
                         @Html.DisplayFor(modelItem => item.last_name)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.identification }) |
-
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.identification })|
-                        @Html.ActionLink("Detalles", "Details", new { id = item.identification })|
-                        @Html.ActionLink("Responsable", "Responsable", new { id = item.identification })
-
+                        @Html.DisplayFor(modelItem => item.description)
+                    </td>
+                    <td>
+                      @Html.ActionLink("Detalles", "DetailsResponsable", new { id = item.identification })
                     </td>
                 </tr>
             }
 
         </table>
-        <div class="row">
-            <div class="col-sm-5"></div>
-            <div class="col-sm-6 ">
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
-            </div>
-        </div>
-
-
         <br />
+
+        <div class="row">
+            <div class="col-sm-5"></div>
+            
+        </div>
+
         <div class="row">
             <div class="col-sm-5"></div>
             <div class="col-sm-6 ">
 
             </div>
         </div>
-        
+       
 
     </div>
     <br />
     <br />
 </div>
 <hr />
-
-<style>
-
-    #mainNav {
-        background-color: rgb(46,49,146);
-    }
-
-    .md-3 {
-        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-        width: 97%;
-        margin-top: 6%;
-    }
-
-    .panel {
-        border-radius: 0 !important;
-        transition: box-shadow 0.5s;
-        width: 55%;
-    }
-</style>

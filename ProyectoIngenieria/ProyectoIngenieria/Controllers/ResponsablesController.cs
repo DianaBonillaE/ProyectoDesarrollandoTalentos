@@ -16,6 +16,8 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         private bool stateCreate;
+        private bool delete;
+        private static int idResponsable;
 
         // GET: Responsables
         public ActionResult Index(int page = 1, int pageSize = 5)

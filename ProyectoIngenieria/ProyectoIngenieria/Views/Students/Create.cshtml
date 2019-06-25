@@ -1,5 +1,7 @@
 ﻿@model ProyectoIngenieria.DB.Student
 
+
+
 @{
     ViewBag.Title = "Create";
 }
@@ -54,31 +56,34 @@
                     </div>
 
                     <div class="form-group">
-                        
-                            @Html.LabelFor(model => model.Responsable.identification, "Identificación Responsable", htmlAttributes: new { @class = "control-label col-md-6" })
-                       
-                            <div class="col-md-8">
-                                @Html.DropDownList("responsable_identification", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Responsable.identification, "", new { @class = "text-danger" })
+
+                        @Html.LabelFor(model => model.Responsable.identification, "Identificación Responsable", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                        <div class="col-md-8">
+
+                            @Html.DropDownList("responsable_identification", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Responsable.identification, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                   
+
+                    <div class="row">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <a href="~/Students/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
                             </div>
                         </div>
-
-
-                        <div class="row">
-                            <div class="col-md-3">
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-2">
-                                    <a href="~/Students/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-2">
-                                    <input type="submit" value="Guardar" class="btn btn-primary btn-md text-uppercase" />
-                                </div>
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <input type="submit" value="Guardar" class="btn btn-primary btn-md text-uppercase" />
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>

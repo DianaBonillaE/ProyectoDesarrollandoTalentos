@@ -11,7 +11,8 @@ namespace ProyectoIngenieria.DB
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Photo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,6 +27,9 @@ namespace ProyectoIngenieria.DB
         }
     
         public int id { get; set; }
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Nombre")]
         public string name { get; set; }
         public string image { get; set; }
     
