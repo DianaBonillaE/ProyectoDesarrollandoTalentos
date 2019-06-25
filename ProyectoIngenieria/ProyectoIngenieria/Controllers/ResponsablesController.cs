@@ -15,7 +15,7 @@ namespace ProyectoIngenieria.Controllers
     {
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
-        private bool stateCreate;
+        private static bool stateCreate;
         private static bool deleteWarning;
         private static string idResponsable;
 
@@ -66,13 +66,38 @@ namespace ProyectoIngenieria.Controllers
             {
 
                 db.Responsable.Add(responsable);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                   }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", "ERROR! en igresar un responsable ya existe un responsable con esta Identificación");
+                    if (stateCreate) {
+                    return View(); }
+                    else {
+                        return View("CreateResponsable");
+                    }
+                }
 
                 if (stateCreate) { 
                 student.responsable_identification = responsable.identification;
                 db.Student.Add(student);
+                stateCreate = false;
                 }
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    db.Student.Remove(student);
+                    db.Responsable.Remove(responsable);
+                    stateCreate = true;
+                    db.SaveChanges();
+                    ModelState.AddModelError("", "ERROR! en igresar un estudiante ya existe un estudiante con esta Identificación");
+                    return View();
+                }
 
 
 

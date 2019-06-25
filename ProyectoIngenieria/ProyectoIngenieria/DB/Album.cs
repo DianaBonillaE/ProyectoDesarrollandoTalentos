@@ -30,6 +30,7 @@ namespace ProyectoIngenieria.DB
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha de Creacion")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime creation_date { get; set; }
         [Required]
         [StringLength(50)]

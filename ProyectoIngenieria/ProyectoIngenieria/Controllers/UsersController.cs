@@ -92,8 +92,18 @@ namespace ProyectoIngenieria.Controllers
                     user.password = Protection.Encrypt(user.password);
                         
                 db.User.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                    try
+                    {
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception e)
+                    {
+                        ModelState.AddModelError("", "ERROR! en igresar un Usuario ya existe un usuario con esta Identificación");
+                        return View();
+                    }
+                    
+                   
                 }
             }
 

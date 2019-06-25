@@ -76,11 +76,23 @@ namespace ProyectoIngenieria.Controllers
             if (ModelState.IsValid)
             {
                 db.Student.Add(student);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+
+              
             }
 
             ViewBag.responsable_identification = new SelectList(db.Responsable, "identification", "identification", student.responsable_identification);
+            
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", "ERROR! en igresar un estudiante ya existe un estudiante con esta Identificación");
+                    return View();
+                }
             return View(student);
         }
 
