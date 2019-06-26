@@ -83,7 +83,14 @@ namespace ProyectoIngenieria.Controllers
                     }
                     else
                     {
-                        var extension = Path.GetExtension(File.FileName);
+                        if (nameFile == "")
+                        {
+                            ViewBag.message = "Debe ingresar un nombre de imagen";
+                            return View();
+                        }
+                        else
+                        {
+                            var extension = Path.GetExtension(File.FileName);
                         var path = Path.Combine(Server.MapPath("/Static/"), nameFile + extension);
 
                         var Photo = new DB.Photo();
@@ -97,6 +104,7 @@ namespace ProyectoIngenieria.Controllers
                         db.SaveChanges();
                         user.Photo = Photo;
                         user.photo_id=Photo.id;
+                        }
                     }
                     user.password = Protection.Encrypt(user.password);
                         

@@ -187,6 +187,14 @@ namespace ProyectoIngenieria.Controllers
                 }
                 else
                 {
+                    if (nameFile == "")
+                    {
+                    ViewBag.message = "Debe ingresar un nombre de imagen";
+                    return View();
+                    }
+                    else
+                    {
+
                     var extension = Path.GetExtension(File.FileName);
                     var path = Path.Combine(Server.MapPath("/Static/"), photo.name + extension);
 
@@ -194,11 +202,13 @@ namespace ProyectoIngenieria.Controllers
                     photo.name = photo.name;
                     photo.image = photo.name + extension;
                     File.SaveAs(path);
+                    photo.Album.Add(album);
+                    db.Photo.Add(photo);
+                    db.SaveChanges();
+                    }
                 }
 
-                photo.Album.Add(album);
-                db.Photo.Add(photo);
-                db.SaveChanges();
+                
                 string direccion = "/AddPhoto/" + id;
                 return RedirectToAction(direccion);
             }
