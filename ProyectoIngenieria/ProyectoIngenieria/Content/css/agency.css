@@ -596,14 +596,15 @@ header.masthead .intro-text .intro-heading {
 
 section#contact {
   background-color: #212529;
-  background-image: url("../img/map-image.png");
+  background-image: url("../img/contact.jpg");
   background-repeat: no-repeat;
   background-position: center;
 }
 
-section#contact .section-heading {
-  color: #fff;
-}
+    section#contact .section-subheading {
+        color: rgba(254, 209, 54, 0.9);
+        
+    }
 
 section#contact .form-group {
   margin-bottom: 25px;

@@ -20,6 +20,15 @@ namespace ProyectoIngenieria.Controllers
             ViewBag.comments = commentList;
             ViewBag.users = userList;
 
+            List<int> activitiesCount = new List<int>();
+
+            for (int i=0;i>activityList.Count();i++)
+            {
+                activitiesCount[i] = i;
+            }
+
+            ViewBag.activitiesCount = activitiesCount;
+
             return View();
         }
 
