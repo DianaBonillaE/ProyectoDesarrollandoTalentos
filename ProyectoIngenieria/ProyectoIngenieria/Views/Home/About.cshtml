@@ -1,5 +1,135 @@
-﻿@{
-    ViewBag.Title = "About";
-}
+﻿@Html.Partial("UserMenu")
 
+<div id="demo" class="carousel slide" data-ride="carousel">
 
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+        <li data-target="#demo" data-slide-to="3"></li>
+    </ul>
+
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/Content/img/collage1.JPG" style="height:500px; width:100%" alt="Los Angeles">
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/img/collage2.JPG" style="height:500px; width:100%" alt="Chicago">
+        </div>
+        <div class="carousel-item">
+            <img src="~/Content/img/collage3.JPG" style="height:500px; width:100%" alt="New York">
+        </div>
+
+        <div class="carousel-item">
+            <img src="~/Content/img/collage4.JPG" style="height:500px; width:100%" alt="New York">
+        </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+
+</div>
+<br />
+<br />
+<div class="container">
+    <a class="title">Fundación Desarrollando Talentos</a>
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-sm-8">
+
+            <div class="text-justify" style="font-family:'Montserrat'; font-size:20px;">
+                <a>
+                    Nos basamos en un concepto de inteligencia global, múltiple, interconectada, cambiante y desarrollable. Consideramos el talento como inteligencia práctica, hacer algo muy bien. El talento tiene una crucial trascendencia individual, da sentido a nuestra vida,
+                    y una trascendencia colectiva, es el motor del mundo.
+                </a>
+                <br />
+                <br />
+                <a>
+                    Ofrecemos a los niños y jóvenes modelos, estímulos, oportunidades y
+                    acompañamiento para que él desde sus intereses y voluntad desarrolle su identidad,vocación y talento
+                </a>
+
+            </div>
+
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-3">
+            <img src="~/Content/img/logofundacion.png" style="height:260px; width:80%" alt="New York">
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-sm-6">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/JUTAZWmJ5oQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+            <div class="text-center">
+                <a class="cite">
+                    "El éxito de un niño talentoso se basa en
+                    la formación integral de su educación"
+                </a>
+            </div>
+            <div class="text-right">
+                <br />
+                <a class="name">Arq. Gerardo Díaz</a>
+                <br />
+                <a class="name">Talent Adviser</a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row ">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 text-center">
+            <a class="title">Misión</a>
+            <br />
+            <a class="name">
+                Es una fundación que propone la transformación integral de las vidas de niños
+                y jóvenes en situaciones vulnerables, mediante el desarrollo de sus talentos.
+            </a>
+            <br />
+            <br />
+            <a class="title">Visión</a>
+            <br />
+            <a class="name">
+                Ser una institución líder en el desarrollo y evolución de talentos, potencializando
+                sus habilidades y valores que les permita a los niños y jóvenes ser más inclusivos en la sociedad.
+            </a>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+<br />
+<br />
+<hr />
+
+<style>
+    .title {
+        color: rgb(255,242,0);
+        font-family: 'Kaushan Script', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        font-size: 50px;
+    }
+
+    .cite {
+        color: rgb(255,242,0);
+        font-family: 'Kaushan Script', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        font-size: 30px;
+    }
+
+    .name {
+        font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        font-size: 20px;
+    }
+</style>

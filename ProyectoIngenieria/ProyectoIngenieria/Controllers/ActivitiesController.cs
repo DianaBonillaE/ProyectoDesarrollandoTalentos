@@ -75,7 +75,7 @@ namespace ProyectoIngenieria.Controllers
             List<Sponsor> sponsorReturn = db.Sponsor.ToList();
             List<User> userReturn = db.User.ToList();
             List<Voluntary> voluntaryReturn = db.Voluntary.ToList();
-
+            List<Photo> photoVerify = db.Photo.ToList();
             if (ModelState.IsValid)
             {
 
@@ -197,6 +197,11 @@ namespace ProyectoIngenieria.Controllers
                     //if the file is fill and name too
                     else
                     {
+
+                        foreach(Photo photo in photoVerify)
+                        {
+                            //if(nameFile == photo.image)
+                        }
 
                         //add the image in the folder, in the activity and database
                         var extension = Path.GetExtension(File.FileName);

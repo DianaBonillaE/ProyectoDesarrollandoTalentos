@@ -298,9 +298,14 @@
     <Content Include="Content\img\about\2.jpg" />
     <Content Include="Content\img\about\3.jpg" />
     <Content Include="Content\img\about\4.jpg" />
+    <Content Include="Content\img\collage1.JPG" />
+    <Content Include="Content\img\collage2.JPG" />
+    <Content Include="Content\img\collage3.JPG" />
+    <Content Include="Content\img\collage4.JPG" />
     <Content Include="Content\img\contact.jpg" />
     <Content Include="Content\img\header-bg.jpg" />
     <Content Include="Content\img\login.jpg" />
+    <Content Include="Content\img\logofundacion.png" />
     <Content Include="Content\img\portfolio\01-full.jpg" />
     <Content Include="Content\img\portfolio\01-thumbnail.jpg" />
     <Content Include="Content\img\portfolio\02-full.jpg" />
