@@ -6,131 +6,129 @@
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
-<div class="container md-3">
-    <br />
-    <h1 class="text-center">Estudiante</h1>
-    <br />
-    <br />
-    <div class="panel-body ">
-        <div class="row">
-            <div class="col-sm-2 "></div>
-            <div class="col-sm-5 ">
+    <div class="container md-3">
+        <br />
+        <h1 class="text-center">Estudiante</h1>
+        <br />
+        <br />
+        <div class="panel-body ">
+            <div class="row">
+                <div class="col-sm-2 "></div>
+                <div class="col-sm-5 ">
 
-                <dl class="dl-horizontal margen">
+                    <dl class="dl-horizontal margen">
+                        <dt>
+                            <p class="text-muted">@Html.DisplayNameFor(model => model.identification)</p>
+
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.identification)
+                        </dd>
+
+                        <dt>
+                            <p class="text-muted">@Html.DisplayNameFor(model => model.name)</p>
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.name)
+                        </dd>
+                </div>
+                <div class="col-sm-5 ">
                     <dt>
-                        <p class="text-muted">@Html.DisplayNameFor(model => model.identification)</p>
-
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.last_name)</p>
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.identification)
+                        @Html.DisplayFor(model => model.last_name)
                     </dd>
 
                     <dt>
-                        <p class="text-muted">@Html.DisplayNameFor(model => model.name)</p>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.phone_number)</p>
                     </dt>
 
                     <dd>
-                        @Html.DisplayFor(model => model.name)
+                        @Html.DisplayFor(model => model.phone_number)
                     </dd>
+                </div>
+
             </div>
-            <div class="col-sm-5 ">
-                <dt>
-                    <p class="text-muted">@Html.DisplayNameFor(model => model.last_name)</p>
-                </dt>
+        </div>
 
-                <dd>
-                    @Html.DisplayFor(model => model.last_name)
-                </dd>
+        <div class="panel-body ">
+            <h1 class="text-center">Responsable a cargo</h1>
+            <div class="row">
+                <div class="col-sm-2 "></div>
+                <div class="col-sm-5 ">
 
-                <dt>
-                    <p class="text-muted">@Html.DisplayNameFor(model => model.phone_number)</p>
-                </dt>
+                    <dl class="dl-horizontal margen">
+                        <dt>
+                            <p class="text-muted">@Html.DisplayNameFor(model => model.Responsable.identification)</p>
 
-                <dd>
-                    @Html.DisplayFor(model => model.phone_number)
-                </dd>
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Responsable.identification)
+                        </dd>
+
+                        <dt>
+                            <p class="text-muted">@Html.DisplayNameFor(model => model.Responsable.name)</p>
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Responsable.name)
+                        </dd>
+                </div>
+                <div class="col-sm-5 ">
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.Responsable.last_name)</p>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Responsable.last_name)
+                    </dd>
+
+                    <dt>
+                        <p class="text-muted">@Html.DisplayNameFor(model => model.Responsable.phone_number)</p>
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Responsable.phone_number)
+                    </dd>
+                </div>
             </div>
 
+
+
+            <br />
+
+            <a href="~/Students/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
+
+            <br />
+            <br />
         </div>
     </div>
+        <hr />
 
-    <div class="panel-body ">
-        <h1 class="text-center">Responsable a cargo</h1>
+        <style>
 
-        <table class="table ">
-            <tr class="text-center">
-                <th>
-                    <p class="text-muted">Identificación</p>
-                </th>
-                <th>
-                    <p class="text-muted">Nombre</p>
-                    
-                </th>
-                <th>
-                    <p class="text-muted">Apellido</p>
-                    
-                </th>
-                <th>
-                    <p class="text-muted">Número de Teléfono</p>
-                    
-                </th>
-                <th></th>
-            </tr>
+            #mainNav {
+                background-color: rgb(46,49,146);
+            }
 
-           
-            <tr class="text-center">
+            .md-3 {
+                box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+                width: 97%;
+                margin-top: 8%;
+            }
 
-                <td>
-                    @Html.DisplayFor(model => model.Responsable.identification)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Responsable.name)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Responsable.last_name)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Responsable.phone_number)
-                </td>
+            .panel {
+                border-radius: 0 !important;
+                transition: box-shadow 0.5s;
+                width: 55%;
+            }
 
-
-            </tr>
-           
-
-        </table>
-    </div>
-
-
-
-    <br />
-
-    <a href="~/Students/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
-
-    <br />
-    <br />
-</div>
-<hr />
-
-<style>
-
-    #mainNav {
-        background-color: rgb(46,49,146);
-    }
-
-    .md-3 {
-        box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-        width: 97%;
-        margin-top: 8%;
-    }
-
-    .panel {
-        border-radius: 0 !important;
-        transition: box-shadow 0.5s;
-        width: 55%;
-    }
-
-    .form-group {
-        align-content: center;
-    }
-</style>
+            .form-group {
+                align-content: center;
+            }
+        </style>
