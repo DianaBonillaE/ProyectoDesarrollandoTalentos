@@ -50,8 +50,9 @@
                         @Html.DisplayFor(modelItem => item.description)
                     </td>
                     <td>
-                        @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
-                        @Html.ActionLink("Agregar fotos", "Details", new { id = item.id }) |
+
+                        <a href="/Albums/Photos/@item.album_id" class="btn btn-default " >Detalles</a>|
+                        <a href="/Albums/AddPhoto/@item.album_id" class="btn btn-default ">Añadir fotos</a>|
                         @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.id })
                     </td>
