@@ -16,6 +16,13 @@ namespace ProyectoIngenieria.Controllers
             List<Comments> commentList = db.Comments.ToList();
             List<News> newsList = db.News.ToList();
             List<User> userList = db.User.ToList();
+            List<Voluntary> voluntarieList = db.Voluntary.ToList();
+            List<Teacher> teacherList = db.Teacher.ToList();
+
+            ViewBag.teachers = teacherList;
+
+
+            ViewBag.voluntarie = voluntarieList;
 
             ViewBag.activities = activityList;
             ViewBag.activity = activityList[0];
@@ -63,7 +70,9 @@ namespace ProyectoIngenieria.Controllers
         }
         public ActionResult Galery()
         {
+           
             
+     
 
             return View();
         }
