@@ -53,7 +53,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label col-md-5" })
                         <div class="col-md-10">
-                            @Html.TextAreaFor(model => model.address, 3, 42, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.address, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -118,7 +118,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 6%;
+        margin-top: 8%;
     }
 
     .panel {

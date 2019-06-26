@@ -229,7 +229,9 @@ namespace ProyectoIngenieria.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+           
             Photo photo = db.Photo.Find(id);
+            ViewBag.image = Path.Combine("/Static/", photo.image);
             if (photo == null)
             {
                 return HttpNotFound();

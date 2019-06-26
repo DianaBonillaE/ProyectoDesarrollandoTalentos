@@ -33,24 +33,25 @@
                     <dd>
                         @Html.DisplayFor(model => model.name)
                     </dd>
-
-                    <dt>
-                        <p class="text-muted">@Html.DisplayNameFor(model => model.last_name)</p>
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.last_name)
-                    </dd>
-
-                    <dt>
-                        <p class="text-muted">@Html.DisplayNameFor(model => model.phone_number)</p>
-                    </dt>
-
-                    <dd>
-                        @Html.DisplayFor(model => model.phone_number)
-                    </dd>
             </div>
-           
+            <div class="col-sm-5 ">
+                <dt>
+                    <p class="text-muted">@Html.DisplayNameFor(model => model.last_name)</p>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.last_name)
+                </dd>
+
+                <dt>
+                    <p class="text-muted">@Html.DisplayNameFor(model => model.phone_number)</p>
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.phone_number)
+                </dd>
+            </div>
+
         </div>
     </div>
 
@@ -120,7 +121,7 @@
     .md-3 {
         box-shadow: 5px 0px 40px rgba(0,0,0, .2);
         width: 97%;
-        margin-top: 6%;
+        margin-top: 8%;
     }
 
     .panel {
