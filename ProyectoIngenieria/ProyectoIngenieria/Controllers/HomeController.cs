@@ -15,15 +15,15 @@ namespace ProyectoIngenieria.Controllers
             List<Activity> activityList = db.Activity.ToList();
             List<Comments> commentList = db.Comments.ToList();
             List<News> newsList = db.News.ToList();
-
-     
-
-
             List<User> userList = db.User.ToList();
 
             ViewBag.activities = activityList;
             ViewBag.activity = activityList[0];
             ViewBag.comments = commentList;
+            ViewBag.description = commentList[0].description;
+            ViewBag.name = commentList[0].name;
+
+            commentList.Remove(commentList[0]);
             ViewBag.users = userList;
             ViewBag.news = newsList;
             ViewBag.news2 = newsList[0];
