@@ -29,6 +29,7 @@ namespace ProyectoIngenieria.Controllers
 
             List<Course_Student> courseStudentList = db.Course_Student.ToList();
             List<Student> mostrarCourseStudentList = new List<Student>();
+            List<Teacher> teachers = course.Teacher.ToList();
 
             for (int i = 0; i < courseStudentList.Count; i++)
             {
@@ -43,6 +44,9 @@ namespace ProyectoIngenieria.Controllers
 
             PagedList<Student> model = new PagedList<Student>(mostrarCourseStudentList, page, pageSize);
             ViewBag.students = mostrarCourseStudentList;
+            ViewBag.teacher = teachers;
+            ViewBag.startDate = course.start_date;
+            ViewBag.endDate = course.end_date;
 
             return View(model);
 

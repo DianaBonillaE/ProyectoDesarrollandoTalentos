@@ -12,6 +12,23 @@
     <br />
     <h2 class="text-center">Lista de estudiantes del curso: @(ViewBag.name) </h2>
     <br />
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-6">
+            <h6>Profesor(es): </h6>
+            @foreach (var item in ViewBag.teacher)
+            {
+                @item.name    @item.last_name
+            }
+        </div>
+        <div class="col-md-5">
+            <h6>Fecha de inicio: </h6> <p>@ViewBag.startDate</p> 
+            <h6>Fecha de finalización:  </h6> <p>@ViewBag.endDate</p>
+        </div>
+    </div>
+
+    <br />
     <div class="panel-body">
 
         <table class="table">
