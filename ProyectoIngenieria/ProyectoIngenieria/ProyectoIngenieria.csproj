@@ -2114,6 +2114,7 @@
     <Content Include="Views\Voluntaries\Edit.cshtml" />
     <Content Include="Views\Voluntaries\Index.cshtml" />
     <Content Include="Views\Responsables\CreateResponsable.cshtml" />
+    <Content Include="Views\Home\Photos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

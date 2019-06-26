@@ -10,6 +10,9 @@ namespace ProyectoIngenieria.Controllers
     public class HomeController : Controller
     {
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
+
+        private static int idAlbum;
+
         public ActionResult Index()
         {
             List<Activity> activityList = db.Activity.ToList();
@@ -70,9 +73,35 @@ namespace ProyectoIngenieria.Controllers
         }
         public ActionResult Galery()
         {
-           
-            
-     
+
+          
+          
+                
+
+                         
+                List<Album> albumsList = db.Album.ToList();
+
+                ViewBag.albums = albumsList;
+
+         
+
+
+
+
+            return View();
+        }
+
+        public ActionResult Photos(int id)
+        {
+            Album album = db.Album.ToList().Find(c => c.id == id);
+
+            List<Photo> phototList = album.Photo.ToList();
+
+
+            ViewBag.photo = phototList;
+
+
+
 
             return View();
         }
