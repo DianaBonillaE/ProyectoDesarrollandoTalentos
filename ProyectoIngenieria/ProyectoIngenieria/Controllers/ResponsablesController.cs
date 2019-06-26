@@ -50,8 +50,14 @@ namespace ProyectoIngenieria.Controllers
         }
 
         // GET: Responsables/Create
-        public ActionResult Create()
+        public ActionResult Create(string message)
         {
+            
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
+
             List<Student> students = db.Student.ToList();
             ViewBag.students = students;
             stateCreate = true;
@@ -66,17 +72,20 @@ namespace ProyectoIngenieria.Controllers
         public ActionResult Create([Bind(Include = "identification,name,last_name,address,phone_number,description,email")]
         Responsable responsable, [Bind(Include = "identification,name,last_name,phone_number,responsable_identification")]Student student, List<int> students, HttpPostedFileBase File, string nameFile)
         {
+          
             if (ModelState.IsValid)
             {
 
                 db.Responsable.Add(responsable);
+
                 try
                 {
                     db.SaveChanges();
+                    
                    }
                 catch (Exception e)
                 {
-                    ModelState.AddModelError("", "ERROR! en igresar un responsable ya existe un responsable con esta Identificación");
+                    ViewBag.message = "Ya existe un responsable con esta Identificación";
                     if (stateCreate) {
                     return View(); }
                     else {
@@ -92,6 +101,7 @@ namespace ProyectoIngenieria.Controllers
                 try
                 {
                     db.SaveChanges();
+                   
                 }
                 catch (Exception e)
                 {
@@ -99,14 +109,14 @@ namespace ProyectoIngenieria.Controllers
                     db.Responsable.Remove(responsable);
                     stateCreate = true;
                     db.SaveChanges();
-                    ModelState.AddModelError("", "ERROR! en igresar un estudiante ya existe un estudiante con esta Identificación");
+                    ViewBag.message = "Ya existe un estudiante con esta Identificación";
                     return View();
                 }
 
 
 
 
-                return RedirectToAction("Index", new { message = "El responsable y estudiante se ingresaron exitosamente" });
+                return RedirectToAction("Index", new { message = "Datos ingresados exitosamente" });
             }
 
             return View(responsable);

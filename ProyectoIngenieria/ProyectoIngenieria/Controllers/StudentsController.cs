@@ -64,8 +64,12 @@ namespace ProyectoIngenieria.Controllers
 
 
         // GET: Students/Create
-        public ActionResult Create()
+        public ActionResult Create(string message)
         {
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
             ViewBag.responsable_identification = new SelectList(db.Responsable, "identification", "identification");
             return View();
         }
@@ -94,7 +98,7 @@ namespace ProyectoIngenieria.Controllers
             }
                 catch (Exception e)
                 {
-                    ModelState.AddModelError("", "ERROR! en igresar un estudiante ya existe un estudiante con esta Identificación");
+                ViewBag.message = "Ya existe un estudiante con esta Identificación";
                     return View();
                 }
             return View(student);

@@ -46,8 +46,13 @@ namespace ProyectoIngenieria.Controllers
         }
 
         // GET: Albums/Create
-        public ActionResult Create()
+        public ActionResult Create( string message)
         {
+           
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
             return View();
         }
 
@@ -147,7 +152,7 @@ namespace ProyectoIngenieria.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult AddPhoto(int? id)
+        public ActionResult AddPhoto(int? id, string message)
         {
             if (id == null)
             {
@@ -157,6 +162,11 @@ namespace ProyectoIngenieria.Controllers
             if (album == null)
             {
                 return HttpNotFound();
+            }
+           
+            if (message != null)
+            {
+                ViewBag.message = message;
             }
             return View();
         }
@@ -172,8 +182,7 @@ namespace ProyectoIngenieria.Controllers
 
                 if (File == null)
                 {
-                    ViewBag.MessagePhoto = "Debe ingresar una imagen";
-                    ViewBag.MessageList = "Debe seleccionar datos";
+                    ViewBag.message = "Debe ingresar una imagen";
                     return View();
                 }
                 else

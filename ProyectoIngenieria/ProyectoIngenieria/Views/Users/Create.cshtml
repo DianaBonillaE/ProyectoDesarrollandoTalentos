@@ -15,7 +15,15 @@
         <br />
         <h1 class="text-center">Ingresar un Usuarios</h1>
         <br />
-      
+        @if (ViewBag.message != null)
+        {
+            <div class="alert alert-danger text-center alert-dismissible">
+                <h4 class="alert-heading"><i class="icon fa fa-times"></i> ¡Error!</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                <h6>@ViewBag.message</h6>
+            </div>
+        }
+
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-1"></div>
@@ -131,7 +139,7 @@
                             Nombre de la imagen
                             <br />
                             <input type="text" name="nameFile" id="nameFile" class="form-control" />
-                             
+
                         </div>
                         @if (ViewBag.MessagePhotoName != null)
                         {
@@ -144,22 +152,22 @@
                     </div>
                 </div>
             </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <a href="~/Users/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <input type="submit" value="Guardar" class="btn btn-primary btn-md text-uppercase" />
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <a href="~/Users/Index" class="btn btn-primary btn-md text-uppercase">Cancelar</a>
                     </div>
-               
-           
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <input type="submit" value="Guardar" class="btn btn-primary btn-md text-uppercase" />
+                    </div>
+                </div>
+            </div>
+
+
             <br />
         </div>
     </div>

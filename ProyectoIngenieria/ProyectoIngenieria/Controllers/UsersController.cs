@@ -47,8 +47,13 @@ namespace ProyectoIngenieria.Controllers
         }
 
         // GET: Users/Create
-        public ActionResult Create()
+        public ActionResult Create(string message)
         {
+            
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
             return View();
         }
 
@@ -63,8 +68,8 @@ namespace ProyectoIngenieria.Controllers
             {
                 if (File == null)
                 {
-                    ViewBag.MessagePhoto = "Debe ingresar una imagen";
-                    ViewBag.MessageList = "Debe seleccionar datos";
+                    ViewBag.message = "Debe ingresar una imagen";
+                   
                     return View();
                 }
                 else
@@ -72,8 +77,8 @@ namespace ProyectoIngenieria.Controllers
 
                     if (nameFile == "")
                     {
-                        ViewBag.MessagePhotoName = "Debe ingresar un nombre de imagen";
-                        ViewBag.MessageList = "Debe seleccionar datos";
+                        ViewBag.message = "Debe ingresar un nombre de imagen";
+                       
                         return View();
                     }
                     else
@@ -103,7 +108,7 @@ namespace ProyectoIngenieria.Controllers
                     }
                     catch (Exception e)
                     {
-                        ModelState.AddModelError("", "ERROR! en igresar un Usuario ya existe un usuario con esta Identificación");
+                        ViewBag.message = "Ya existe un usuario con esta Identificación";
                         return View();
                     }
                     
@@ -177,6 +182,8 @@ namespace ProyectoIngenieria.Controllers
                     Photo.name = nameFile;
                   
                    db.SaveChanges();
+                    user.Photo = Photo;
+                    user.photo_id = Photo.id;
                 }
 
               
