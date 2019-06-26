@@ -11,85 +11,92 @@
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
-<div class="container md-3">
-    <br />
-
-    <h1 class="text-center">Fotos Asociadas</h1>
-    <br />
-
-
-    <br />
-    <div class="row">
-        <div class="col-sm-9"></div>
-    </div>
-    <div class="panel-body">
+    <div class="container md-3">
         <br />
-        <table class="table ">
-            <tr class="text-center">
-                <th>
-                    <p class="text-muted">Identificación</p>
-                    
-                </th>
-                <th>
-                    <p class="text-muted">Nombre</p>
-                    
-                </th>
-                <th>
-                    <p class="text-muted">Archivo</p>
-                    
-                </th>
-                <th></th>
-            </tr>
 
-            @foreach (var item in Model)
-            {
+        <h1 class="text-center">Fotos Asociadas</h1>
+        <br />
+        @if (ViewBag.message != null)
+        {
+            <div class="alert alert-success text-center alert-dismissible">
+                <h4 class="alert-heading"><i class="icon fa fa-check"></i> ¡Correcto!</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                <h6>@ViewBag.message</h6>
+            </div>
+        }
+
+        <br />
+        <div class="row">
+            <div class="col-sm-9"></div>
+        </div>
+        <div class="panel-body">
+            <br />
+            <table class="table ">
                 <tr class="text-center">
+                    <th>
+                        <p class="text-muted">Identificación</p>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.name)
-                    </td>
-                    <td>
+                    </th>
+                    <th>
+                        <p class="text-muted">Nombre</p>
 
-                        <img src="@("/Static/"+item.image)" width="25%;" height="15%;" class="w3-round" />
-                    </td>
-                    <td>
+                    </th>
+                    <th>
+                        <p class="text-muted">Archivo</p>
 
-
-                        @Html.ActionLink("Eliminar", "DeletePhoto", new { id = item.id })
-
-
-                    </td>
-
+                    </th>
+                    <th></th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center">
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+
+                            <img src="@("/Static/"+item.image)" width="25%;" height="15%;" class="w3-round" />
+                        </td>
+                        <td>
+
+
+                            @Html.ActionLink("Eliminar", "DeletePhoto", new { id = item.id })
+
+
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+            <br />
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-6 ">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-6 ">
+
+                </div>
+            </div>
+            <div class="col-sm-3 ">
+                <a href="~/Albums/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
+            </div>
+
+        </div>
         <br />
-        <div class="row">
-            <div class="col-sm-5"></div>
-            <div class="col-sm-6 ">
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-sm-5"></div>
-            <div class="col-sm-6 ">
-
-            </div>
-        </div>
-        <div class="col-sm-3 ">
-            <a href="~/Albums/Index" class="btn btn-primary btn-md text-uppercase">Regresar</a>
-        </div>
-
+        <br />
     </div>
-    <br />
-    <br />
-</div>
 <hr />
 
 <style>

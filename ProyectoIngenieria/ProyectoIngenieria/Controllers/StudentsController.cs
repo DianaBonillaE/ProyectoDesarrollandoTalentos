@@ -16,8 +16,12 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Students
-        public ActionResult Index(int page = 1, int pageSize = 5)
+        public ActionResult Index(string message, int page = 1, int pageSize = 5)
         {
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
 
             List<Student> studentList = db.Student.ToList();
             PagedList<Student> model = new PagedList<Student>(studentList, page, pageSize);
@@ -86,8 +90,8 @@ namespace ProyectoIngenieria.Controllers
                 try
                 {
                     db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                return RedirectToAction("Index", new { message = "El estudiante se ingresó exitosamente" });
+            }
                 catch (Exception e)
                 {
                     ModelState.AddModelError("", "ERROR! en igresar un estudiante ya existe un estudiante con esta Identificación");
@@ -123,7 +127,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 db.Entry(student).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "El estudiante se actualizo exitosamente" });
             }
             ViewBag.responsable_identification = new SelectList(db.Responsable, "identification", "identification", student.responsable_identification);
             return View(student);
@@ -159,7 +163,7 @@ namespace ProyectoIngenieria.Controllers
            
             db.Student.Remove(student);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { message = "El estudiante se eliminó exitosamente" });
         }
 
         protected override void Dispose(bool disposing)

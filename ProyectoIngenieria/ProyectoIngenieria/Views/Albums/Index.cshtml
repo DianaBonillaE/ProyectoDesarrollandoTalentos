@@ -7,79 +7,89 @@
 
 @Html.Partial("~/Views/Home/AdminMenu.cshtml")
 
-<div class="container md-3" margin-top="8">
-    <br />
-    <h1 class="text-center">Álbumes</h1>
-    <br />
-    <br />
-    <div class="row">
-        <div class="col-sm-9"></div>
-        <div class="col-sm-3 ">
-            <a href="~/Albums/Create" class="btn btn-primary btn-md text-uppercase">Añadir Nuevo</a>
-        </div>
-    </div>
-    <div class="panel-body">
+    <div class="container md-3" margin-top="8">
         <br />
-        <table class="table ">
-            <tr class="text-center">
-                <th>
-                    
-                    <p class="text-muted">Nombre</p>
-                </th>
-                <th>
-                    
-                    <p class="text-muted">Descripcion</p>
-                </th>
-                <th>
-                    
-                    <p class="text-muted">Fecha de creación</p>
-                </th>
-                <th></th>
-            </tr>
+        <h1 class="text-center">Álbumes</h1>
+        <br />
 
-            @foreach (var item in Model)
-            {
+        @if (ViewBag.message != null)
+        {
+            <div class="alert alert-success text-center alert-dismissible">
+                <h4 class="alert-heading"><i class="icon fa fa-check"></i> ¡Correcto!</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                <h6>@ViewBag.message</h6>
+            </div>
+        }
+
+
+        <div class="row">
+            <div class="col-sm-9"></div>
+            <div class="col-sm-3 ">
+                <a href="~/Albums/Create" class="btn btn-primary btn-md text-uppercase">Añadir Nuevo</a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <br />
+            <table class="table ">
                 <tr class="text-center">
+                    <th>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.creation_date)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.id })|
-                        @Html.ActionLink("Fotos", "Photos", new { id = item.id })|
-                        @Html.ActionLink("AgregarFotos", "AddPhoto", new { id = item.id })
+                        <p class="text-muted">Nombre</p>
+                    </th>
+                    <th>
 
-                    </td>
+                        <p class="text-muted">Descripcion</p>
+                    </th>
+                    <th>
+
+                        <p class="text-muted">Fecha de creación</p>
+                    </th>
+                    <th></th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center">
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.creation_date)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.id })|
+                            @Html.ActionLink("Fotos", "Photos", new { id = item.id })|
+                            @Html.ActionLink("AgregarFotos", "AddPhoto", new { id = item.id })
+
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            <br />
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-6 ">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5"></div>
+                <div class="col-sm-6 ">
+
+                </div>
+            </div>
+
+
+        </div>
         <br />
-        <div class="row">
-            <div class="col-sm-5"></div>
-            <div class="col-sm-6 ">
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = Model.PageSize }))
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-5"></div>
-            <div class="col-sm-6 ">
-
-            </div>
-        </div>
-       
-
+        <br />
     </div>
-    <br />
-    <br />
-</div>
 <hr />
 
 

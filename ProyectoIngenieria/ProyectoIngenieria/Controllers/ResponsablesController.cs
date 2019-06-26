@@ -20,8 +20,12 @@ namespace ProyectoIngenieria.Controllers
         private static string idResponsable;
 
         // GET: Responsables
-        public ActionResult Index(int page = 1, int pageSize = 5)
+        public ActionResult Index(string message, int page = 1, int pageSize = 5)
         {
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
             List<Responsable> responsableList = db.Responsable.ToList();
             PagedList<Responsable> model = new PagedList<Responsable>(responsableList, page, pageSize);
             return View(model);
@@ -102,7 +106,7 @@ namespace ProyectoIngenieria.Controllers
 
 
 
-                return RedirectToAction("/Index");
+                return RedirectToAction("Index", new { message = "El responsable y estudiante se ingresaron exitosamente" });
             }
 
             return View(responsable);
@@ -154,7 +158,7 @@ namespace ProyectoIngenieria.Controllers
 
 
                 db.SaveChanges();
-                return RedirectToAction("/Index");
+                return RedirectToAction("Index", new { message = "Se actualizó el responsable exitosamente" });
             }
 
           
@@ -204,7 +208,7 @@ namespace ProyectoIngenieria.Controllers
             {
 
             }
-            return RedirectToAction("/Index");
+            return RedirectToAction("Index", new { message = "El responsable se eliminó exitosamente" });
         }
 
         protected override void Dispose(bool disposing)
@@ -265,7 +269,7 @@ namespace ProyectoIngenieria.Controllers
             {
 
             }
-            return RedirectToAction("/Index");
+            return RedirectToAction("Index", new { message = "El responsable y los estudiantes se eliminaron exitosamente" });
         }
 
     }

@@ -17,8 +17,12 @@ namespace ProyectoIngenieria.Controllers
         private ProyectoIngenieriaEntities db = new ProyectoIngenieriaEntities();
 
         // GET: Users
-        public ActionResult Index(int page = 1, int pageSize = 5)
+        public ActionResult Index(string message, int page = 1, int pageSize = 5)
         {
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
             List<User> userList = db.User.ToList();
             PagedList<User> model = new PagedList<User>(userList, page, pageSize);
             return View(model);
@@ -95,7 +99,7 @@ namespace ProyectoIngenieria.Controllers
                     try
                     {
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", new { message = "El usuario se ingresó exitosamente" });
                     }
                     catch (Exception e)
                     {
@@ -119,14 +123,16 @@ namespace ProyectoIngenieria.Controllers
             }
             User user = db.User.Find(id);
 
-            ViewBag.image = Path.Combine("/Static/", user.Photo.image);
-            ViewBag.name = user.Photo.name;
+         
 
             user.password = Protection.Decrypt(user.password);
             if (user == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.image = Path.Combine("/Static/", user.Photo.image);
+            ViewBag.name = user.Photo.name;
             return View(user);
         }
 
@@ -143,19 +149,20 @@ namespace ProyectoIngenieria.Controllers
 
                 db.Entry(user).State = EntityState.Modified;
 
-               
-                var imageAct = db.Photo.Find(user.photo_id);
+               User us = db.User.ToList().Find(ca => ca.identification == user.identification);
+
+                var imageAct = db.Photo.Find(us.photo_id);
 
                 if (File != null)
                 {
-                    Photo image = db.Photo.Find(user.photo_id);
+                    Photo image = db.Photo.Find(us.photo_id);
                     image.name = nameFile;
 
-                    //elimina la imagen anterior
+                  
                     var locationStatic = Path.Combine(Server.MapPath("/Static/"));
                     System.IO.File.Delete(locationStatic + image.image);
 
-                    //Escribe la nueva ruta de la imagen
+                   
                     var fileName = Path.GetExtension(File.FileName);
                     image.image = nameFile + fileName;
                     var path = Path.Combine(Server.MapPath("/Static/"), nameFile + fileName);
@@ -166,17 +173,17 @@ namespace ProyectoIngenieria.Controllers
                 }
                 if (nameFile != imageAct.name)
                 {
-                    var Photo = db.Photo.Find(user.photo_id);
+                    var Photo = db.Photo.Find(us.photo_id);
                     Photo.name = nameFile;
-
-                    db.SaveChanges();
+                  
+                   db.SaveChanges();
                 }
 
-
+              
 
 
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "Se actualizó el usuario exitosamente" });
             }
             return View(user);
         }
@@ -205,10 +212,14 @@ namespace ProyectoIngenieria.Controllers
             User user = db.User.Find(id);
             user.Activity.Clear();
             Photo photo = db.Photo.Find(user.photo_id);
+
+            var locationStatic = Path.Combine(Server.MapPath("/Static/"));
+            System.IO.File.Delete(locationStatic + photo.image);
+
             db.User.Remove(user);
             db.Photo.Remove(photo);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { message = "El usuario se eliminó exitosamente" });
         }
 
         protected override void Dispose(bool disposing)

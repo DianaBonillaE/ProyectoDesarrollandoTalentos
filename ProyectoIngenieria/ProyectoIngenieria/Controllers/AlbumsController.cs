@@ -19,8 +19,12 @@ namespace ProyectoIngenieria.Controllers
         private static int idAlbum;
 
         // GET: Albums
-        public ActionResult Index(int page = 1, int pageSize = 5)
+        public ActionResult Index(string message, int page = 1, int pageSize = 5)
         {
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
             List<Album> albumList = db.Album.ToList();
             PagedList<Album> model = new PagedList<Album>(albumList, page, pageSize);
             return View(model);
@@ -59,7 +63,7 @@ namespace ProyectoIngenieria.Controllers
                 
                 db.Album.Add(album);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "El álbum se ingresó exitosamente" });
             }
 
             return View(album);
@@ -91,7 +95,7 @@ namespace ProyectoIngenieria.Controllers
             {
                 db.Entry(album).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { message = "Se actualizó el álbum exitosamente" });
             }
             return View(album);
         }
@@ -131,7 +135,7 @@ namespace ProyectoIngenieria.Controllers
             Album album = db.Album.Find(id);
             db.Album.Remove(album);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { message = "El álbum se eliminó exitosamente" });
         }
 
         protected override void Dispose(bool disposing)
@@ -191,12 +195,18 @@ namespace ProyectoIngenieria.Controllers
             }
 
             ViewBag.album = new SelectList(db.Album, "identification", "name", photo.Album);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { message = "Fotografías añadidas exitosamente" });
         }
 
 
-        public ActionResult Photos(int id, int page = 1, int pageSize = 25)
+        public ActionResult Photos(string message, int id, int page = 1, int pageSize = 25)
         {
+
+            if (message != null)
+            {
+                ViewBag.message = message;
+            }
+
             Album album = db.Album.Include(a => a.Photo).ToList().Find(c => c.id == id);
 
             List<Photo> phototList = album.Photo.ToList();
@@ -259,7 +269,8 @@ namespace ProyectoIngenieria.Controllers
             db.Photo.Remove(photo);
             
             db.SaveChanges();
-            return RedirectToAction("/Photos/"+idAlbum);
+            return RedirectToAction("/Photos/" + idAlbum, new { message = "La foto se eliminó exitosamente" });
+           
         }
 
         [HttpPost, ActionName("DeleteWarning")]
@@ -285,7 +296,7 @@ namespace ProyectoIngenieria.Controllers
 
             db.Album.Remove(album);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { message = "El álbum se elimino exitosamente" });
         }
 
     }
