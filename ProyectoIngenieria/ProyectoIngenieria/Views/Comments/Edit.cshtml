@@ -30,7 +30,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                <textarea id="description" name="description" rows="4" cols="63" style="resize:none;" >@(ViewBag.description)</textarea>
+                                <textarea id="description" name="description" rows="4" cols="63" style="resize:none;" class="form-control">@(ViewBag.description)</textarea>
                                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.state, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                <select style="width:100%" ; id="state" name="state">
+                                <select style="width:100%" ; id="state" name="state" class="form-control">
                                     @if (Model.state == false)
                                     {
                                         <option value="true">mostrado</option>
